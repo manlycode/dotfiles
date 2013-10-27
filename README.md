@@ -19,6 +19,9 @@ cd .dotfiles
 mv ~/.vimrc vimrc.ln
 ln -s vimrc.ln ~/.vimrc
 
-mv ~/.vimrc vimrc.ln
-ln -s vimrc.ln ~/.vimrc
+mv ~/.gitconfig gitconfig.ln
+ln -s gitconfig.ln ~/.gitconfig
+
+git add .
+git commit -m "Adds vim and gitconfig files."
 ```
