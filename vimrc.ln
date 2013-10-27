@@ -34,6 +34,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'tpope/vim-endwise'
+Bundle 'Raimondi/delimitMate'
 
 Bundle 'kana/vim-textobj-user.git'
 Bundle 'kana/vim-textobj-entire.git'
@@ -53,30 +54,44 @@ Bundle 'honza/vim-snippets'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'pangloss/vim-javascript'
+Bundle 'elzr/vim-json'
 Bundle 'moll/vim-node'
 Bundle 'suan/vim-instant-markdown'
 
 Bundle 'tpope/vim-bundler'
 
- filetype plugin on     " required!
- filetype plugin indent on     " required!
- "
- " Brief help
- " :BundleList          - list configured bundles
- " :BundleInstall(!)    - install(update) bundles
- " :BundleSearch(!) foo - search(or refresh cache first) for foo
- " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
- "
- " see :h vundle for more details or wiki for FAQ
- " NOTE: comments after Bundle command are not allowed..
-syntax on
+syntax enable
 
-" Wrap gitcommit file types at the appropriate length
-filetype indent plugin on
+set autoindent smartindent
+set smarttab
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set copyindent
+set preserveindent
+
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+
+set showmatch
+
+set shell=/bin/sh
+let mapleader=","
+
+set ignorecase
+set smartcase
+set backspace=indent,eol,start
+
+set nobackup
+set nowb
+set noswapfile
 
 set number
-let mapleader=","
-set shell=/bin/sh
+set ruler
+
 
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 
@@ -88,4 +103,27 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
-set noswapfile
+" TextMate style character navigation
+" for insert mode
+" cmap :W :w
+imap <C-f> <Right>
+imap <C-b> <Left>
+imap <C-e> <Esc>A
+imap <C-a> <Esc>^i
+
+set wildignore+=*.o,*.obj,.git,log/**,vendor/**,*/plugins/*,*/node_modules/*
+set switchbuf=useopen
+
+
+" Mark unwanted spaces
+set list
+set listchars=tab:\ \
+set listchars+=trail:·
+set listchars+=extends:>
+set listchars+=precedes:<
+
+" Copy from OS
+set clipboard=unnamed
+
+set showcmd
+set hlsearch
