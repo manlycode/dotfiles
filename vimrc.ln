@@ -36,12 +36,16 @@ Bundle 'rizzatti/dash.vim'
 Bundle 'tpope/vim-endwise'
 Bundle 'Raimondi/delimitMate'
 
+Bundle 'LnL7/vim-tslime'
+
 Bundle 'kana/vim-textobj-user.git'
 Bundle 'kana/vim-textobj-entire.git'
 Bundle 'kana/vim-textobj-indent.git'
 Bundle 'kana/vim-textobj-syntax.git'
 Bundle 'kana/vim-textobj-line.git'
 Bundle 'nelstrom/vim-textobj-rubyblock.git'
+
+Bundle 'AutoTag'
 
 
 " Snippets
@@ -127,3 +131,8 @@ set clipboard=unnamed
 
 set showcmd
 set hlsearch
+
+
+vmap <C-c><C-c> <Plug>SendSelectionToTmux
+nmap <C-c><C-c> <Plug>NormalModeSendToTmux
+nmap <C-c>r <Plug>SetTmuxVars
