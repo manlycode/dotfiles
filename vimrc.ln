@@ -109,7 +109,7 @@ endif
 
 " TextMate style character navigation
 " for insert mode
-" cmap :W :w
+cmap :W :w
 imap <C-f> <Right>
 imap <C-b> <Left>
 imap <C-e> <Esc>A
@@ -136,3 +136,5 @@ set hlsearch
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
+
+colorscheme vividchalk

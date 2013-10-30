@@ -13,6 +13,7 @@ set  -g mode-mouse on
 # Enable mouse select pane/window
 set -g mouse-select-pane on
 set -g mouse-select-window on
+set -g mouse-resize-pane on
 
 # Start tmux windows at 1 instead of 0
 #set -g base-index 1
@@ -64,3 +65,6 @@ bind-key Right resize-pane -R 8
 bind-key Left resize-pane -L 8
 bind-key Up resize-pane -U 4
 bind-key Down resize-pane -D 4
+
+set -g utf8 on
+set -g status-utf8 on

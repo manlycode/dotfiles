@@ -48,7 +48,7 @@ plugins=(git zshmarks)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/Users/manlycode/.rvm/gems/ruby-2.0.0-p247@global/bin:/Users/manlycode/.rvm/gems/ruby-2.0.0-p247@global/bin:/Users/manlycode/.rvm/rubies/ruby-2.0.0-p247/bin:/Users/manlycode/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 
 export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 export PATH="~/bin:$PATH"
@@ -59,7 +59,10 @@ export PATH="~/bin:$PATH"
 alias bi="bundle instal --binstubs"
 export PATH=/usr/local/bin:/Users/manlycode/.rvm/gems/ruby-2.0.0-p247/bin:/Users/manlycode/.rvm/gems/ruby-2.0.0-p247@global/bin:/Users/manlycode/.rvm/rubies/ruby-2.0.0-p247/bin:/Users/manlycode/.rvm/bin:~/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 
-
 export EDITOR="vim"
-
 source ~/bin/tmuxinator.zsh
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
