@@ -24,7 +24,6 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'junegunn/tabularize'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'ervandew/supertab'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'Lokaltog/vim-easymotion'
@@ -35,6 +34,7 @@ Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'tpope/vim-endwise'
 Bundle 'Raimondi/delimitMate'
+
 
 Bundle 'LnL7/vim-tslime'
 
@@ -66,6 +66,7 @@ Bundle 'tpope/vim-bundler'
 
 syntax enable
 
+set encoding=utf-8
 set autoindent smartindent
 set smarttab
 set expandtab
@@ -115,7 +116,7 @@ imap <C-b> <Left>
 imap <C-e> <Esc>A
 imap <C-a> <Esc>^i
 
-set wildignore+=*.o,*.obj,.git,log/**,vendor/**,*/plugins/*,*/node_modules/*
+set wildignore+=*.o,*.obj,.git,log/**,vendor/**,*/plugins/*,*/node_modules/*,tags
 set switchbuf=useopen
 
 
@@ -131,6 +132,7 @@ set clipboard=unnamed
 
 set showcmd
 set hlsearch
+set incsearch
 
 
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
@@ -138,3 +140,10 @@ nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
 colorscheme vividchalk
+
+set laststatus=2             "Always show the status bar and not on splited like before(this was the main problem)
+
+"to fix the font and lot of strange characters and colors
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
