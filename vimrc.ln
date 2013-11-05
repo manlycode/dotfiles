@@ -17,6 +17,7 @@ Bundle 'tpope/vim-rake'
 " Color Schemes
 Bundle 'vividchalk.vim'
 Bundle '29decibel/codeschool-vim-theme'
+Bundle 'altercation/vim-colors-solarized'
 
 " Utilities
 Bundle 'kien/ctrlp.vim'
@@ -28,16 +29,18 @@ Bundle 'ervandew/supertab'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-surround'
+Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'tpope/vim-endwise'
 Bundle 'Raimondi/delimitMate'
-
-
+Bundle 'AutoTag'
 Bundle 'LnL7/vim-tslime'
 
+
+" Select Ruby blocks as text objects
 Bundle 'kana/vim-textobj-user.git'
 Bundle 'kana/vim-textobj-entire.git'
 Bundle 'kana/vim-textobj-indent.git'
@@ -45,8 +48,8 @@ Bundle 'kana/vim-textobj-syntax.git'
 Bundle 'kana/vim-textobj-line.git'
 Bundle 'nelstrom/vim-textobj-rubyblock.git'
 
-Bundle 'AutoTag'
-
+" Searching
+Bundle "tpope/vim-abolish"
 
 " Snippets
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -63,6 +66,10 @@ Bundle 'moll/vim-node'
 Bundle 'suan/vim-instant-markdown'
 
 Bundle 'tpope/vim-bundler'
+
+" Dash
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
 
 syntax enable
 
@@ -97,7 +104,7 @@ set noswapfile
 set number
 set ruler
 
-
+nnoremap <C-l> :nohlsearch<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 
 " NERDTree
@@ -110,13 +117,12 @@ endif
 
 " TextMate style character navigation
 " for insert mode
-cmap :W :w
 imap <C-f> <Right>
 imap <C-b> <Left>
 imap <C-e> <Esc>A
 imap <C-a> <Esc>^i
 
-set wildignore+=*.o,*.obj,.git,log/**,vendor/**,*/plugins/*,*/node_modules/*,tags
+set wildignore+=*.o,*.obj,.git,log/**,vendor/**,*/plugins/*,*/node_modules/*,tags,gems.tags
 set switchbuf=useopen
 
 
@@ -134,16 +140,22 @@ set showcmd
 set hlsearch
 set incsearch
 
-
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
 colorscheme vividchalk
 
-set laststatus=2             "Always show the status bar and not on splited like before(this was the main problem)
+
+"set laststatus=2             "Always show the status bar and not on splited like before(this was the main problem)
 
 "to fix the font and lot of strange characters and colors
 set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
+
+" Find word in project
+nmap <leader>fw :vimgrep /<C-r><C-w>/ **/*
+nmap <leader>fl yy :vimgrep /<C-r><C-0>/ **/*
+
+
