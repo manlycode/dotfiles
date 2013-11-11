@@ -14,6 +14,9 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-rake'
 
+" Style
+Bundle "bling/vim-airline"
+
 " Color Schemes
 Bundle 'vividchalk.vim'
 Bundle '29decibel/codeschool-vim-theme'
@@ -61,9 +64,9 @@ Bundle 'honza/vim-snippets'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'pangloss/vim-javascript'
-Bundle 'elzr/vim-json'
 Bundle 'moll/vim-node'
 Bundle 'suan/vim-instant-markdown'
+Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
 
 Bundle 'tpope/vim-bundler'
 
@@ -144,10 +147,11 @@ vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
-colorscheme vividchalk
+
+colorscheme solarized
 
 
-"set laststatus=2             "Always show the status bar and not on splited like before(this was the main problem)
+set laststatus=2             "Always show the status bar and not on splited like before(this was the main problem)
 
 "to fix the font and lot of strange characters and colors
 set encoding=utf-8
@@ -158,4 +162,14 @@ set fillchars+=stl:\ ,stlnc:\
 nmap <leader>fw :vimgrep /<C-r><C-w>/ **/*
 nmap <leader>fl yy :vimgrep /<C-r><C-0>/ **/*
 
+cabbr W w
+cabbr Q q
 
+" Gist settings
+let g:gist_clip_command = 'pbcopy'
+let g:gist_detect_filetype = 1
+
+
+" Filetypes
+au BufNewFile,BufRead *.css.erb set ft=css
+let g:airline_powerline_fonts = 1

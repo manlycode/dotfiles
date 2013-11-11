@@ -11,8 +11,12 @@ ZSH_THEME="fino"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias be="bundle exec"
-alias zource="source ~/.zshrc"
-alias zedit="mvim ~/.zshrc"
+
+# Helpers for quickly editing and sourcing
+alias source-zshrc="source ~/.zshrc"
+alias edit-zshrc="vim ~/.zshrc && source ~/.zshrc"
+alias edit-muxes="vim ~/.tmuxinator"
+alias edit-tmux="vim ~/.tmux.conf"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
