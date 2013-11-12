@@ -1,0 +1,18 @@
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias be="bundle exec"
+
+# Helpers for quickly editing and sourcing
+alias source-zshrc="source ~/.zshrc"
+
+# shortcuts to edit important dotfiles
+alias edit-zshrc="vim ~/.zshrc && source ~/.zshrc"
+alias edit-muxes="vim ~/.tmuxinator"
+alias edit-tmux="vim ~/.tmux.conf"
+
+alias bi="bundle install --binstubs"
+
+# ctags helpers
+alias build-tags="ctags -R ."
+alias build-tags-rails="ctags -R . \$(bundle list --paths)"

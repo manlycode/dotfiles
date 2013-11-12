@@ -7,16 +7,7 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="fino"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias be="bundle exec"
-
-# Helpers for quickly editing and sourcing
-alias source-zshrc="source ~/.zshrc"
-alias edit-zshrc="vim ~/.zshrc && source ~/.zshrc"
-alias edit-muxes="vim ~/.tmuxinator"
-alias edit-tmux="vim ~/.tmux.conf"
+source ~/.aliasrc
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -60,7 +51,6 @@ export PATH="~/bin:$PATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # BINSTUBS!
-alias bi="bundle instal --binstubs"
 export PATH=/usr/local/bin:/Users/manlycode/.rvm/gems/ruby-2.0.0-p247/bin:/Users/manlycode/.rvm/gems/ruby-2.0.0-p247@global/bin:/Users/manlycode/.rvm/rubies/ruby-2.0.0-p247/bin:/Users/manlycode/.rvm/bin:~/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 
 export EDITOR="vim"
