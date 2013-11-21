@@ -39,9 +39,11 @@ Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'tpope/vim-endwise'
 Bundle 'Raimondi/delimitMate'
-Bundle 'AutoTag'
+" Bundle 'AutoTag'
 Bundle 'LnL7/vim-tslime'
-
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'jeetsukumaran/vim-buffergator'
+Bundle 'godlygeek/tabular'
 
 " Select Ruby blocks as text objects
 Bundle 'kana/vim-textobj-user.git'
@@ -53,6 +55,7 @@ Bundle 'nelstrom/vim-textobj-rubyblock.git'
 
 " Searching
 Bundle "tpope/vim-abolish"
+Bundle "rking/ag.vim"
 
 " Snippets
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -69,6 +72,9 @@ Bundle 'suan/vim-instant-markdown'
 Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
 
 Bundle 'tpope/vim-bundler'
+
+" Testing
+Bundle 'jgdavey/vim-turbux'
 
 " Dash
 Bundle 'rizzatti/funcoo.vim'
@@ -173,3 +179,13 @@ let g:gist_detect_filetype = 1
 " Filetypes
 au BufNewFile,BufRead *.css.erb set ft=css
 let g:airline_powerline_fonts = 1
+
+
+" Update the color scheme depending on what time of day it is
+if strftime("%H") >= 5 && strftime("%H") <= 17
+  set background=light
+else
+  set background=dark
+endif
+
+set mouse=a
