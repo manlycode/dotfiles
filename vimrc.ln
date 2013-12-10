@@ -70,6 +70,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'moll/vim-node'
 Bundle 'suan/vim-instant-markdown'
 Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
+Bundle 'ekalinin/Dockerfile.vim'
 
 Bundle 'tpope/vim-bundler'
 
@@ -131,7 +132,7 @@ imap <C-b> <Left>
 imap <C-e> <Esc>A
 imap <C-a> <Esc>^i
 
-set wildignore+=*.o,*.obj,.git,log/**,vendor/**,*/plugins/*,*/node_modules/*,tags,gems.tags
+set wildignore+=*.o,*.obj,.git,log/**,coverage/**,vendor/**,*/plugins/*,*/node_modules/*,tags,gems.tags
 set switchbuf=useopen
 
 
@@ -189,3 +190,15 @@ else
 endif
 
 set mouse=a
+
+" The Silver Searcher
+if executable('ag')
+  " user ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " use it in ctrl-p for listing files
+  let g:ctrl_puser_command = 'ag %s -l --nocolor -g ""'
+
+  " Turn off the ctrl p cache
+  let g:ctrl_use_caching = 0
+endif
