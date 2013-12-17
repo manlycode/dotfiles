@@ -21,7 +21,11 @@ Bundle "bling/vim-airline"
 Bundle 'vividchalk.vim'
 Bundle '29decibel/codeschool-vim-theme'
 Bundle 'altercation/vim-colors-solarized'
-
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'tomasr/molokai'
+Bundle 'sickill/vim-monokai'
+Bundle 'sjl/badwolf'
 " Utilities
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
@@ -155,7 +159,7 @@ nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
 
-colorscheme solarized
+colorscheme molokai
 
 
 set laststatus=2             "Always show the status bar and not on splited like before(this was the main problem)
@@ -182,12 +186,7 @@ au BufNewFile,BufRead *.css.erb set ft=css
 let g:airline_powerline_fonts = 1
 
 
-" Update the color scheme depending on what time of day it is
-if strftime("%H") >= 5 && strftime("%H") <= 17
-  set background=light
-else
-  set background=dark
-endif
+set background=dark
 
 set mouse=a
 
