@@ -72,11 +72,14 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'pangloss/vim-javascript'
 Bundle 'moll/vim-node'
-Bundle 'suan/vim-instant-markdown'
 Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
 Bundle 'ekalinin/Dockerfile.vim'
-
+Bundle 'groenewege/vim-less'
+Bundle 'tpope/vim-rbenv'
+Bundle 'timcharper/textile.vim'
+Bundle 'greyblake/vim-preview'
 Bundle 'tpope/vim-bundler'
+Bundle 'jade.vim'
 
 " Testing
 Bundle 'jgdavey/vim-turbux'
