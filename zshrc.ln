@@ -57,13 +57,18 @@ fi
 echo -e "\033]50;SetProfile=$profile\a"
 }
 
+# Chruby
+source '/usr/local/share/chruby/chruby.sh'
+source '/usr/local/share/chruby/auto.sh'
+
 # Binstubs!
 export PATH="./bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
+
+# Android
 export PATH="/Users/manlycode/Library/adt-bundle-mac/sdk/tools:$PATH"
 
 # NPM Bins
-
 export PATH="./node_modules:$PATH"
 
 # added by travis gem
