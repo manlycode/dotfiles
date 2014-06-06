@@ -12,6 +12,6 @@
 /.rbenv-version
 
 # Bundler binstubs
-/bin/
 tags
 gems.tags
+Guardfile

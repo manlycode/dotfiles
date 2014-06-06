@@ -46,7 +46,7 @@ Bundle 'Raimondi/delimitMate'
 " Bundle 'AutoTag'
 Bundle 'LnL7/vim-tslime'
 Bundle 'vim-scripts/taglist.vim'
-Bundle 'jeetsukumaran/vim-buffergator'
+"Bundle 'jeetsukumaran/vim-buffergator'
 Bundle 'godlygeek/tabular'
 
 " Select Ruby blocks as text objects
@@ -63,7 +63,7 @@ Bundle "rking/ag.vim"
 
 " Snippets
 Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle "tomtom/tlib_vim"
+Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 
@@ -82,11 +82,18 @@ Bundle 'tpope/vim-bundler'
 Bundle 'jade.vim'
 
 " Testing
-Bundle 'jgdavey/vim-turbux'
+"Bundle 'jgdavey/vim-turbux'
+Bundle 'thoughtbot/vim-rspec'
+Bundle 'tpope/vim-dispatch'
+
+let g:rspec_command = "Dispatch rspec {spec}"
 
 " Dash
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
+
+" Emett
+Bundle 'mattn/emmet-vim'
 
 syntax enable
 
@@ -139,7 +146,7 @@ imap <C-b> <Left>
 imap <C-e> <Esc>A
 imap <C-a> <Esc>^i
 
-set wildignore+=*.o,*.obj,.git,log/**,coverage/**,vendor/**,*/plugins/*,*/node_modules/*,tags,gems.tags
+set wildignore+=*.o,*.obj,.git,log/**,coverage/**,vendor/**,*/plugins/*,*/node_modules/*,tags,gems.tags,tmp,log
 set switchbuf=useopen
 
 
@@ -173,8 +180,8 @@ set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 
 " Find word in project
-nmap <leader>fw :vimgrep /<C-r><C-w>/ **/*
-nmap <leader>fl yy :vimgrep /<C-r><C-0>/ **/*
+nmap <leader>fw :grep "<C-r><C-w>"<CR>
+nmap <leader>fl yy :grep "<C-r><C-0>"<CR>
 
 cabbr W w
 cabbr Q q
@@ -204,3 +211,8 @@ if executable('ag')
   " Turn off the ctrl p cache
   let g:ctrl_use_caching = 0
 endif
+
+nmap <Leader>t :call RunCurrentSpecFile()<CR>
+nmap <Leader>T :call RunNearestSpec()<CR>
+nmap <Leader>l :call RunLastSpec()<CR>
+nmap <Leader>a :call RunAllSpecs()<CR>
