@@ -15,3 +15,7 @@
 tags
 gems.tags
 Guardfile
+
+hit_list.txt
+task_list.txt
+sandbox.rb
