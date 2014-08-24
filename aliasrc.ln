@@ -16,3 +16,4 @@ alias bi="bundle install --binstubs"
 # ctags helpers
 alias build-tags="ctags -R ."
 alias build-tags-rails="ctags -R . \$(bundle list --paths)"
+alias neovim="VIM=~/git_dumpster/vimscript/runtime nvim"

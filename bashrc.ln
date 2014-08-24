@@ -7,3 +7,7 @@ export PATH="/usr/local/bin:$PATH"
 
 # added by travis gem
 [ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
+
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
