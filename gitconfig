@@ -1,0 +1,25 @@
+[user]
+	name = Chris Rittersdorf
+	email = chris.rittersdorf@collectiveidea.com
+
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+
+[alias]
+	st = status
+	co = checkout
+	wip = !"git add -A .; git commit -m \"@WIP\""
+	stash-all = !"git add -A .; git stash"
+	delete-merged = !"git branch --merged | grep -v master | xargs -n 1 git branch -d"
+
+[diff]
+	tool = opendiff
+
+[difftool]
+	prompt = false
+
+[mergetool]
+	prompt = false
+[push]
+	default = simple
