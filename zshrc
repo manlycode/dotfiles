@@ -78,6 +78,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias bundle_and_reset="bundle && rake db:reset db:seed:demo"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-bright.dark.sh"
