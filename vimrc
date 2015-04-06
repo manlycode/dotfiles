@@ -29,6 +29,7 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
+NeoBundle 'majutsushi/tagbar'
 
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-sensible'
