@@ -237,3 +237,5 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
+" Syntastic
+let g:syntastic_javascript_checkers = ['jsxhint']
