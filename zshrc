@@ -45,7 +45,7 @@ ZSH_THEME="cloud"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails rake-fast zshmarks)
+plugins=(git rails rake-fast zshmarks tmuxinator docker)
 
 # User configuration
 # export PATH="/Users/manlycode/.rbenv/shims:/usr/local/bin:/Users/manlycode/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -84,3 +84,5 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-bright.dark.sh"
 # export PATH=$PATH:node_modules/.bin
 source ~/.bin/tmuxinator.zsh
 
+# Tmuxinator
+export DISABLE_AUTO_TITLE=true
