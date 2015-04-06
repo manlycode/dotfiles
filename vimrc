@@ -32,7 +32,6 @@ NeoBundle 'honza/vim-snippets'
 NeoBundle 'majutsushi/tagbar'
 
 NeoBundle 'tpope/vim-sensible'
-NeoBundle 'tpope/vim-sensible'
 NeoBundle 'scrooloose/syntastic'
 
 " Add or remove your Bundles here:
