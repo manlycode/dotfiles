@@ -26,6 +26,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 " NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
 
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-sensible'
@@ -213,3 +215,10 @@ endif
 
 " Markdown
 au BufRead,BufNewFile *.md setlocal textwidth=80
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+
