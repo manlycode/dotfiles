@@ -95,6 +95,9 @@ filetype plugin indent on
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
+syntax enable
+filetype plugin indent on
+
 runtime! plugin/sensible.vim
 
 let base16colorspace=256
@@ -215,6 +218,17 @@ endif
 
 " Markdown
 au BufRead,BufNewFile *.md setlocal textwidth=80
+
+
+" HTML
+if has("autocmd")
+  autocmd FileType html setlocal shiftwidth=4 tabstop=4
+endif
+
+" Javascript
+if has("autocmd")
+  autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+endif
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
