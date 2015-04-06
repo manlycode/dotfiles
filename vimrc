@@ -26,6 +26,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 " NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'mattn/emmet-vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
 
