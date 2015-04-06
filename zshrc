@@ -48,21 +48,17 @@ ZSH_THEME="cloud"
 plugins=(git rails rake-fast zshmarks)
 
 # User configuration
+# export PATH="/Users/manlycode/.rbenv/shims:/usr/local/bin:/Users/manlycode/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
-export PATH="/Users/manlycode/.rbenv/shims:/usr/local/bin:/Users/manlycode/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-# export MANPATH="/usr/local/man:$MANPATH"
+# PATH is set in ~/.zshenv for Vim compatibility
+source ~/.zshenv
 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -83,3 +79,8 @@ alias bundle_and_reset="bundle && rake db:reset db:seed:demo"
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-bright.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+# Node.js
+# export PATH=$PATH:node_modules/.bin
+source ~/.bin/tmuxinator.zsh
+
