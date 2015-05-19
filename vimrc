@@ -25,18 +25,38 @@ NeoBundle 'Shougo/vimproc.vim', {
       \ }
 
 " NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplete'
+" NeoBundle 'Shougo/neosnippet'
+" NeoBundle 'Shougo/neosnippet-snippets'
+
+NeoBundle 'vim-scripts/Align'
+NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mattn/emmet-vim'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
 NeoBundle 'majutsushi/tagbar'
 
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'wting/rust.vim'
+NeoBundle 'phildawes/racer', {
+      \   'build' : {
+      \     'mac': 'cargo build --release',
+      \     'unix': 'cargo build --release',
+      \   }
+      \ }
+
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
+
+NeoBundle 'szw/vim-tags'
+
+NeoBundle 'cespare/vim-toml'
+
+NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'myhere/vim-nodejs-complete'
 
 " Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'tpope/vim-commentary'
@@ -73,6 +93,7 @@ NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'jgdavey/tslime.vim'
 NeoBundle 'jgdavey/vim-turbux'
 NeoBundle 'slim-template/vim-slim'
+NeoBundle 'tpope/vim-rbenv'
 
 " Markdown
 NeoBundle 'tpope/vim-markdown'
@@ -85,17 +106,22 @@ NeoBundle 'chriskempson/base16-vim'
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 
+NeoBundle 'fatih/vim-go'
+
 " Required:
 call neobundle#end()
 
 " Required:
 filetype plugin indent on
+set hlsearch
+set ic
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
+set omnifunc=syntaxcomplete#Complete
 syntax enable
 filetype plugin indent on
 
@@ -127,14 +153,16 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-set wildignore+=*/.git/*,*/log/*,*/tmp/*
+set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*
 
-
-" Colorscheme
-set background=dark
 silent! colorscheme base16-default
+let bg_shade=$BG_SHADE
 
-set hidden
+if bg_shade == 'light'
+  set bg=light
+else
+  set bg=dark
+endif
 
 " Plugin configuration {{{1
 " netrw.vim {{{2
@@ -221,21 +249,41 @@ endif
 au BufRead,BufNewFile *.md setlocal textwidth=80
 
 
-" HTML
+" Tabs!
 if has("autocmd")
   autocmd FileType html setlocal shiftwidth=4 tabstop=4
+  autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+  autocmd FileType json setlocal shiftwidth=2 tabstop=2
+  autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 endif
 
-" Javascript
+" Completions
 if has("autocmd")
-  autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+  " Ruby
+  autocmd FileType ruby,eruby setl omnifunc=rubycomplete#Complete
+  let g:rubycomplete_rails = 1
+  let g:rubycomplete_buffer_loading = 1
+  let g:rubycomplete_classes_in_global = 1
 endif
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
 
 " Syntastic
 let g:syntastic_javascript_checkers = ['jsxhint']
+
+" Rust
+set hidden
+
+
+"" YouCompleteMe
+let g:ycm_key_list_previous_completion=['<Up>']
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<s-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
