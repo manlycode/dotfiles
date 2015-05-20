@@ -51,7 +51,7 @@ plugins=(git rails rake-fast zshmarks tmuxinator docker)
 # export PATH="/Users/manlycode/.rbenv/shims:/usr/local/bin:/Users/manlycode/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # PATH is set in ~/.zshenv for Vim compatibility
-source ~/.zshenv
+# source ~/.zshenv
 
 source $ZSH/oh-my-zsh.sh
 
@@ -74,11 +74,9 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias bundle_and_reset="bundle && rake db:reset db:seed:demo"
+alias bundle_and_reset="bundle && rake db:seed:demo"
+alias edit-nginx="vim /usr/local/etc/nginx/nginx.conf && sudo nginx -s reload"
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-bright.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Node.js
 # export PATH=$PATH:node_modules/.bin
@@ -86,3 +84,8 @@ source ~/.bin/tmuxinator.zsh
 
 # Tmuxinator
 export DISABLE_AUTO_TITLE=true
+PATH=$PATH:$HOME/.cli-scripts/bin
+PATH=$PATH:$HOME/.bartlett/bin
+
+# Rust
+export RUST_SRC_PATH="/usr/local/src/rust/src"

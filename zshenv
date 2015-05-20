@@ -5,10 +5,8 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=./bin:$PATH
 
-
 function set_bg {
   export BG_SHADE=$1
-  echo "Setting BG_SHADE to $BG_SHADE"
   BASE16_SHELL="$HOME/.config/base16-shell/base16-bright.$BG_SHADE.sh"
   [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 }
@@ -20,3 +18,5 @@ if [ $h -lt 19 ]; then
 else
   set_bg "dark"
 fi
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
