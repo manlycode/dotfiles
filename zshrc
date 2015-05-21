@@ -1,3 +1,21 @@
+# chruby
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
+
+function set_bg {
+  export BG_SHADE=$1
+  BASE16_SHELL="$HOME/.config/base16-shell/base16-bright.$BG_SHADE.sh"
+  [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+}
+
+h=`date +%H`
+
+if [ $h -lt 19 ]; then
+  set_bg "light"
+else
+  set_bg "dark"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/manlycode/.oh-my-zsh
 
@@ -47,12 +65,6 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git rails rake-fast zshmarks tmuxinator docker)
 
-# User configuration
-# export PATH="/Users/manlycode/.rbenv/shims:/usr/local/bin:/Users/manlycode/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-
-# PATH is set in ~/.zshenv for Vim compatibility
-# source ~/.zshenv
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -89,3 +101,8 @@ PATH=$PATH:$HOME/.bartlett/bin
 
 # Rust
 export RUST_SRC_PATH="/usr/local/src/rust/src"
+
+export PATH="/usr/local/bin:/Users/manlycode/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH=$PATH:node_modules/.bin
+export PATH=$PATH:$HOME/.cli-scripts/bin
+export PATH=./bin:$PATH

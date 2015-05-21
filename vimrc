@@ -93,7 +93,6 @@ NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'jgdavey/tslime.vim'
 NeoBundle 'jgdavey/vim-turbux'
 NeoBundle 'slim-template/vim-slim'
-NeoBundle 'tpope/vim-rbenv'
 
 " Markdown
 NeoBundle 'tpope/vim-markdown'
@@ -104,7 +103,7 @@ NeoBundle 'suan/vim-instant-markdown'
 NeoBundle 'chriskempson/base16-vim'
 
 " You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+" NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 
 NeoBundle 'fatih/vim-go'
 
@@ -120,12 +119,12 @@ set ic
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
+"
 
 set omnifunc=syntaxcomplete#Complete
 syntax enable
 filetype plugin indent on
 
-runtime! plugin/sensible.vim
 
 let base16colorspace=256
 let mapleader=","
@@ -179,7 +178,7 @@ let g:markdown_fenced_languages = ['ruby', 'javascript']
 " let g:markdown_fenced_languages = ['ruby', 'javascript']
 " to debug, run :verbose set foldmethod?
 
-" Ctlr-P 
+" Ctlr-P
 let g:ctrlp_jump_to_buffer = 0
 let g:ctrlp_working_path_mode = 0
 nnoremap <leader>b :CtrlPBuffer<CR>
