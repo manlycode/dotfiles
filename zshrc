@@ -1,3 +1,5 @@
+export PATH=./bin:$PATH
+
 # chruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
@@ -63,7 +65,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails rake-fast zshmarks tmuxinator docker)
+plugins=(bundler git rails rake-fast zshmarks tmuxinator docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,7 +93,7 @@ alias edit-nginx="vim /usr/local/etc/nginx/nginx.conf && sudo nginx -s reload"
 
 
 # Node.js
-# export PATH=$PATH:node_modules/.bin
+export PATH=$PATH:node_modules/.bin
 source ~/.bin/tmuxinator.zsh
 
 # Tmuxinator
@@ -105,4 +107,4 @@ export RUST_SRC_PATH="/usr/local/src/rust/src"
 export PATH="/usr/local/bin:/Users/manlycode/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH=$PATH:node_modules/.bin
 export PATH=$PATH:$HOME/.cli-scripts/bin
-export PATH=./bin:$PATH
+export PATH=$PATH:/usr/bin/local
