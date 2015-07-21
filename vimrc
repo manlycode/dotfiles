@@ -30,13 +30,13 @@ NeoBundle 'Shougo/neocomplete'
 " NeoBundle 'Shougo/neosnippet-snippets'
 
 NeoBundle 'vim-scripts/Align'
-NeoBundle 'scrooloose/nerdtree'
+" NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'majutsushi/tagbar'
 
+
 NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'wting/rust.vim'
 NeoBundle 'phildawes/racer', {
       \   'build' : {
       \     'mac': 'cargo build --release',
@@ -44,10 +44,10 @@ NeoBundle 'phildawes/racer', {
       \   }
       \ }
 
+NeoBundle 'rhysd/rust-doc.vim'
+
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
-
-NeoBundle 'szw/vim-tags'
 
 NeoBundle 'cespare/vim-toml'
 
@@ -75,6 +75,7 @@ NeoBundle 'tpope/vim-projectile'
 NeoBundle 'nelstrom/vim-visual-star-search'
 NeoBundle 'nelstrom/vim-docopen'
 NeoBundle 'vim-scripts/prettyprint.vim'
+NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kana/vim-textobj-user'
@@ -97,7 +98,11 @@ NeoBundle 'slim-template/vim-slim'
 " Markdown
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'nelstrom/vim-markdown-folding'
-NeoBundle 'suan/vim-instant-markdown'
+"NeoBundle 'suan/vim-instant-markdown'
+NeoBundle 'greyblake/vim-preview'
+
+" Textile
+NeoBundle 'timcharper/textile.vim'
 
 " Colorschemes
 NeoBundle 'chriskempson/base16-vim'
@@ -227,6 +232,7 @@ set number
 command! Github :VimProcBang github
 
 " Syntastic
+let g:syntastic_ruby_rubocop_exec="~/vin/rubocop.sh"
 
 " Source .vimrc after editing it
 if has("autocmd")
@@ -244,8 +250,13 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" Markdown
-au BufRead,BufNewFile *.md setlocal textwidth=80
+" Writing defaults (Markdown textile)
+if has("autocmd")
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+  autocmd BufRead,BufNewFile *.md set spell
+  autocmd BufRead,BufNewFile *.textile setlocal textwidth=80
+  autocmd BufRead,BufNewFile *.textile set spell
+endif
 
 
 " Tabs!
@@ -253,7 +264,9 @@ if has("autocmd")
   autocmd FileType html setlocal shiftwidth=4 tabstop=4
   autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
   autocmd FileType json setlocal shiftwidth=2 tabstop=2
+  autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
   autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
+  autocmd FileType sql setlocal shiftwidth=2 tabstop=2
 endif
 
 " Completions
@@ -274,7 +287,6 @@ let g:syntastic_javascript_checkers = ['jsxhint']
 " Rust
 set hidden
 
-
 "" YouCompleteMe
 let g:ycm_key_list_previous_completion=['<Up>']
 
@@ -286,3 +298,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" vim-turbux
+let g:turbux_command_prefix = 'bundle exec' " default: (empty)
