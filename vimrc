@@ -49,6 +49,7 @@ NeoBundle 'mattn/webapi-vim'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-vinegar'
+NeoBundle 'scrooloose/nerdtree'
 
 " ------------------------------------------------------------------
 "  -- Editing
@@ -145,6 +146,7 @@ NeoBundle "tfnico/vim-gradle"
 
 NeoBundle "guns/vim-clojure-static"
 NeoBundle "tpope/vim-fireplace"
+NeoBundle "reedes/vim-wordy"
 
 " Required:
 call neobundle#end()
@@ -373,6 +375,17 @@ if has("autocmd")
 endif
 
 " ------------------------------------------------------------------
+" --- Groovy
+" ------------------------------------------------------------------
+if has("autocmd")
+  augroup groovy_defaults
+    autocmd!
+    autocmd FileType groovy setlocal shiftwidth=2 tabstop=2 expandtab
+    autocmd FileType gradle setlocal shiftwidth=2 tabstop=2 expandtab
+  augroup END
+endif
+
+" ------------------------------------------------------------------
 " --- Markdown
 " ------------------------------------------------------------------
 " Writing defaults (Markdown textile)
@@ -414,6 +427,7 @@ endif
 if has("autocmd")
   augroup ruby_defaults
     autocmd!
+    autocmd BufNewFile,BufRead Fastfile set filetype=ruby
     autocmd FileType ruby,eruby setl omnifunc=rubycomplete#Complete
     autocmd FileType ruby,eruby setlocal shiftwidth=2 tabstop=2
 
@@ -484,3 +498,10 @@ if has("autocmd")
     autocmd FileType vim setlocal shiftwidth=2 tabstop=2
   augroup END
 endif
+
+" ------------------------------------------------------------------
+" --- NerdTree
+" ------------------------------------------------------------------
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <leader>n :NERDTreeToggle<CR>

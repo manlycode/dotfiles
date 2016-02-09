@@ -1,9 +1,5 @@
 export PATH=./bin:$PATH
 
-# chruby
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
-
 function set_bg {
   export BG_SHADE=$1
   BASE16_SHELL="$HOME/.config/base16-shell/base16-bright.$BG_SHADE.sh"
@@ -12,7 +8,7 @@ function set_bg {
 
 h=`date +%H`
 
-if [ $h -lt 19 ]; then
+if [ $h -lt 17 ]; then
   set_bg "light"
 else
   set_bg "dark"
@@ -65,7 +61,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bundler git rails rake-fast zshmarks tmuxinator docker)
+plugins=(rake bundler git rails rake-fast zshmarks tmuxinator docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,11 +86,11 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias bundle_and_reset="bundle && rake db:seed:demo"
 alias edit-nginx="vim /usr/local/etc/nginx/nginx.conf && sudo nginx -s reload"
+alias rake="noglob bundled_rake"
 
 
 # Node.js
 export PATH=$PATH:node_modules/.bin
-source ~/.bin/tmuxinator.zsh
 
 # Tmuxinator
 export DISABLE_AUTO_TITLE=true
@@ -108,3 +104,18 @@ export PATH="/usr/local/bin:/Users/manlycode/.bin:/usr/local/bin:/usr/bin:/bin:/
 export PATH=$PATH:node_modules/.bin
 export PATH=$PATH:$HOME/.cli-scripts/bin
 export PATH=$PATH:/usr/bin/local
+
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+chruby 2.3.0
+
+source ~/.bin/tmuxinator.zsh
+
+source /usr/local/opt/chruby/share/chruby/auto.sh
+eval "$(hub alias -s)"
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+
+export GRADLE_OPTS="-Dorg.gradle.daemon=tru"
+
+# docker-machine start docker
+# eval "$(docker-machine env docker)"
