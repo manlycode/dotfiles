@@ -35,7 +35,6 @@ NeoBundle 'Shougo/vimproc.vim', {
       \    },
       \ }
 
-
 NeoBundle 'jgdavey/tslime.vim'
 NeoBundle 'jgdavey/vim-turbux'
 NeoBundle 'tpope/vim-dispatch'
@@ -74,6 +73,7 @@ NeoBundle 'easymotion/vim-easymotion'
 " ------------------------------------------------------------------
 
 NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'easysid/mod8.vim'
 
 
 
@@ -266,7 +266,7 @@ endif
 " Colorshceme
 " ------------------------------------------------------------------
 
-let theme_bg = $THEME_BG
+let theme_bg = $BG_SHADE
 
 if theme_bg == 'light'
   set bg=light
@@ -275,7 +275,9 @@ else
 endif
 
 let base16colorspace=256
-silent! colorscheme base16-default
+" silent! colorscheme base16-default
+silent! colorscheme base16-eighties
+hi Search guibg=darkgray guifg=wheat
 
 " ------------------------------------------------------------------
 " Shougo/neosnippet
