@@ -21,14 +21,29 @@ NeoBundle 'Shougo/vimproc.vim', {
       \     'unix' : 'gmake',
       \    },
       \ }
+let g:neobundle#install_process_timeout = 1800  "YouCompleteMe is so slow
+" NeoBundle 'Valloric/YouCompleteMe', {
+"      \ 'build' : {
+"      \     'mac' : './install.py --clang-completer --system-libclang --gocode-completer --racer-completer',
+"      \     'unix' : './install.py --clang-completer --system-libclang --gocode-completer --racer-completer',
+"      \     'windows' : './install.py --clang-completer --system-libclang --gocode-completer --racer-completer',
+"      \     'cygwin' : './install.py --clang-completer --system-libclang --gocode-completer --racer-completer',
+"      \    }
+"      \ }
+
+" NeoBundle 'ervandew/supertab'
 
 NeoBundle 'tpope/vim-eunuch'     " Unix commands: :Remove :Move, etc
 NeoBundle 'mattn/webapi-vim'
+NeoBundle 'Shougo/vinarise.vim'
 
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'scrooloose/nerdtree'
+
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
 
 NeoBundle 'kana/vim-textobj-indent'
 NeoBundle 'kana/vim-textobj-user'
@@ -45,6 +60,7 @@ NeoBundle 'easymotion/vim-easymotion'
 
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'easysid/mod8.vim'
+NeoBundle 'moll/vim-node'
 
 " ------------------------------------------------------------------
 " -- Languages/Tools
@@ -130,6 +146,8 @@ NeoBundle 'tpope/vim-rake'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
 
+NeoBundle 'rizzatti/dash.vim'
+
 " Required:
 call neobundle#end()
 
@@ -140,6 +158,9 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
+"
+
+set timeoutlen=1000 ttimeoutlen=0
 
 set shell=/bin/zsh
 set nottimeout
@@ -149,29 +170,28 @@ syntax enable
 set number
 
 let mapleader=","
-set bs=indent,eol,start
 filetype plugin indent on
 set clipboard=unnamed
 
 " Personal preferences not set by sensible.vim
-set history=5000
 set showcmd
 set nojoinspaces
 
 " Search
 set ignorecase
-set hlsearch
 
 " set listchars=tab:▸\ ,eol:¬
 set foldlevelstart=99
 set noswapfile
+set autowrite
+
 if has('mouse')
   set mouse=nv
 endif
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*
+set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*
 
 
 " Plugin configuration {{{1
@@ -210,9 +230,9 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
-nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
-nnoremap <leader>et :vsplit ~/.tmux.conf<cr>
-nnoremap <leader>ep :vsplit ~/.bundles.vim<cr>
+nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>
+nnoremap <leader>et :tabe ~/.tmux.conf<cr>
+nnoremap <leader>ep :tabe ~/.bundles.vim<cr>
 
 " Source .vimrc after editing it
 if has("autocmd")
@@ -259,10 +279,6 @@ let base16colorspace=256
 silent! colorscheme base16-eighties
 hi Search guibg=darkgray guifg=wheat
 
-" ------------------------------------------------------------------
-" Shougo/neosnippet
-" ------------------------------------------------------------------
-
 
 " ------------------------------------------------------------------
 " --- Textile
@@ -271,7 +287,6 @@ hi Search guibg=darkgray guifg=wheat
 " ------------------------------------------------------------------
 " --- VimScript
 " ------------------------------------------------------------------
-
 
 " ------------------------------------------------------------------
 "  Plugin Configurations
@@ -473,12 +488,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:neoterm_position = 'horizontal'
 let g:neoterm_automap_keys = ',tt'
 
-nnoremap <silent> <f10> :TREPLSendFile<cr>
-nnoremap <silent> <f9> :TREPLSend<cr>
-vnoremap <silent> <f9> :TREPLSend<cr>
-
 " run set test lib
-"nnoremap <silent> ,rt :call neoterm#test#run('all')<cr>
+nnoremap <silent> ,rt :call neoterm#test#run('all')<cr>
 nnoremap <silent> ,rT :call neoterm#test#run('file')<cr>
 nnoremap <silent> ,rt :call neoterm#test#run('current')<cr>
 nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
@@ -508,9 +519,20 @@ let g:neomake_error_sign={'text': '❌', 'texthl': ''}
 autocmd! BufWritePost * Neomake
 
 
+let g:neoterm_size = 10
 " Terminal
 if has("nvim")
   " Allow escape or Ctrl-[ to switch to navigation mode in the terminal
-  :tnoremap <Esc> <C-\><C-n>
+  :tnoremap <Esc><Esc> <C-\><C-n>
   :tnoremap <C-[> <C-\><C-n>
 endif
+
+" Get to Work Commands
+command! GTWStart :T get-to-work start --force
+command! GTWStop :T get-to-work stop
+
+" makefiles
+autocmd FileType make setlocal noexpandtab
+
+" Vinarise
+let g:vinarise_enable_auto_detect = 1

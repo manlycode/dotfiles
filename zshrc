@@ -104,7 +104,8 @@ export PATH="/usr/local/bin:/Users/manlycode/.bin:/usr/local/bin:/usr/bin:/bin:/
 export PATH=$PATH:node_modules/.bin
 export PATH=$PATH:$HOME/.cli-scripts/bin
 export PATH=$PATH:/usr/bin/local
-
+export PATH=$(npm bin):$PATH
+export PATH=./node_modules/.bin:$PATH
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 chruby 2.3.0
 
@@ -119,3 +120,12 @@ export GRADLE_OPTS="-Dorg.gradle.daemon=tru"
 
 # docker-machine start docker
 # eval "$(docker-machine env docker)"
+
+# 10ms for key sequences
+KEYTIMEOUT=1
+export ANDROID_HOME=/usr/local/opt/android-sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+
+# Neovim Server
+export NVIM_LISTEN_ADDRESS=/tmp/neovim/neovim nvim 
+export PATH="/usr/local/sbin:$PATH"
