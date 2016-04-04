@@ -4,7 +4,6 @@
 
 [core]
 	editor = vim
-	excludesfile = /Users/manlycode/.gitignore_global
 
 [alias]
 	st = status
