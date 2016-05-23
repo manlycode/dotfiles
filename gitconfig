@@ -3,7 +3,7 @@
         email = chris.rittersdorf@collectiveidea.com
 
 [core]
-        editor = vim
+        editor = nvim
         excludesfile = /Users/manlycode/.gitignore
 
 [alias]
@@ -31,7 +31,7 @@
 [push]
         default = simple
 [credential]
-        helper = osxkeychain
+	helper = osxkeychain
 [filter "hawser"]
         clean = git hawser clean %f
         smudge = git hawser smudge %f
