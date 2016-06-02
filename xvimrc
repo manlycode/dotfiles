@@ -1,1 +1,8 @@
 nnoremap <c-p> :xccmd openQuickly<CR>
+
+"Open quick search : CMD+Shift+o
+map ,p :xccmd openQuickly<cr>
+inoremap <c-p> <UP>
+inoremap <c-n> <DOWN>
+inoremap <c-f> <RIGHT>
+inoremap <c-b> <LEFT>
