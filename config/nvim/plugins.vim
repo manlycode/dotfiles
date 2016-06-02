@@ -7,14 +7,18 @@ let g:airline_powerline_fonts = 1
 nnoremap <leader>n :NERDTreeToggle<cr>
 
 
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " Ultisnips
 " --------------
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
 
 " NeoTerm
 " ----------------------------------------------
@@ -54,3 +58,11 @@ autocmd! BufWritePost * Neomake
 " CtrlP
 
 nnoremap <leader>b :CtrlPBuffer<CR>
+
+ " Markdown
+ "
+ " Go
+ " Run deoplete.nvim automatically
+" deoplete-go settings
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']

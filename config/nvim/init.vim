@@ -3,9 +3,18 @@
 call plug#begin('~/.vim/plugged')
 
 " Base Plugins
-Plug 'Valloric/YouCompleteMe'
+"
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'majutsushi/tagbar'
+
+" Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-sensible'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'easymotion/vim-easymotion'
@@ -14,7 +23,8 @@ Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-
+Plug 'suan/vim-instant-markdown'
+Plug 'tpope/vim-scriptease'
 " Themes
 Plug 'chriskempson/base16-vim'
 
@@ -39,6 +49,11 @@ Plug 'markcornick/vim-terraform'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'timonv/vim-cargo'
+Plug 'tpope/gem-ctags'
+
+" Go
+Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -56,7 +71,7 @@ set nojoinspaces
 set ignorecase
 set autowrite
 set expandtab
-set list "show those nasty TABs
+" set list "show those nasty TABs
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
@@ -83,3 +98,5 @@ colorscheme base16-default
 " Other files
 source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/languages.vim
+
+set clipboard=unnamed
