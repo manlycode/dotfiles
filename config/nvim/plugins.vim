@@ -10,6 +10,12 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
+
+" neosnippet
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
 " Ultisnips
 " --------------
 " let g:UltiSnipsExpandTrigger="<tab>"
