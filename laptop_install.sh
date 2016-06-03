@@ -17,6 +17,8 @@ brew install go
 
 # NeoVim
 brew install neovim/neovim/neovim
+brew install python3 # Required for deoplete
+pip3 install neovim
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \\n    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # ~/.zshrc dependencies
@@ -49,3 +51,8 @@ brew cask install alcatraz
 
 # Go
 mkdir go
+
+# Xcode
+brew install carthage
+brew install fastlane
+curl -fsSL https://raw.github.com/alcatraz/Alcatraz/master/Scripts/install.sh | sh
