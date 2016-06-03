@@ -95,11 +95,12 @@ function set_bg {
   [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 }
 
-set_bg "$(node ~/git/manlycode/bash-bg/index.js)"
+# set_bg "$(node ~/git/manlycode/bash-bg/index.js)"
+set_bg "dark"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /usr/local/opt/chruby/share/chruby/chruby.sh
-chruby 2.3.0
+chruby 2.3.1
 source /usr/local/opt/chruby/share/chruby/auto.sh
 
 if docker-machine ls -q --filter state=Running | grep default; then
