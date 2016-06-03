@@ -16,8 +16,17 @@ brew install node
 brew install go
 
 # NeoVim
-brew install neovim/neovim/neovim
-brew install python3 # Required for deoplete
+neovim_deps() {
+        # Powerline fonts (for Airline)
+        hub clone powerline/fonts ~/git/powerline/fonts
+        pushd ~/git/powerline/fonts
+        ./install.sh
+        popd
+
+        brew install neovim/neovim/neovim
+        brew install python3 # Required for deoplete
+}
+
 pip3 install neovim
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \\n    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -48,6 +57,7 @@ brew cask install atom
 brew cask install sketch-toolbox
 brew cask install sketch-tool
 brew cask install alcatraz
+brew cask install screenhero
 
 # Go
 mkdir go
