@@ -23,7 +23,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'suan/vim-instant-markdown'
+Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d' }
 Plug 'tpope/vim-scriptease'
 " Themes
 Plug 'chriskempson/base16-vim'

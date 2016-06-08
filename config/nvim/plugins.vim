@@ -4,7 +4,8 @@ let g:airline_powerline_fonts = 1
 
 " NerdTree
 " --------------
-nnoremap <leader>n :NERDTreeToggle<cr>
+" nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>n :Sexplore<cr>
 
 
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
