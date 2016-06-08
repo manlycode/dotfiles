@@ -72,4 +72,5 @@ curl -fsSL https://raw.github.com/alcatraz/Alcatraz/master/Scripts/install.sh | 
 # GMailinator
 pushd ~/git/manlycode
 git clone manlycode/GMailinator .
+defaults write com.apple.mail EnableBundles -bool true
 popd
