@@ -2,7 +2,8 @@
 # 1. Copy your ssh keys
 # 2. Install Xcode
 
-mkdir -p ~/git # This is where my code goes
+mkdir -p ~/git/collectiveidea # This is where my code goes
+mkdir -p ~/git/manlycode 
 
 # Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -66,3 +67,9 @@ mkdir go
 brew install carthage
 brew install fastlane
 curl -fsSL https://raw.github.com/alcatraz/Alcatraz/master/Scripts/install.sh | sh
+
+
+# GMailinator
+pushd ~/git/manlycode
+git clone manlycode/GMailinator .
+popd
