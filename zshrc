@@ -98,10 +98,6 @@ function set_bg {
 # set_bg "$(node ~/git/manlycode/bash-bg/index.js)"
 set_bg "dark"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-chruby 2.3.1
-source /usr/local/opt/chruby/share/chruby/auto.sh
 
 if docker-machine ls -q --filter state=Running | grep default; then
   eval $(docker-machine env default)
@@ -128,3 +124,8 @@ export SKETCH_PLUGINS_PATH=/Users/manlycode/Library/Application\ Support/com.boh
 
 # added by travis gem
 [ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+chruby 2.3.1
+source /usr/local/opt/chruby/share/chruby/auto.sh
