@@ -14,6 +14,8 @@ Plug 'majutsushi/tagbar'
 
 " Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-vinegar'
+
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
@@ -39,6 +41,7 @@ Plug 'ternjs/tern_for_vim', { 'do': 'npm install'}
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rake'
+Plug 'tpope/vim-projectionist'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'wellbredgrapefruit/tomdoc.vim'
@@ -55,6 +58,9 @@ Plug 'tpope/gem-ctags'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
+" Swift?
+Plug 'keith/swift.vim'
+Plug 'landaire/deoplete-swift'
 " Add plugins to &runtimepath
 call plug#end()
 " ------------------------------------------------

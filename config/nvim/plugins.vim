@@ -62,6 +62,15 @@ command! -nargs=+ Tg :T git <args>
 " NeoMake
 autocmd! BufWritePost * Neomake
 
+let g:neomake_swift_swiftlint_maker = {
+    \ 'args': ['lint', '--path'],
+    \ 'errorformat': '%f:%l:%c: %trror: %m,' .
+    \ '%f:%l:%c: %tarning: %m,' .
+    \ '%f:%l: %trror: %m,' .
+    \ '%f:%l: %tarning: %m'
+    \ }
+let g:neomake_swift_enabled_makers = ['swiftlint']
+
 " CtrlP
 
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -73,3 +82,6 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 " deoplete-go settings
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+
+" Swift
+autocmd FileType swift imap <buffer> <C-j> <Plug>(deoplete_swift_jump_to_placeholder)

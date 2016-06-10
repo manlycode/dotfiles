@@ -129,3 +129,5 @@ export SKETCH_PLUGINS_PATH=/Users/manlycode/Library/Application\ Support/com.boh
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 chruby 2.3.1
 source /usr/local/opt/chruby/share/chruby/auto.sh
+
+if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
