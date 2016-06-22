@@ -62,6 +62,18 @@ command! -nargs=+ Tg :T git <args>
 " NeoMake
 autocmd! BufWritePost * Neomake
 
+" vim: ts=4 sw=4 et
+ 
+let $SDKROOT="$(xcodebuild -version -sdk macosx Path)"
+let g:neomake_swift_swiftc_maker = {
+        \ 'args': ['-parse'],
+        \ 'errorformat':
+            \ '%E%f:%l:%c: error: %m,' .
+            \ '%W%f:%l:%c: warning: %m,' .
+            \ '%Z%\s%#^~%#,' .
+            \ '%-G%.%#',
+        \ }
+
 let g:neomake_swift_swiftlint_maker = {
     \ 'args': ['lint', '--path'],
     \ 'errorformat': '%f:%l:%c: %trror: %m,' .
@@ -69,7 +81,7 @@ let g:neomake_swift_swiftlint_maker = {
     \ '%f:%l: %trror: %m,' .
     \ '%f:%l: %tarning: %m'
     \ }
-let g:neomake_swift_enabled_makers = ['swiftlint']
+let g:neomake_swift_enabled_makers = ['swiftc', 'swiftlint']
 
 " CtrlP
 
