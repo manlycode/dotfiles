@@ -131,3 +131,5 @@ chruby 2.3.1
 source /usr/local/opt/chruby/share/chruby/auto.sh
 
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
+
+export PATH="~/bin:$PATH"
