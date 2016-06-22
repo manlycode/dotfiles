@@ -15,7 +15,8 @@ endif
 if has("autocmd")
   augroup ruby_defaults
     autocmd!
-    autocmd FileType ruby setlocal sts=2 shiftwidth=2 tabstop=2
+    autocmd FileType ruby setlocal sts=2 shiftwidth=2 tabstop=2 expandtab
+    autocmd FileType eruby setlocal sts=2 shiftwidth=2 tabstop=2 expandtab
   augroup END
 endif
 
