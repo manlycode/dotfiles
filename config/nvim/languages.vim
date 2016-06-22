@@ -30,3 +30,12 @@ au BufRead,BufNewFile Appfile set filetype=ruby
 " Swift
 " ------------------------------------------------------------------
 " 
+"
+
+if has("autocmd")
+  augroup yaml_defaults
+    autocmd!
+    autocmd FileType yaml setlocal sts=2 shiftwidth=2 tabstop=2 expandtab
+  augroup END
+endif
+
