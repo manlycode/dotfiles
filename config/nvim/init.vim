@@ -11,6 +11,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/BufOnly.vim'
 
 " Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-sensible'
