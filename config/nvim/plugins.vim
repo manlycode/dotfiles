@@ -13,9 +13,7 @@ nnoremap <leader>n :Sexplore<cr>
 
 
 " neosnippet
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-y>     <Plug>(neosnippet_expand_or_jump)
 
 " Ultisnips
 " --------------
@@ -26,9 +24,11 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 
 " NeoTerm
 " ----------------------------------------------
+let g:neoterm_keep_term_open=0
 let g:neoterm_size = '10'
 let g:neoterm_position = 'horizontal'
 let g:neoterm_automap_keys = ',tt'
@@ -83,9 +83,24 @@ let g:neomake_swift_swiftlint_maker = {
     \ }
 let g:neomake_swift_enabled_makers = ['swiftc', 'swiftlint']
 
-" CtrlP
+let g:neomake_javascript_jshint_maker = {
+    \ 'args': ['--verbose'],
+    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+    \ }
+let g:neomake_javascript_enabled_makers = ['jshint']
 
-nnoremap <leader>b :CtrlPBuffer<CR>
+let g:neomake_eruby_jshint_maker = {
+    \ 'args': ['--verbose', '--extract=auto'],
+    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+    \ }
+let g:neomake_eruby_enabled_makers = ['jshint']
+
+let g:neomake_python_enabled_makers = ['pylint']
+
+
+" CtrlP
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" nnoremap <leader>b :CtrlPBuffer<CR>
 
  " Markdown
  "
@@ -97,3 +112,7 @@ let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const
 
 " Swift
 autocmd FileType swift imap <buffer> <C-j> <Plug>(deoplete_swift_jump_to_placeholder)
+
+
+" Commentary
+nnoremap <c-/> :Commentary<CR>

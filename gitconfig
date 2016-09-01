@@ -10,9 +10,11 @@
         st = status
         co = checkout
         wip = !"git add -A .; git commit -m \"@WIP\""
+        unwip = !"git reset --soft HEAD^"
         stash-all = !"git add -A .; git stash"
         delete-merged = !"git branch --merged | grep -v master | xargs -n 1 git branch -d"
         sync-master= !"git co master && git pull && git co - && git rebase master"
+        push-track=!"git push --set-upstream origin `git symbolic-ref --short HEAD`"
 
 [diff]
         tool = opendiff
@@ -44,3 +46,5 @@
         required = true
 [github]
         user = manlycode
+[ghi]
+	token = !security find-internet-password -a manlycode -s github.com -l 'ghi token' -w
