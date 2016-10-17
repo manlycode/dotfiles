@@ -88,3 +88,21 @@ let g:neomake_elixir_mix_maker = {
       \ }
 
 let g:neomake_elixir_enabled_makers = ['mix']
+
+" ------------------------------------------------------------------
+" Clojure
+" ------------------------------------------------------------------
+
+au Filetype clojure nmap <leader>eb :Require<cr>  
+au Filetype clojure nmap <leader>ef :Eval<cr>  
+
+" ------------------------------------------------------------------
+" Terraform
+" ------------------------------------------------------------------
+if has("autocmd")
+  augroup terraform_defaults
+    autocmd!
+    autocmd FileType terraform setlocal sts=2 shiftwidth=2 tabstop=2 expandtab
+  augroup END
+endif
+

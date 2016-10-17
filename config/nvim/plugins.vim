@@ -29,9 +29,11 @@ let g:deoplete#enable_smart_case = 1
 " NeoTerm
 " ----------------------------------------------
 let g:neoterm_keep_term_open=0
-let g:neoterm_size = '10'
+let g:neoterm_focus_when_test_fail=1
+let g:neoterm_size = '20'
 let g:neoterm_position = 'horizontal'
-let g:neoterm_automap_keys = ',tt'
+" let g:neoterm_position = 'vertical'
+" let g:neoterm_automap_keys = ',tt'
 
 nnoremap <silent> <f10> :TREPLSendFile<cr>
 nnoremap <silent> <f9> :TREPLSend<cr>
@@ -95,7 +97,7 @@ let g:neomake_eruby_jshint_maker = {
     \ }
 let g:neomake_eruby_enabled_makers = ['jshint']
 
-let g:neomake_python_enabled_makers = ['pylint']
+let g:neomake_python_enabled_makers = ['pep8']
 
 
 " CtrlP

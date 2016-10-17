@@ -11,7 +11,7 @@ endfunction
 Plug 'tpope/vim-sensible'
 
 " Completion
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
@@ -72,7 +72,6 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " Swift?
 Plug 'keith/swift.vim'
-Plug 'landaire/deoplete-swift'
 
 " Elixir
 Plug 'powerman/vim-plugin-AnsiEsc'
@@ -92,6 +91,13 @@ Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-salve'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-repeat'
+Plug 'guns/vim-clojure-static'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'clojure-vim/async-clj-omni'
+Plug 'kien/rainbow_parentheses.vim'
+
+" Java
+Plug 'tfnico/vim-gradle'
 
 " YAML
 Plug 'stephpy/vim-yaml'
@@ -100,13 +106,19 @@ Plug 'stephpy/vim-yaml'
 Plug 'mattn/emmet-vim'
 
 " Python
-Plug 'zchee/deoplete-jedi'
+"Plug 'zchee/deoplete-jedi'
+Plug 'hdima/python-syntax'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Do not load vim-pyenv until *.py is opened and
 " make sure that it is loaded after jedi-vim is loaded.
+Plug 'davidhalter/jedi-vim'
+
+" Do not load vim-pyenv until *.py is opened and
+" make sure that it is loaded after jedi-vim is loaded.
+Plug 'lambdalisue/vim-pyenv'
 
 
 
@@ -133,12 +145,14 @@ set autowrite
 set expandtab
 " set list "show those nasty TABs
 
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 
 filetype plugin on
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
-set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,*/*.pyc
+set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*
 
 
 " The Silver Searcher
@@ -159,7 +173,7 @@ nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>:NERDTreeTogg
 " Other files
 source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/languages.vim
-source ~/.config/nvim/commands.vim
+" source ~/.config/nvim/commands.vim
 
 set clipboard=unnamed
 
@@ -175,9 +189,6 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
 let g:terminal_scrollback_buffer_size = 2147483646
-
-set rtp+=~/.fzf
-
 
 let g:token="113eda4ab465dc9f416ea955d36738d7"
 let g:project_id="792199"
