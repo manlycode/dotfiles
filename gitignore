@@ -3,4 +3,5 @@
 tags
 feature.txt
 scratch.rb
+*.pyc
 

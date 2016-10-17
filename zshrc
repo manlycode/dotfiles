@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/manlycode/.oh-my-zsh
 
+source ~/.zshenv
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -92,3 +93,13 @@ export SKETCH_PLUGINS_PATH=/Users/manlycode/Library/Application\ Support/com.boh
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export BOOT_JVM_OPTIONS="-client 
+-XX:+TieredCompilation 
+-XX:TieredStopAtLevel=1 
+-Xmx2g 
+-XX:+UseConcMarkSweepGC 
+-XX:+CMSClassUnloadingEnabled 
+-Xverify:none"
+
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
