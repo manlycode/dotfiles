@@ -1,0 +1,14 @@
+/log/
+/logs/
+/images/
+/tmp/
+/vendor/
+*.sql
+*.tags*
+*.gemtags*
+*.csv
+*.tsv
+*.tmp*
+*.pdf
+*.log
+/.git/
