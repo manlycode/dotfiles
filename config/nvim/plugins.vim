@@ -101,7 +101,7 @@ let g:neomake_python_enabled_makers = ['pep8']
 
 
 " CtrlP
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 " nnoremap <leader>b :CtrlPBuffer<CR>
 
  " Markdown
@@ -118,3 +118,23 @@ autocmd FileType swift imap <buffer> <C-j> <Plug>(deoplete_swift_jump_to_placeho
 
 " Commentary
 nnoremap <c-/> :Commentary<CR>
+
+" FZF
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Advanced customization using autoload functions
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+
+nmap <leader>f :FZF<CR>
+nmap <leader>b :Buffers<CR>
+nmap <leader>h :History<CR>
+

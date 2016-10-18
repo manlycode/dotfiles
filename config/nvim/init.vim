@@ -29,13 +29,12 @@ Plug 'tpope/vim-vinegar'
 Plug 'rizzatti/dash.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'easymotion/vim-easymotion'
-Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'suan/vim-instant-markdown', { 'do': 'npm -g install instant-markdown-d' }
-Plug 'tpope/vim-scriptease'
+Plug 'suan/vim-instant-markdown', { 'for': 'markdown', 'do': 'npm -g install instant-markdown-d' }
+Plug 'tpope/vim-scriptease', {'for': 'vim'}
 Plug 'kana/vim-textobj-user'
 
 " NeoVim Plugins
@@ -43,7 +42,7 @@ Plug 'neomake/neomake'
 Plug 'kassio/neoterm'
 
 " JavaScript
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install'}
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install'}
 
 " Ruby
 Plug 'tpope/vim-bundler'
@@ -86,15 +85,15 @@ Plug 'avdgaag/vim-phoenix'
 Plug 'slashmili/alchemist.vim'
 
 " Clojure
-Plug 'vim-scripts/paredit.vim'
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-salve'
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-repeat'
-Plug 'guns/vim-clojure-static'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'clojure-vim/async-clj-omni'
-Plug 'kien/rainbow_parentheses.vim'
+" Plug 'vim-scripts/paredit.vim'
+" Plug 'tpope/vim-fireplace'
+" Plug 'tpope/vim-salve'
+" Plug 'guns/vim-sexp'
+" Plug 'tpope/vim-repeat'
+" Plug 'guns/vim-clojure-static'
+" Plug 'kien/rainbow_parentheses.vim'
+" Plug 'clojure-vim/async-clj-omni'
+" Plug 'kien/rainbow_parentheses.vim'
 
 " Java
 Plug 'tfnico/vim-gradle'
@@ -114,11 +113,11 @@ Plug 'junegunn/fzf.vim'
 
 " Do not load vim-pyenv until *.py is opened and
 " make sure that it is loaded after jedi-vim is loaded.
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
 " Do not load vim-pyenv until *.py is opened and
 " make sure that it is loaded after jedi-vim is loaded.
-Plug 'lambdalisue/vim-pyenv'
+Plug 'lambdalisue/vim-pyenv', {'for': 'python'}
 
 
 
@@ -156,19 +155,19 @@ set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/
 
 
 " The Silver Searcher
-if executable('ag')
+"if executable('ag')
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+"  set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
+  " let g:ctrlp_use_caching = 0
+"endif
 
 " Key Bindings
-nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>:NERDTreeToggle<cr>
+nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>:NERDTreeToggle<cr><C-w>l
 
 " Other files
 source ~/.config/nvim/plugins.vim
