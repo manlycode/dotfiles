@@ -12,7 +12,7 @@ alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias pulls="git browse -- pulls"
 alias mux="tmuxinator"
-# alias vim="nvim"
+alias vim="nvim"
 
 # HUB https://github.com/github/hub/tree/master/etc
 eval "$(hub alias -s)"

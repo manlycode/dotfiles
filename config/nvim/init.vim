@@ -9,6 +9,7 @@ function! DoRemote(arg)
 endfunction
 
 Plug 'tpope/vim-sensible'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -36,6 +37,7 @@ Plug 'tpope/vim-surround'
 Plug 'suan/vim-instant-markdown', { 'for': 'markdown', 'do': 'npm -g install instant-markdown-d' }
 Plug 'tpope/vim-scriptease', {'for': 'vim'}
 Plug 'kana/vim-textobj-user'
+Plug 'wfleming/vim-codeclimate'
 
 " NeoVim Plugins
 Plug 'neomake/neomake'
@@ -155,16 +157,16 @@ set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/
 
 
 " The Silver Searcher
-"if executable('ag')
+if executable('ag')
   " Use ag over grep
-"  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
-  " let g:ctrlp_use_caching = 0
-"endif
+  let g:ctrlp_use_caching = 0
+endif
 
 " Key Bindings
 nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>:NERDTreeToggle<cr><C-w>l

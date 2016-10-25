@@ -28,7 +28,7 @@ let g:deoplete#enable_smart_case = 1
 
 " NeoTerm
 " ----------------------------------------------
-let g:neoterm_keep_term_open=0
+"let g:neoterm_keep_term_open=0
 let g:neoterm_focus_when_test_fail=1
 let g:neoterm_size = '20'
 let g:neoterm_position = 'horizontal'
