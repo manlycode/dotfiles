@@ -5,14 +5,14 @@ export PATH=/Users/manlycode/.gem/ruby/2.3.0/bin:/Users/manlycode/.rubies/ruby-2
 export PATH="/Users/manlycode/.cargo/bin:$PATH"
 export PATH="/Users/manlycode/bin:$PATH"
 
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Aliases
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias pulls="git browse -- pulls"
 alias mux="tmuxinator"
-# alias vim="nvim"
+" alias vim="nvim"
 
 # HUB https://github.com/github/hub/tree/master/etc
 eval "$(hub alias -s)"
@@ -32,5 +32,3 @@ if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export GOPATH=$HOME/git/manlycode/pickaxe/server-machine
 export PATH=$PATH:$GOPATH/bin
-
-export AA_RAILS_DIR=~/git/collectiveidea/advisory-alpha-rails

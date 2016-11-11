@@ -103,3 +103,12 @@ export BOOT_JVM_OPTIONS="-client
 -Xverify:none"
 
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+# added by travis gem
+[ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
+
+# ------------------------------------------------------------
+# Python settings
+# ------------------------------------------------------------
+# Add color to nosetests
+export NOSE_REDNOSE=1
