@@ -9,6 +9,9 @@ function! DoRemote(arg)
 endfunction
 
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'godlygeek/tabular'
 
 " Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -18,6 +21,7 @@ Plug 'Shougo/neosnippet-snippets'
 " Look and feel
 Plug 'vim-airline/vim-airline'
 Plug 'chriskempson/base16-vim'
+Plug 'gorodinskiy/vim-coloresque'
 
 " Tags
 Plug 'majutsushi/tagbar'
@@ -26,14 +30,15 @@ Plug 'vim-scripts/BufOnly.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'raimondi/delimitmate'
 Plug 'tpope/vim-vinegar'
+
 Plug 'rizzatti/dash.vim'
+
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-" Plug 'suan/vim-instant-markdown', { 'for': 'markdown', 'do': 'npm -g install instant-markdown-d' }
 Plug 'tpope/vim-scriptease', {'for': 'vim'}
 Plug 'kana/vim-textobj-user'
 Plug 'wfleming/vim-codeclimate'
@@ -46,55 +51,47 @@ Plug 'kassio/neoterm'
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install'}
 
 " Ruby
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-rake'
 Plug 'tpope/vim-projectionist'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'wellbredgrapefruit/tomdoc.vim'
-Plug 'jc00ke/vim-tomdoc'
-Plug 'noprompt/vim-yardoc'
-Plug 'gorodinskiy/vim-coloresque'
-Plug 'rust-lang/rust.vim'
-Plug 'cespare/vim-toml'
-Plug 'timonv/vim-cargo'
-Plug 'tpope/gem-ctags'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'ecomba/vim-ruby-refactoring'
-Plug 'jgdavey/vim-blockle'
 
+Plug 'tpope/vim-bundler',             { 'for': 'ruby'}
+Plug 'tpope/vim-endwise',             { 'for': 'ruby'}
+Plug 'tpope/vim-rake',                { 'for': 'ruby'}
+Plug 'vim-ruby/vim-ruby',             { 'for': 'ruby'}
+Plug 'tpope/vim-rails',               { 'for': 'ruby'}
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby'}
+Plug 'ecomba/vim-ruby-refactoring',    { 'for': 'ruby'}
+Plug 'jgdavey/vim-blockle',            { 'for': 'ruby'}
+
+" Rust
+Plug 'rust-lang/rust.vim', { 'for': 'rust'}
+Plug 'cespare/vim-toml',   { 'for': 'rust'}
+Plug 'timonv/vim-cargo',   { 'for': 'rust'}
+
+Plug 'tpope/gem-ctags'
 Plug 'markcornick/vim-terraform'
 
 " Go
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
-" Swift?
-Plug 'keith/swift.vim'
-
 " Elixir
-Plug 'powerman/vim-plugin-AnsiEsc'
-Plug 'elixir-lang/vim-elixir'
-" Plug 'thinca/vim-ref'
-" Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
-
-
-" Elixir
-Plug 'mattreduce/vim-mix'
-Plug 'avdgaag/vim-phoenix'
-Plug 'slashmili/alchemist.vim'
+Plug 'powerman/vim-plugin-AnsiEsc', { 'for': 'elixir'}
+Plug 'elixir-lang/vim-elixir',      { 'for': 'elixir'}
+Plug 'mattreduce/vim-mix',          { 'for': 'elixir'}
+Plug 'avdgaag/vim-phoenix',         { 'for': 'elixir'}
+Plug 'slashmili/alchemist.vim',     { 'for': 'elixir'}
+" Plug 'awetzel/elixir.nvim',       { 'do': 'yes \| ./install.sh', 'for': 'elixir'}
 
 " Clojure
-" Plug 'vim-scripts/paredit.vim'
-" Plug 'tpope/vim-fireplace'
-" Plug 'tpope/vim-salve'
-" Plug 'guns/vim-sexp'
-" Plug 'tpope/vim-repeat'
-" Plug 'guns/vim-clojure-static'
-" Plug 'kien/rainbow_parentheses.vim'
-" Plug 'clojure-vim/async-clj-omni'
-" Plug 'kien/rainbow_parentheses.vim'
+Plug 'vim-scripts/paredit.vim',      { 'for': 'clojure'}
+Plug 'tpope/vim-fireplace',          { 'for': 'clojure'}
+Plug 'tpope/vim-salve',              { 'for': 'clojure'}
+Plug 'guns/vim-sexp',                { 'for': 'clojure'}
+Plug 'tpope/vim-repeat',             { 'for': 'clojure'}
+Plug 'guns/vim-clojure-static',      { 'for': 'clojure'}
+Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure'}
+Plug 'clojure-vim/async-clj-omni',   { 'for': 'clojure'}
+Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure'}
 
 " Java
 Plug 'tfnico/vim-gradle'
@@ -109,8 +106,6 @@ Plug 'mattn/emmet-vim'
 "Plug 'zchee/deoplete-jedi'
 Plug 'hdima/python-syntax'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 
 " Do not load vim-pyenv until *.py is opened and
 " make sure that it is loaded after jedi-vim is loaded.
@@ -134,6 +129,16 @@ let g:python3_host_prog="/Users/manlycode/.pyenv/versions/3.5.2/envs/neovim3/bin
 
 " General settings
 " ------------------------------------------------
+set timeout
+set timeoutlen=750
+set ttimeoutlen=250
+
+"NeoVim handles ESC keys as alt+key set this to solve the problem
+if has('nvim')
+   set ttimeout
+   set ttimeoutlen=0
+endif
+
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
@@ -163,10 +168,8 @@ set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
@@ -202,3 +205,7 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 " Clear search highlight
 nmap <C-l> :noh<CR>
+
+" Comment/Uncomment
+vnoremap <leader>c :Commentary<CR>
+vnoremap <leader>c :Commentary<CR>
