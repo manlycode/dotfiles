@@ -199,3 +199,6 @@ let g:project_id="792199"
 
 nmap <silent> <leader>d <Plug>DashSearch
 
+
+" Clear search highlight
+nmap <C-l> :noh<CR>
