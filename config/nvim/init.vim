@@ -8,7 +8,6 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
-Plug 'tpope/vim-sensible'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Completion
@@ -34,7 +33,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'suan/vim-instant-markdown', { 'for': 'markdown', 'do': 'npm -g install instant-markdown-d' }
+" Plug 'suan/vim-instant-markdown', { 'for': 'markdown', 'do': 'npm -g install instant-markdown-d' }
 Plug 'tpope/vim-scriptease', {'for': 'vim'}
 Plug 'kana/vim-textobj-user'
 Plug 'wfleming/vim-codeclimate'
@@ -128,6 +127,10 @@ call plug#end()
 " ------------------------------------------------
 
 autocmd! BufWritePost ~/.config/nvim/*.vim source ~/.config/nvim/init.vim
+
+let g:python_host_prog="/Users/manlycode/.pyenv/versions/2.7.9/envs/neovim2/bin/python"
+let g:python3_host_prog="/Users/manlycode/.pyenv/versions/3.5.2/envs/neovim3/bin/python3"
+
 
 " General settings
 " ------------------------------------------------
