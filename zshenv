@@ -30,7 +30,7 @@ if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 [ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
 
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export GOPATH=$HOME/git/manlycode/pickaxe/server-machine
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 export AA_RAILS_DIR=~/git/collectiveidea/advisory-alpha-rails

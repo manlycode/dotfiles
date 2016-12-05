@@ -9,9 +9,10 @@ function! DoRemote(arg)
 endfunction
 
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'godlygeek/tabular'
+Plug 'FooSoft/vim-argwrap'
+" Plug 'wincent/ferret'
+Plug 'mhinz/vim-grepper'
 
 " Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -68,7 +69,8 @@ Plug 'cespare/vim-toml',   { 'for': 'rust'}
 Plug 'timonv/vim-cargo',   { 'for': 'rust'}
 
 Plug 'tpope/gem-ctags'
-Plug 'markcornick/vim-terraform'
+" Plug 'markcornick/vim-terraform'
+Plug 'hashivim/vim-terraform'
 
 " Go
 Plug 'fatih/vim-go'
@@ -123,8 +125,8 @@ call plug#end()
 
 autocmd! BufWritePost ~/.config/nvim/*.vim source ~/.config/nvim/init.vim
 
-let g:python_host_prog="/Users/manlycode/.pyenv/versions/2.7.9/envs/neovim2/bin/python"
-let g:python3_host_prog="/Users/manlycode/.pyenv/versions/3.5.2/envs/neovim3/bin/python3"
+" let g:python_host_prog="/Users/manlycode/.pyenv/versions/2.7.9/envs/neovim2/bin/python"
+" let g:python3_host_prog="/Users/manlycode/.pyenv/versions/3.5.2/envs/neovim3/bin/python3"
 
 
 " General settings

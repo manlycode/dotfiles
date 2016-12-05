@@ -76,17 +76,12 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias vim="nvim"
 alias re-source="source ~/.zshrc"
+
+# BASE16 configuration
+# I love this color scheme like Toby Keith loves this bar and grill
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-# source ~/.vim/plugged/gruvbox/gruvbox_256palette_osx.sh
-
-# if docker-machine ls -q --filter state=Running | grep default; then
-#   eval $(docker-machine env default)
-# fi
-
 
 
 export RUST_SRC_PATH="/Users/manlycode/src/rust/src"
