@@ -31,3 +31,16 @@ export BOOT_JVM_OPTIONS="-client
 -XX:+UseConcMarkSweepGC 
 -XX:+CMSClassUnloadingEnabled 
 -Xverify:none"
+
+# ------------------------------------------------------------
+# Ruby
+# ------------------------------------------------------------
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+chruby 2.3.1
+source /usr/local/opt/chruby/share/chruby/auto.sh
+
+# ------------------------------------------------------------
+# Python
+# ------------------------------------------------------------
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
