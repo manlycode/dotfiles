@@ -44,3 +44,7 @@ source /usr/local/opt/chruby/share/chruby/auto.sh
 # ------------------------------------------------------------
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+# HUB https://github.com/github/hub/tree/master/etc
+eval "$(hub alias -s)"
+alias pulls="git browse -- pulls"

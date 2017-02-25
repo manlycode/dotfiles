@@ -30,6 +30,8 @@ zplug "lib/misc", from:oh-my-zsh, defer:0
 zplug "lib/termsupport", from:oh-my-zsh, defer:0
 zplug "lib/theme-and-appearance", from:oh-my-zsh, defer:0
 
+zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
+
 # Misc
 # zsh-syntax-highlighting must be loaded after executing compinit command and sourcing other plugins
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
@@ -61,15 +63,11 @@ zplug load
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-# HUB https://github.com/github/hub/tree/master/etc
-eval "$(hub alias -s)"
 
 # added by travis gem
 [ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
 
 # Aliases
 alias zshconfig="vim ~/.zshrc"
-alias pulls="git browse -- pulls"
 alias mux="tmuxinator"
 alias re-source="source ~/.zshrc"
-
