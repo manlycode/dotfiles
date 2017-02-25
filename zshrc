@@ -1,82 +1,62 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/manlycode/.oh-my-zsh
+# export ZSH=/Users/manlycode/.oh-my-zsh
 
-source ~/.zshenv
+# If not running interactively, don't do anything
+case $- in
+ 	*i*) ;;
+	*) return;;
+esac
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="cloud"
+# Exit if called from vim
+[[ -n $VIMRUNTIME ]] && return
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Exit if called from atom
+[[ -n $ATOM_HOME ]] && return
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+source ~/.zplug/init.zsh
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Set Theme
+zplug "mafredri/zsh-async", from:github, defer:0  # Load this first
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme, defer:3
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+zplug "lib/compfix", from:oh-my-zsh, defer:0
+zplug "lib/clipboard", from:oh-my-zsh, defer:0
+zplug "lib/directories", from:oh-my-zsh, defer:0
+zplug "lib/grep", from:oh-my-zsh, defer:0
+zplug "lib/key-bindings", from:oh-my-zsh, defer:0
+zplug "lib/misc", from:oh-my-zsh, defer:0
+zplug "lib/termsupport", from:oh-my-zsh, defer:0
+zplug "lib/theme-and-appearance", from:oh-my-zsh, defer:0
+ 
+# Pure ZSH theme
+zplug mafredri/zsh-async, from:github
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "plugins/bundler", from:oh-my-zsh
+zplug "zsh-users/zsh-completions"
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# Misc
+# zsh-syntax-highlighting must be loaded after executing compinit command and sourcing other plugins
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug "zsh-users/zsh-autosuggestions", defer:3
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(lein git rake bundler rails rake-fast zshmarks tmuxinator docker go)
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
 alias re-source="source ~/.zshrc"
+
+# alias docker-remove-all-containers="docker rm $(docker ps -a -q)"
+# alias docker-remove-all-images="docker rmi $(docker images -q)"
 
 # BASE16 configuration
 # I love this color scheme like Toby Keith loves this bar and grill
@@ -84,14 +64,10 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 
-export RUST_SRC_PATH="/Users/manlycode/src/rust/src"
 
 h=`date +%H`
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 export SKETCH_PLUGINS_PATH=/Users/manlycode/Library/Application\ Support/com.bohemiancoding.sketch3/Plugins
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export BOOT_JVM_OPTIONS="-client 
 -XX:+TieredCompilation 
@@ -101,13 +77,12 @@ export BOOT_JVM_OPTIONS="-client
 -XX:+CMSClassUnloadingEnabled 
 -Xverify:none"
 
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+# HUB https://github.com/github/hub/tree/master/etc
+eval "$(hub alias -s)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # added by travis gem
 [ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
 
-# ------------------------------------------------------------
-# Python settings
-# ------------------------------------------------------------
-# Add color to nosetests
-export NOSE_REDNOSE=1
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
