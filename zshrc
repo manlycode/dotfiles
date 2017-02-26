@@ -31,6 +31,9 @@ zplug "lib/termsupport", from:oh-my-zsh, defer:0
 zplug "lib/theme-and-appearance", from:oh-my-zsh, defer:0
 
 zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
+zplug "plugins/tmuxinator", from:oh-my-zsh, defer:3
+zplug "plugins/chruby", from:oh-my-zsh, defer:3
+zplug "plugins/bundler", from:oh-my-zsh, defer:3
 
 # Misc
 # zsh-syntax-highlighting must be loaded after executing compinit command and sourcing other plugins
