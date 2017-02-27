@@ -32,19 +32,24 @@ export BOOT_JVM_OPTIONS="-client
 -XX:+CMSClassUnloadingEnabled 
 -Xverify:none"
 
-# ------------------------------------------------------------
-# Ruby
-# ------------------------------------------------------------
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-chruby 2.3.1
-source /usr/local/opt/chruby/share/chruby/auto.sh
 
-# ------------------------------------------------------------
-# Python
-# ------------------------------------------------------------
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# HUB https://github.com/github/hub/tree/master/etc
-eval "$(hub alias -s)"
-alias pulls="git browse -- pulls"
+if [[ -n $VIMRUNTIME ]]; then
+  # ------------------------------------------------------------
+  # Ruby
+  # ------------------------------------------------------------
+  source /usr/local/opt/chruby/share/chruby/chruby.sh
+  chruby ruby-2.3.3
+  source /usr/local/opt/chruby/share/chruby/auto.sh
+
+  # ------------------------------------------------------------
+  # Python
+  # ------------------------------------------------------------
+  if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+  if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+  # HUB https://github.com/github/hub/tree/master/etc
+  eval "$(hub alias -s)"
+  alias pulls="git browse -- pulls"
+fi
+

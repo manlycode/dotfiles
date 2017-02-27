@@ -1,3 +1,20 @@
+# ------------------------------------------------------------
+# Ruby
+# ------------------------------------------------------------
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+chruby ruby-2.3.3
+source /usr/local/opt/chruby/share/chruby/auto.sh
+
+# ------------------------------------------------------------
+# Python
+# ------------------------------------------------------------
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+# HUB https://github.com/github/hub/tree/master/etc
+eval "$(hub alias -s)"
+alias pulls="git browse -- pulls"
+
 # If not running interactively, don't do anything
 case $- in
  	*i*) ;;
@@ -32,7 +49,6 @@ zplug "lib/theme-and-appearance", from:oh-my-zsh, defer:0
 
 zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
 zplug "plugins/tmuxinator", from:oh-my-zsh, defer:3
-zplug "plugins/chruby", from:oh-my-zsh, defer:3
 zplug "plugins/bundler", from:oh-my-zsh, defer:3
 
 # Misc
@@ -57,8 +73,8 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-# zplug load --verbose
-zplug load
+zplug load --verbose
+# zplug load
 
 
 # BASE16 configuration
