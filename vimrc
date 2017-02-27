@@ -135,22 +135,25 @@ nnoremap <leader>ev :tabe ~/.vimrc<CR>
 
 " make test commands execute using dispatch.vim
 let g:test#strategy = 'asyncrun'
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>tt :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ta :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
-let g:test#ruby#rspec#options = '--color'
+" let g:test#ruby#rspec#options = '--color'
 
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger='<tab>'
+
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+let g:UltiSnipsListSnippets='<s-tab>'
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit='vertical'
+
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 nmap <leader>f :Grep 
@@ -189,9 +192,23 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
-let g:netrw_winsize = 25
+let g:netrw_winsize = 20
 
 augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :Vexplore
 augroup END
+
+" Quickly toggle quickfix
+:noremap <leader>q :call asyncrun#quickfix_toggle(8)<cr>
+
+" Map alt keys to window motions
+" Alt + j
+nnoremap ∆ <c-w>j
+" Alt + k
+nnoremap ∆ <c-w>k
+" Alt + h
+nnoremap ˙ <c-w>h
+" Alt + l
+nnoremap ¬ <c-w>l
+
