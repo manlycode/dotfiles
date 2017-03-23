@@ -1,132 +1,40 @@
-" Plugins
-" ------------------------------------------------
-call plug#begin('~/.vim/plugged')
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
-" Base Plugins
-"
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
+" Required:
+set runtimepath+=/Users/manlycode/.cache/dein/repos/github.com/Shougo/dein.vim
 
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'godlygeek/tabular'
-Plug 'FooSoft/vim-argwrap'
-" Plug 'wincent/ferret'
-Plug 'mhinz/vim-grepper'
+" Required:
+if dein#load_state('/Users/manlycode/.cache/dein')
+  call dein#begin('/Users/manlycode/.cache/dein')
 
-" Completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/manlycode/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-" Look and feel
-Plug 'vim-airline/vim-airline'
-Plug 'chriskempson/base16-vim'
-Plug 'gorodinskiy/vim-coloresque'
-
-" Tags
-Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-scripts/BufOnly.vim'
-Plug 'tpope/vim-eunuch'
-Plug 'raimondi/delimitmate'
-Plug 'tpope/vim-vinegar'
-
-Plug 'rizzatti/dash.vim'
-
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-scriptease', {'for': 'vim'}
-Plug 'kana/vim-textobj-user'
-Plug 'wfleming/vim-codeclimate'
-
-" NeoVim Plugins
-Plug 'neomake/neomake'
-Plug 'kassio/neoterm'
-
-" JavaScript
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript', 'do': 'npm install'}
-
-" Ruby
-Plug 'tpope/vim-projectionist'
-
-Plug 'tpope/vim-bundler',             { 'for': 'ruby'}
-Plug 'tpope/vim-endwise',             { 'for': 'ruby'}
-Plug 'tpope/vim-rake',                { 'for': 'ruby'}
-Plug 'vim-ruby/vim-ruby',             { 'for': 'ruby'}
-Plug 'tpope/vim-rails',               { 'for': 'ruby'}
-Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby'}
-Plug 'ecomba/vim-ruby-refactoring',    { 'for': 'ruby'}
-Plug 'jgdavey/vim-blockle',            { 'for': 'ruby'}
-
-" Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rust'}
-Plug 'cespare/vim-toml',   { 'for': 'rust'}
-Plug 'timonv/vim-cargo',   { 'for': 'rust'}
-
-Plug 'tpope/gem-ctags'
-" Plug 'markcornick/vim-terraform'
-Plug 'hashivim/vim-terraform'
-
-" Go
-Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-
-" Elixir
-Plug 'powerman/vim-plugin-AnsiEsc', { 'for': 'elixir'}
-Plug 'elixir-lang/vim-elixir',      { 'for': 'elixir'}
-Plug 'mattreduce/vim-mix',          { 'for': 'elixir'}
-Plug 'avdgaag/vim-phoenix',         { 'for': 'elixir'}
-Plug 'slashmili/alchemist.vim',     { 'for': 'elixir'}
-" Plug 'awetzel/elixir.nvim',       { 'do': 'yes \| ./install.sh', 'for': 'elixir'}
-
-" Clojure
-Plug 'vim-scripts/paredit.vim',      { 'for': 'clojure'}
-Plug 'tpope/vim-fireplace',          { 'for': 'clojure'}
-Plug 'tpope/vim-salve',              { 'for': 'clojure'}
-Plug 'guns/vim-sexp',                { 'for': 'clojure'}
-Plug 'tpope/vim-repeat',             { 'for': 'clojure'}
-Plug 'guns/vim-clojure-static',      { 'for': 'clojure'}
-Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure'}
-Plug 'clojure-vim/async-clj-omni',   { 'for': 'clojure'}
-Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure'}
-
-" Java
-Plug 'tfnico/vim-gradle'
-
-" YAML
-Plug 'stephpy/vim-yaml'
-
-" HTML
-Plug 'mattn/emmet-vim'
-
-" Python
-"Plug 'zchee/deoplete-jedi'
-Plug 'hdima/python-syntax'
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('chriskempson/base16-vim')
 
 
-" Do not load vim-pyenv until *.py is opened and
-" make sure that it is loaded after jedi-vim is loaded.
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
 
-" Do not load vim-pyenv until *.py is opened and
-" make sure that it is loaded after jedi-vim is loaded.
-Plug 'lambdalisue/vim-pyenv', {'for': 'python'}
+" Required:
+filetype plugin indent on
+syntax enable
 
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
 
-
-" Add plugins to &runtimepath
-call plug#end()
-" ------------------------------------------------
-
-autocmd! BufWritePost ~/.config/nvim/*.vim source ~/.config/nvim/init.vim
-
-" let g:python_host_prog="/Users/manlycode/.pyenv/versions/2.7.9/envs/neovim2/bin/python"
-" let g:python3_host_prog="/Users/manlycode/.pyenv/versions/3.5.2/envs/neovim3/bin/python3"
+"End dein Scripts-------------------------
 
 
 " General settings
@@ -180,8 +88,8 @@ endif
 nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>:NERDTreeToggle<cr><C-w>l
 
 " Other files
-source ~/.config/nvim/plugins.vim
-source ~/.config/nvim/languages.vim
+" source ~/.config/nvim/plugins.vim
+" source ~/.config/nvim/languages.vim
 " source ~/.config/nvim/commands.vim
 
 set clipboard=unnamed

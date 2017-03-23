@@ -22,6 +22,9 @@ Plug 'powerman/vim-plugin-AnsiEsc'
 " Editing Text
 Plug 'tpope/vim-commentary'
 Plug 'FooSoft/vim-argwrap'
+Plug 'reedes/vim-pencil'
+Plug 'itspriddle/vim-marked'
+Plug 'junegunn/goyo.vim'
 
 " Look and feel
 Plug 'vim-airline/vim-airline'
@@ -40,7 +43,6 @@ Plug 'ekalinin/Dockerfile.vim'
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
-Plug 'shime/vim-livedown', {'for': 'markdown', 'do': 'npm install -g livedown'}
 
 " Vim
 Plug 'tpope/vim-scriptease', {'for': 'vim'}
@@ -51,7 +53,6 @@ Plug 'syngan/vim-vimlint'
 " Do not load vim-pyenv until *.py is opened and
 " make sure that it is loaded after jedi-vim is loaded.
 Plug 'davidhalter/jedi-vim', {'for': 'python'} | Plug 'lambdalisue/vim-pyenv', {'for': 'python'}
-Plug 'hdima/python-syntax'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -59,7 +60,7 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
-Plug 'gorodinskiy/vim-coloresque'
+Plug 'gorodinskiy/vim-coloresque', {'for': 'css'}
 Plug 'tpope/gem-ctags'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'jgdavey/vim-blockle'
@@ -87,7 +88,7 @@ set smarttab
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
-autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
 autocmd Filetype coffeescript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
 
@@ -101,11 +102,6 @@ set mouse=a
 set ttymouse=xterm2
 
 autocmd! BufWritePost ~/.vimrc source ~/.vimrc
-
-if filereadable(expand('~/.vimrc_background'))
-  let g:base16colorspace=256
-  source ~/.vimrc_background
-endif
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#virtualenv#enabled = 0
@@ -122,13 +118,13 @@ endif
 
 set wildignore+=build
 set wildignore+=*.pyc
+set wildignore+=node_modules
 
 set noswapfile
 set background=light
 set hlsearch
 set clipboard=unnamed
 set tags=~/mytags
-set spell
 hi Search cterm=NONE ctermfg=white ctermbg=gray
 
 nnoremap <leader>ev :tabe ~/.vimrc<CR>
@@ -161,10 +157,6 @@ nmap <leader>F :Grep <C-r><C-w>
 
 let g:jedi#show_call_signatures = '2'
 
-" Markdown
-let g:vim_markdown_folding_disabled = 1
-let g:livedown_autorun = 1
-
 augroup Ruby
   autocmd!
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
@@ -172,12 +164,12 @@ augroup Ruby
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 augroup END
 
-augroup Python
-  autocmd FileType python setlocal omnifunc=jedi#completions
-  " let g:jedi#completions_enabled = 0
-  " let g:jedi#auto_vim_configuration = 0
-  " let g:jedi#smart_auto_mappings = 0
-augroup END
+" augroup Python
+"   autocmd FileType python setlocal omnifunc=jedi#completions
+"   let g:jedi#completions_enabled = 0
+"   let g:jedi#auto_vim_configuration = 0
+"   let g:jedi#smart_auto_mappings = 0
+" augroup END
 
 let g:ctrlp_show_hidden = 1
 
@@ -194,13 +186,14 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 20
 
-augroup ProjectDrawer
-  autocmd!
-  autocmd VimEnter * :Vexplore
-augroup END
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
 
 " Quickly toggle quickfix
 :noremap <leader>q :call asyncrun#quickfix_toggle(8)<cr>
+:noremap <leader>d :Vexplore<cr>
 
 " Map alt keys to window motions
 " Alt + j
@@ -212,3 +205,43 @@ nnoremap ˙ <c-w>h
 " Alt + l
 nnoremap ¬ <c-w>l
 
+nnoremap <c-_> :Commentary<CR>
+vnoremap <c-_> :Commentary<CR>
+
+let g:EasyGrepFilesToExclude=".svn,.git,tags"
+let g:EasyGrepRecursive=1
+let g:EasyGrepCommand=1
+let g:EasyGrepRoot="repository"
+set grepprg=ag\ --nogroup\ --nocolor\ --column
+set grepformat=%f:%l:%c%m
+
+if filereadable(expand('~/.vimrc_background'))
+  let g:base16colorspace=256
+  source ~/.vimrc_background
+endif
+
+
+
+" Markdown
+let g:vim_markdown_folding_disabled = 1
+let g:marked_app = 'Marked 2'
+let g:pencil#wrapModeDefault = 'soft'
+let g:pencil#conceallevel = 0
+
+augroup Markdown
+  autocmd!
+
+  function! SetMarkdownOptions()
+    set spell spelllang=en_us
+    Goyo
+  endfunction
+
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  autocmd Filetype markdown call SetMarkdownOptions()
+augroup END
+
+augroup Pencil
+  autocmd!
+  autocmd FileType markdown,mkd,md call pencil#init()
+  autocmd FileType txt call pencil#init()
+augroup END
