@@ -122,9 +122,11 @@ set wildignore+=node_modules
 
 set noswapfile
 set background=light
+set incsearch
 set hlsearch
 set clipboard=unnamed
 set tags=~/mytags
+
 hi Search cterm=NONE ctermfg=white ctermbg=gray
 
 nnoremap <leader>ev :tabe ~/.vimrc<CR>
@@ -215,6 +217,7 @@ let g:EasyGrepRoot="repository"
 set grepprg=ag\ --nogroup\ --nocolor\ --column
 set grepformat=%f:%l:%c%m
 
+
 if filereadable(expand('~/.vimrc_background'))
   let g:base16colorspace=256
   source ~/.vimrc_background
@@ -245,3 +248,7 @@ augroup Pencil
   autocmd FileType markdown,mkd,md call pencil#init()
   autocmd FileType txt call pencil#init()
 augroup END
+
+
+highlight Search ctermfg=Black ctermbg=DarkMagenta
+highlight IncSearch ctermfg=Black ctermbg=Magenta
