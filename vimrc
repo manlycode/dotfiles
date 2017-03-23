@@ -1,6 +1,12 @@
 scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
+Plug 'sheerun/vim-polyglot'
+" Full project search/replace
+Plug 'wincent/ferret'
+" Plug 'dkprice/vim-easygrep'
+"
+Plug 'junegunn/vim-emoji'
 
 Plug 'tpope/vim-sensible'
 Plug 'maxbrunsfeld/vim-emacs-bindings'
@@ -15,7 +21,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-commentary'
 Plug 'kana/vim-textobj-user'
 Plug 'tpope/vim-projectionist'
-Plug 'dkprice/vim-easygrep'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'powerman/vim-plugin-AnsiEsc'
 
@@ -85,12 +90,12 @@ set smartindent
 set smarttab
 
 " for html/rb files, 2 spaces
-autocmd Filetype html setlocal ts=2 sw=2 expandtab
-autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+" autocmd Filetype html setlocal ts=2 sw=2 expandtab
+" autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
-autocmd Filetype coffeescript setlocal ts=2 sw=2 sts=0 expandtab
-autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
+" autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+" autocmd Filetype coffeescript setlocal ts=2 sw=2 sts=0 expandtab
+" autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
 
 set shell=$SHELL
 
