@@ -6,3 +6,7 @@ inoremap <c-p> <UP>
 inoremap <c-n> <DOWN>
 inoremap <c-f> <RIGHT>
 inoremap <c-b> <LEFT>
+
+
+
+

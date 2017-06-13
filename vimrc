@@ -5,10 +5,15 @@ Plug 'sheerun/vim-polyglot'
 " Full project search/replace
 Plug 'wincent/ferret'
 " Plug 'dkprice/vim-easygrep'
+Plug 'junegunn/vim-easy-align'
+Plug 'scrooloose/nerdtree'
 "
 Plug 'junegunn/vim-emoji'
+Plug 'maralla/completor.vim'
+Plug 'maralla/completor-swift'
 
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-abolish'
 Plug 'maxbrunsfeld/vim-emacs-bindings'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
@@ -57,7 +62,7 @@ Plug 'syngan/vim-vimlint'
 " Python
 " Do not load vim-pyenv until *.py is opened and
 " make sure that it is loaded after jedi-vim is loaded.
-Plug 'davidhalter/jedi-vim', {'for': 'python'} | Plug 'lambdalisue/vim-pyenv', {'for': 'python'}
+" Plug 'davidhalter/jedi-vim', {'for': 'python'} | Plug 'lambdalisue/vim-pyenv', {'for': 'python'}
 
 " Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -72,11 +77,22 @@ Plug 'jgdavey/vim-blockle'
 Plug 'vim-ruby/vim-ruby'
 
 
+Plug 'majutsushi/tagbar'
+
+
 " Hashicorp
 Plug 'markcornick/vim-terraform'
 
 " YAML
 Plug 'stephpy/vim-yaml'
+
+" Go
+Plug 'fatih/vim-go'
+
+" Arduino
+Plug 'sudar/vim-arduino-syntax'
+Plug 'sudar/vim-arduino-snippets'
+Plug 'vim-scripts/a.vim'
 
 call plug#end()
 
@@ -92,12 +108,14 @@ set smarttab
 " for html/rb files, 2 spaces
 " autocmd Filetype html setlocal ts=2 sw=2 expandtab
 " autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+autocmd Filetype swift setlocal ts=4 sw=4 expandtab
+autocmd FileType arduino setlocal ft=cpp
 
 " autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
 " autocmd Filetype coffeescript setlocal ts=2 sw=2 sts=0 expandtab
 " autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
 
-set shell=$SHELL
+set shell=/usr/local/bin/zsh
 
 runtime! plugin/sensible.vim
 set number
@@ -122,15 +140,17 @@ else
 endif
 
 set wildignore+=build
+set wildignore+=.build
 set wildignore+=*.pyc
 set wildignore+=node_modules
+set wildignore+=Packages
 
 set noswapfile
 set background=light
 set incsearch
 set hlsearch
 set clipboard=unnamed
-set tags=~/mytags
+" set tags=~/mytags
 
 hi Search cterm=NONE ctermfg=white ctermbg=gray
 
@@ -148,16 +168,15 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger='<tab>'
-
-let g:UltiSnipsJumpForwardTrigger='<c-j>'
-let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-let g:UltiSnipsListSnippets='<s-tab>'
+" let g:UltiSnipsExpandTrigger='<tab>'
+" let g:UltiSnipsJumpForwardTrigger='<c-j>'
+" let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+" let g:UltiSnipsListSnippets='<s-tab>'
 
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit='vertical'
+" let g:UltiSnipsEditSplit='vertical'
 
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 nmap <leader>f :Grep 
 nmap <leader>F :Grep <C-r><C-w>
@@ -187,11 +206,11 @@ let g:nodejs_complete_config = {
 
 " Netrw
 " Make Netrw behave line Nerdtree
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 20
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 20
 
 " augroup ProjectDrawer
 "   autocmd!
@@ -200,7 +219,8 @@ let g:netrw_winsize = 20
 
 " Quickly toggle quickfix
 :noremap <leader>q :call asyncrun#quickfix_toggle(8)<cr>
-:noremap <leader>d :Vexplore<cr>
+" :noremap <leader>d :Vexplore<cr>
+:noremap <leader>d :NERDTreeToggle<cr>
 
 " Map alt keys to window motions
 " Alt + j
@@ -255,5 +275,27 @@ augroup Pencil
 augroup END
 
 
-highlight Search ctermfg=Black ctermbg=DarkMagenta
-highlight IncSearch ctermfg=Black ctermbg=Magenta
+highlight Search ctermfg=White ctermbg=DarkMagenta
+highlight IncSearch ctermfg=White ctermbg=DarkGray
+
+set completefunc=emoji#complete
+
+"" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+let g:completor_clang_binary = '/usr/bin/clang'
+let g:ale_cpp_clang_options=system('paste -d " " -s .clang_complete')
+let g:ale_c_clang_options=system('paste -d " " -s .clang_complete')
+" let g:ale_cpp_clangtidy_options=system('paste -d " " -s .clang_complete')
+
+" let g:ale_cpp_gcc_options=system('paste -d " " -s .clang_complete')
+" let g:ale_c_gcc_options=system('paste -d " " -s .clang_complete')
