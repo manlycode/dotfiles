@@ -1,7 +1,9 @@
 scriptencoding utf-8
 
 call plug#begin('~/.vim/plugged')
+Plug 'rizzatti/dash.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-dispatch'
 " Full project search/replace
 Plug 'wincent/ferret'
 " Plug 'dkprice/vim-easygrep'
@@ -75,6 +77,7 @@ Plug 'tpope/gem-ctags'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'jgdavey/vim-blockle'
 Plug 'vim-ruby/vim-ruby'
+Plug 'ck3g/vim-change-hash-syntax'
 
 
 Plug 'majutsushi/tagbar'
@@ -128,7 +131,8 @@ autocmd! BufWritePost ~/.vimrc source ~/.vimrc
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#virtualenv#enabled = 0
-
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if exists('$TMUX')
