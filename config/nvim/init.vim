@@ -18,6 +18,7 @@ if dein#load_state('/Users/manlycode/.cache/dein')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('chriskempson/base16-vim')
+  call dein#add('w0rp/ale')
 
 
   " Required:
