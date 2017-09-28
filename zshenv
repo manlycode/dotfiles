@@ -2,27 +2,35 @@
 # General
 # ------------------------------------------------------------
 # export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="/Users/manlycode/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # ------------------------------------------------------------
 # Python 
 # ------------------------------------------------------------
 export NOSE_REDNOSE=1
 export PYTHONDONTWRITEBYTECODE="true"
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # ------------------------------------------------------------
 # Go
 # ------------------------------------------------------------
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export GOPATH=$HOME/go
+export GOPATH=$PWD:$HOME/go/bin
 export PATH=$PATH:$GOPATH/bin
+
+# ------------------------------------------------------------
+# Ruby
+# ------------------------------------------------------------
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
 
 # ------------------------------------------------------------
 # Rust 
 # ------------------------------------------------------------
-export RUST_SRC_PATH="/Users/manlycode/src/rust/src"
-export EDITOR='vim'
-export PATH="/Users/manlycode/.cargo/bin:$PATH"
+export RUST_SRC_PATH="$HOME/src/rust/src"
+export EDITOR='nvim'
+export PATH="$HOME/.cargo/bin:$PATH"
 
 export BOOT_JVM_OPTIONS="-client 
 -XX:+TieredCompilation 
@@ -32,24 +40,7 @@ export BOOT_JVM_OPTIONS="-client
 -XX:+CMSClassUnloadingEnabled 
 -Xverify:none"
 
-
-
-if [[ -n $VIMRUNTIME ]]; then
-  # ------------------------------------------------------------
-  # Python
-  # ------------------------------------------------------------
-  if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-  if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-  # ------------------------------------------------------------
-  # Ruby
-  # ------------------------------------------------------------
-  source /usr/local/opt/chruby/share/chruby/chruby.sh
-  source /usr/local/opt/chruby/share/chruby/auto.sh
-
-  # HUB https://github.com/github/hub/tree/master/etc
-  eval "$(hub alias -s)"
-  alias pulls="git browse -- pulls"
-fi
-
+# HUB https://github.com/github/hub/tree/master/etc
+alias pulls="git browse -- pulls"
 export PATH="/usr/local/opt/swift/bin:$PATH"
+export ZSHENV_LOADED="yes"

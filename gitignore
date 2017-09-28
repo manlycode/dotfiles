@@ -1,4 +1,5 @@
 .DS_Store
+.ruby-version
 .rake_tasks
 tags
 feature.txt
@@ -9,3 +10,4 @@ scratch.rb
 custom_plan.rb
 zeus.json
 .get-to-work
+scratch.rb

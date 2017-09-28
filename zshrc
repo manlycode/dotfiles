@@ -1,15 +1,6 @@
-# ------------------------------------------------------------
-# Ruby
-# ------------------------------------------------------------
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-chruby ruby-2.3.3
-source /usr/local/opt/chruby/share/chruby/auto.sh
-
-# ------------------------------------------------------------
-# Python
-# ------------------------------------------------------------
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+if [[ -z "${ZSHENV_LOADED}" ]]; then
+  source $HOME/.zshenv
+fi
 
 # HUB https://github.com/github/hub/tree/master/etc
 eval "$(hub alias -s)"
@@ -21,12 +12,6 @@ case $- in
 	*) return;;
 esac
 
-# Exit if called from vim
-[[ -n $VIMRUNTIME ]] && return
-
-# Exit if called from atom
-[[ -n $ATOM_HOME ]] && return
-
 # -----------------------------------------------------------------
 # zplug configuration
 # https://github.com/zplug/zplug
@@ -37,6 +22,7 @@ source ~/.zplug/init.zsh
 zplug "mafredri/zsh-async", from:github, defer:0  # Load this first
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme, defer:3
 
+zplug "lib/functions", from:oh-my-zsh, defer:0
 zplug "lib/key-bindings", from:oh-my-zsh, defer:0
 zplug "lib/compfix", from:oh-my-zsh, defer:0
 zplug "lib/clipboard", from:oh-my-zsh, defer:0
@@ -91,3 +77,5 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 alias zshconfig="vim ~/.zshrc"
 alias mux="tmuxinator"
 alias re-source="source ~/.zshrc"
+alias kill_pumas="kill -9 $(lsof -i tcp:3000 -t)"
+alias vim="nvim"

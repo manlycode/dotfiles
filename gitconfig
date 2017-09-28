@@ -1,6 +1,6 @@
 [user]
-        name = Chris Rittersdorf
-        email = chris.rittersdorf@collectiveidea.com
+	name = Chris Rittersdorf
+	email = chris.rittersdorf@collectiveidea.com
 
 [core]
         editor = vim
