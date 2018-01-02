@@ -3,13 +3,47 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-
-Plug 'chriskempson/base16-vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'kien/ctrlp.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/gem-ctags'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
+
+" Look and Feel
+Plug 'chriskempson/base16-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Neovim
 Plug 'kassio/neoterm'
+
+" Editing
+Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-commentary'
+Plug 'easymotion/vim-easymotion'
+Plug 'kana/vim-textobj-user'
+Plug 'FooSoft/vim-argwrap'
+Plug 'reedes/vim-pencil'
+Plug 'itspriddle/vim-marked'
+Plug 'junegunn/goyo.vim'
+" Plug 'maxbrunsfeld/vim-emacs-bindings'
+
+" Ruby
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+Plug 'jgdavey/vim-blockle'
+Plug 'ck3g/vim-change-hash-syntax'
+
+" Vim
+Plug 'tpope/vim-scriptease', {'for': 'vim'}
+Plug 'ynkdir/vim-vimlparser'
+Plug 'syngan/vim-vimlint'
 
 " Initialize plugin system
 call plug#end()
@@ -22,6 +56,14 @@ set mouse=a
 set timeout
 set timeoutlen=750
 set ttimeoutlen=250
+set wrap
+set ignorecase
+set smartcase
+set expandtab
+set tabstop=2 shiftwidth=2 softtabstop=2
+set autoindent
+set smartindent
+set smarttab
 
 "NeoVim handles ESC keys as alt+key set this to solve the problem
 if has('nvim')
@@ -53,6 +95,11 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*
 
+let base16colorspace=256
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 " The Silver Searcher
 if executable('ag')
