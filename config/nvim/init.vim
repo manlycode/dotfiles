@@ -3,6 +3,7 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
+Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -51,6 +52,9 @@ call plug#end()
 
 " General settings
 " ------------------------------------------------
+let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
+
 set noswapfile
 set mouse=a
 set timeout
@@ -145,6 +149,11 @@ nmap <C-l> :noh<CR>
 
 " Comment/Uncomment
 vnoremap <leader>c :Commentary<CR>
-vnoremap <leader>c :Commentary<CR>
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
+
+let g:airline_powerline_fonts = 1
+
+set wildignore+=build
+set wildignore+=.build
+set wildignore+=*.pyc
+set wildignore+=node_modules
+set wildignore+=Packages
