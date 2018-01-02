@@ -2,13 +2,14 @@
 # General
 # ------------------------------------------------------------
 # export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="$HOME/bin:$PATH"
+# export PATH="$HOME/bin:$PATH"
 
 # ------------------------------------------------------------
 # Python 
 # ------------------------------------------------------------
 export NOSE_REDNOSE=1
 export PYTHONDONTWRITEBYTECODE="true"
+
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
@@ -16,7 +17,8 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 # Go
 # ------------------------------------------------------------
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export GOPATH=$PWD:$HOME/go/bin
+export GOROOT=$HOME/go
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # ------------------------------------------------------------
@@ -32,6 +34,12 @@ export RUST_SRC_PATH="$HOME/src/rust/src"
 export EDITOR='nvim'
 export PATH="$HOME/.cargo/bin:$PATH"
 
+
+# ------------------------------------------------------------
+# VBCC
+# ------------------------------------------------------------
+export VBCC=$HOME/git/manlycode/vbcc
+
 export BOOT_JVM_OPTIONS="-client 
 -XX:+TieredCompilation 
 -XX:TieredStopAtLevel=1 
@@ -40,7 +48,8 @@ export BOOT_JVM_OPTIONS="-client
 -XX:+CMSClassUnloadingEnabled 
 -Xverify:none"
 
+alias pulls="hub browse -- pulls"
 # HUB https://github.com/github/hub/tree/master/etc
-alias pulls="git browse -- pulls"
 export PATH="/usr/local/opt/swift/bin:$PATH"
 export ZSHENV_LOADED="yes"
+export PATH="$HOME/bin:$PATH"

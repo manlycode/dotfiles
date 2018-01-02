@@ -2,9 +2,9 @@ if [[ -z "${ZSHENV_LOADED}" ]]; then
   source $HOME/.zshenv
 fi
 
-# HUB https://github.com/github/hub/tree/master/etc
-eval "$(hub alias -s)"
-alias pulls="git browse -- pulls"
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
 
 # If not running interactively, don't do anything
 case $- in
@@ -44,6 +44,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-autosuggestions", defer:3
 zplug "vasyharan/zsh-brew-services"
+zplug "jocelynmallon/zshmarks"
 
 zplug "junegunn/fzf-bin", \
     from:gh-r, \
@@ -73,9 +74,27 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 # added by travis gem
 [ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
 
+function kill_pumas() {
+  kill -9 $(lsof -i tcp:3000 -t)
+}
+
+# HUB https://github.com/github/hub/tree/master/etc
+# eval "$(hub alias -s)"
+alias git="hub"
+alias pulls="git browse -- pulls"
+
+export POSTMASTER_PID_FILE="/usr/local/var/postgres/postmaster.pid"
 # Aliases
 alias zshconfig="vim ~/.zshrc"
 alias mux="tmuxinator"
 alias re-source="source ~/.zshrc"
-alias kill_pumas="kill -9 $(lsof -i tcp:3000 -t)"
 alias vim="nvim"
+alias kill-pumas="kill_pumas"
+alias reset-postgres="rm $POSTMASTER_PID_FILE"
+# alias zip-all="find . -name \"*.zip\" | while read filename; do unzip -o -d \"`dirname \"$filename\"`\" \"$filename\"; done;"
+eval "$(direnv hook zsh)"
+export PATH="$HOME/bin:$PATH"
+
+unzip_all() {
+ find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
+}

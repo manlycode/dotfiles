@@ -1,13 +1,13 @@
 .DS_Store
 .ruby-version
+.python-version
 .rake_tasks
 tags
 feature.txt
-scratch.rb
+scratch.*
 *.pyc
 *.swp
 
 custom_plan.rb
 zeus.json
 .get-to-work
-scratch.rb
