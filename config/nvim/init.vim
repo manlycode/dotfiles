@@ -1,45 +1,24 @@
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-" Required:
-set runtimepath+=/Users/manlycode/.cache/dein/repos/github.com/Shougo/dein.vim
-
-" Required:
-if dein#load_state('/Users/manlycode/.cache/dein')
-  call dein#begin('/Users/manlycode/.cache/dein')
-
-  " Let dein manage dein
-  " Required:
-  call dein#add('/Users/manlycode/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-  " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('chriskempson/base16-vim')
-  call dein#add('w0rp/ale')
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
 
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
+Plug 'chriskempson/base16-vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'kien/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'kassio/neoterm'
 
-" Required:
-filetype plugin indent on
-syntax enable
-
-" If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
-
-"End dein Scripts-------------------------
+" Initialize plugin system
+call plug#end()
 
 
 " General settings
 " ------------------------------------------------
+set noswapfile
+set mouse=a
 set timeout
 set timeoutlen=750
 set ttimeoutlen=250
@@ -48,11 +27,6 @@ set ttimeoutlen=250
 if has('nvim')
    set ttimeout
    set ttimeoutlen=0
-endif
-
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
 endif
 
 let mapleader=','
@@ -65,8 +39,13 @@ set autowrite
 set expandtab
 " set list "show those nasty TABs
 
+" Reload config on write
+autocmd! BufWritePost ~/.config/nvim/init.vim source ~/.config/nvim/init.vim
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 
 filetype plugin on
@@ -86,7 +65,7 @@ if executable('ag')
 endif
 
 " Key Bindings
-nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>:NERDTreeToggle<cr><C-w>l
+nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>
 
 " Other files
 " source ~/.config/nvim/plugins.vim
@@ -120,3 +99,5 @@ nmap <C-l> :noh<CR>
 " Comment/Uncomment
 vnoremap <leader>c :Commentary<CR>
 vnoremap <leader>c :Commentary<CR>
+let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'

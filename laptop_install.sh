@@ -61,3 +61,6 @@ pushd $HASKLIG_DIR && \
   cp *.otf ~/Library/Fonts
   rm hasklig.zip && \
   popd
+
+source ./setup_nvim.sh
+

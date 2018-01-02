@@ -98,3 +98,5 @@ export PATH="$HOME/bin:$PATH"
 unzip_all() {
  find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
