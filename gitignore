@@ -11,3 +11,5 @@ scratch.*
 custom_plan.rb
 zeus.json
 .get-to-work
+.rake_tasks
+.github

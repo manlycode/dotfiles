@@ -93,11 +93,15 @@ alias vim="nvim"
 alias kill-pumas="kill_pumas"
 alias reset-postgres="rm $POSTMASTER_PID_FILE"
 # alias zip-all="find . -name \"*.zip\" | while read filename; do unzip -o -d \"`dirname \"$filename\"`\" \"$filename\"; done;"
+alias flush-cache="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
+
 eval "$(direnv hook zsh)"
 export PATH="$HOME/bin:$PATH"
 
 unzip_all() {
  find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
 }
+
+eval "$(direnv hook zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

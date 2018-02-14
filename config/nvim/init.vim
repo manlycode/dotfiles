@@ -6,11 +6,18 @@ call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fszymanski/deoplete-emoji'
+Plug 'janko-m/vim-test'
+Plug 'wincent/ferret'
+Plug 'tpope/vim-sleuth'
+Plug 'chr4/nginx.vim'
+Plug 'wannesm/wmgraphviz.vim'
 
 " Look and Feel
 Plug 'chriskempson/base16-vim'
@@ -40,11 +47,26 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'jgdavey/vim-blockle'
 Plug 'ck3g/vim-change-hash-syntax'
+Plug 'tpope/vim-endwise'
+Plug 'Shougo/deoplete-rct'
 
 " Vim
 Plug 'tpope/vim-scriptease', {'for': 'vim'}
 Plug 'ynkdir/vim-vimlparser'
 Plug 'syngan/vim-vimlint'
+
+" Go
+Plug 'fatih/vim-go'
+"Plug 'farazdagi/vim-go-ide'
+Plug 'zchee/deoplete-go', { 'do': ':T make'}
+Plug 'benmills/vim-golang-alternate'
+
+" Terraform
+Plug 'hashivim/vim-terraform'
+Plug 'juliosueiras/vim-terraform-completion'
+
+" ASM
+Plug 'samsaga2/vim-z80'
 
 " Initialize plugin system
 call plug#end()
@@ -108,12 +130,13 @@ endif
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --hidden
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+let g:ctrlp_show_hidden = 1
 
 " Key Bindings
 nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>
@@ -136,12 +159,13 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
+
 let g:terminal_scrollback_buffer_size = 2147483646
 
 let g:token="113eda4ab465dc9f416ea955d36738d7"
 let g:project_id="792199"
 
-nmap <silent> <leader>d <Plug>DashSearch
+nmap <silent> <leader>d :NERDTreeToggle<cr>
 
 
 " Clear search highlight
@@ -157,3 +181,48 @@ set wildignore+=.build
 set wildignore+=*.pyc
 set wildignore+=node_modules
 set wildignore+=Packages
+
+let g:deoplete#enable_at_startup = 1
+
+" NeoTerm
+let g:neoterm_position = 'horizontal'
+let g:neoterm_automap_keys = ',tt'
+
+nnoremap <silent> <leader>sf :TREPLSendFile<cr>
+nnoremap <silent> <leader>sl :TREPLSendLine<cr>
+vnoremap <silent> <leader>ss :TREPLSendSelection<cr>
+
+
+
+" Useful maps
+" hide/close terminal
+nnoremap <silent> ,th :call neoterm#close()<cr>
+" clear terminal
+nnoremap <silent> ,tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tc :call neoterm#kill()<cr>
+
+" Rails commands
+command! Troutes :T rake routes
+command! -nargs=+ Troute :T rake routes | grep <args>
+command! Tmigrate :T rake db:migrate
+command! Trailss :T rails s
+command! Trailsc :T rails c
+
+command! Foreman :tabe term://foreman start -f Procfile.dev
+
+" make test commands execute using dispatch.vim
+let test#strategy = "neoterm"
+
+" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+nmap <silent> <leader>tn :TestNearest<CR> 
+nmap <silent> <leader>tf :TestFile<CR>    
+nmap <silent> <leader>ts :TestSuite<CR>   
+nmap <silent> <leader>tl :TestLast<CR>    
+nmap <silent> <leader>tg :TestVisit<CR>   
+
+" Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+autocmd FileType terraform setlocal commentstring=#%s
+au BufNewFile,BufRead *.conf.erb set filetype=nginx

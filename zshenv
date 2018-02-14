@@ -18,9 +18,9 @@ export PYENV_ROOT=/usr/local/opt/pyenv/
 # Go
 # ------------------------------------------------------------
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export GOROOT=$HOME/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
 
 # ------------------------------------------------------------
 # Ruby
