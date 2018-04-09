@@ -13,3 +13,5 @@ zeus.json
 .get-to-work
 .rake_tasks
 .github
+.cadre/
+.simplecov

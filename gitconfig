@@ -5,6 +5,7 @@
 [core]
         editor = nvim
         excludesfile = /Users/manlycode/.gitignore
+        commentchar = $
 
 [alias]
         st = status

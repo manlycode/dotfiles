@@ -2,6 +2,9 @@ if [[ -z "${ZSHENV_LOADED}" ]]; then
   source $HOME/.zshenv
 fi
 
+fpath=(~/.zsh/completions $fpath) 
+autoload -U compinit && compinit
+
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 export PYENV_ROOT=/usr/local/opt/pyenv/
@@ -105,3 +108,4 @@ unzip_all() {
 eval "$(direnv hook zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES

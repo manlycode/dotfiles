@@ -28,5 +28,10 @@
 --regex-js=/([^= ]+)[ \t]*=[ \t]*[^"]'[^']*/\1/,string/
 --regex-js=/([^= ]+)[ \t]*=[ \t]*[^']"[^"]*/\1/,string/
 
+--regex-ruby=/^[ \t]*describe ['"](.*)['"] do/\1/d,rspec describe/
+--regex-ruby=/^[ \t]*context ['"](.*)['"] do/\1/C,rspec context/
+
+--regex-ruby=/^[ \t]*create_tale ['"](.*)['"] do/\1/d,rails table/
+
 --python-kinds=-i
 --exclude=*/build/*

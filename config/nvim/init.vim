@@ -12,12 +12,12 @@ Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'fszymanski/deoplete-emoji'
 Plug 'janko-m/vim-test'
 Plug 'wincent/ferret'
 Plug 'tpope/vim-sleuth'
 Plug 'chr4/nginx.vim'
 Plug 'wannesm/wmgraphviz.vim'
+Plug 'schickling/vim-bufonly'
 
 " Look and Feel
 Plug 'chriskempson/base16-vim'
@@ -29,14 +29,15 @@ Plug 'kassio/neoterm'
 
 " Editing
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-abolish'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
 Plug 'kana/vim-textobj-user'
 Plug 'FooSoft/vim-argwrap'
 Plug 'reedes/vim-pencil'
-Plug 'itspriddle/vim-marked'
-Plug 'junegunn/goyo.vim'
+Plug 'itspriddle/vim-marked', {'for': 'markdown'}
+Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 " Plug 'maxbrunsfeld/vim-emacs-bindings'
 
 " Ruby
@@ -49,17 +50,21 @@ Plug 'jgdavey/vim-blockle'
 Plug 'ck3g/vim-change-hash-syntax'
 Plug 'tpope/vim-endwise'
 Plug 'Shougo/deoplete-rct'
+" Plug '~/.vim/plugin/cadre'
+Plug 'killphi/vim-legend'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
+Plug 'lmeijvogel/vim-yaml-helper'
 " Vim
 Plug 'tpope/vim-scriptease', {'for': 'vim'}
 Plug 'ynkdir/vim-vimlparser'
 Plug 'syngan/vim-vimlint'
 
 " Go
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {'for': 'go'}
 "Plug 'farazdagi/vim-go-ide'
 Plug 'zchee/deoplete-go', { 'do': ':T make'}
-Plug 'benmills/vim-golang-alternate'
+Plug 'benmills/vim-golang-alternate', {'for': 'go'}
 
 " Terraform
 Plug 'hashivim/vim-terraform'
@@ -67,6 +72,7 @@ Plug 'juliosueiras/vim-terraform-completion'
 
 " ASM
 Plug 'samsaga2/vim-z80'
+
 
 " Initialize plugin system
 call plug#end()
@@ -119,7 +125,7 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 filetype plugin on
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
-set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*
+set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*,vendor/*
 
 let base16colorspace=256
 if filereadable(expand("~/.vimrc_background"))
@@ -128,14 +134,20 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 " The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor\ --hidden
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " ag is fast enough that CtrlP doesn't need to cache
+" if executable('ag')
+"   " Use ag over grep
+"   set grepprg=ag\ --nogroup\ --nocolor\ --hidden
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"   " ag is fast enough that CtrlP doesn't need to cache
+"   let g:ctrlp_use_caching = 0
+
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
+
 let g:ctrlp_show_hidden = 1
 
 " Key Bindings
@@ -169,6 +181,7 @@ nmap <silent> <leader>d :NERDTreeToggle<cr>
 
 
 " Clear search highlight
+highlight Search ctermbg=yellow ctermfg=white term=underline
 nmap <C-l> :noh<CR>
 
 " Comment/Uncomment
@@ -187,6 +200,8 @@ let g:deoplete#enable_at_startup = 1
 " NeoTerm
 let g:neoterm_position = 'horizontal'
 let g:neoterm_automap_keys = ',tt'
+" let g:neoterm_size = '12'
+let g:neoterm_autoscroll = '1'
 
 nnoremap <silent> <leader>sf :TREPLSendFile<cr>
 nnoremap <silent> <leader>sl :TREPLSendLine<cr>
@@ -211,6 +226,8 @@ command! Trailsc :T rails c
 
 command! Foreman :tabe term://foreman start -f Procfile.dev
 
+" command! Coverage :!open coverage/index.html
+
 " make test commands execute using dispatch.vim
 let test#strategy = "neoterm"
 
@@ -221,8 +238,32 @@ nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>    
 nmap <silent> <leader>tg :TestVisit<CR>   
 
+nmap <silent> <leader>fw :Ack <C-r><C-w><CR>
+nmap <silent> <leader>fp :Ack 
 " Terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 autocmd FileType terraform setlocal commentstring=#%s
-au BufNewFile,BufRead *.conf.erb set filetype=nginx
+
+" au BufNewFile,BufRead *.conf.erb set filetype=nginx
+
+" let g:legend_active_auto = 0
+
+let g:go_autodetect_gopath = 0
+
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
