@@ -1,104 +1,97 @@
-scriptencoding utf-8
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
 
 call plug#begin('~/.vim/plugged')
-Plug 'rizzatti/dash.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-dispatch'
-" Full project search/replace
-Plug 'wincent/ferret'
-" Plug 'dkprice/vim-easygrep'
-Plug 'junegunn/vim-easy-align'
+
+" Plug 'w0rp/ale'
+Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-"
-Plug 'junegunn/vim-emoji'
-Plug 'maralla/completor.vim'
-Plug 'maralla/completor-swift'
-
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-abolish'
-Plug 'maxbrunsfeld/vim-emacs-bindings'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'w0rp/ale'
-Plug 'janko-m/vim-test'
-Plug 'vim-scripts/BufOnly.vim'
 Plug 'tpope/vim-eunuch'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-surround'
-Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-commentary'
-Plug 'kana/vim-textobj-user'
-Plug 'tpope/vim-projectionist'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'powerman/vim-plugin-AnsiEsc'
+Plug 'tpope/gem-ctags'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'janko-m/vim-test'
+Plug 'wincent/ferret'
+Plug 'tpope/vim-sleuth'
+Plug 'chr4/nginx.vim'
+Plug 'wannesm/wmgraphviz.vim'
+Plug 'schickling/vim-bufonly'
+Plug 'jszakmeister/vim-togglecursor'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'maralla/completor.vim'
 
-" Editing Text
-Plug 'tpope/vim-commentary'
-Plug 'FooSoft/vim-argwrap'
-Plug 'reedes/vim-pencil'
-Plug 'itspriddle/vim-marked'
-Plug 'junegunn/goyo.vim'
+" Deoplete
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'roxma/nvim-yarp'
+" Plug 'roxma/vim-hug-neovim-rpc'
 
-" Look and feel
+" Look and Feel
+Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
 
-" Snippets
-Plug 'SirVer/ultisnips'
-Plug 'manlycode/vim-snippets'
+" Editing
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-abolish'
+Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-commentary'
+Plug 'easymotion/vim-easymotion'
+Plug 'kana/vim-textobj-user'
+Plug 'FooSoft/vim-argwrap'
+Plug 'reedes/vim-pencil'
+Plug 'itspriddle/vim-marked', {'for': 'markdown'}
+Plug 'junegunn/goyo.vim', {'for': 'markdown'}
+" Plug 'maxbrunsfeld/vim-emacs-bindings'
 
-" git
-Plug 'tpope/vim-fugitive'
+" Ruby
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+Plug 'jgdavey/vim-blockle'
+Plug 'ck3g/vim-change-hash-syntax'
+Plug 'tpope/vim-endwise'
+" Plug 'Shougo/deoplete-rct'
+Plug 'killphi/vim-legend'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
-" Docker
-Plug 'ekalinin/Dockerfile.vim'
-
-" Markdown
-Plug 'plasticboy/vim-markdown'
-
+Plug 'lmeijvogel/vim-yaml-helper', {'for': 'yaml'}
 " Vim
 Plug 'tpope/vim-scriptease', {'for': 'vim'}
 Plug 'ynkdir/vim-vimlparser'
 Plug 'syngan/vim-vimlint'
 
-" Python
-" Do not load vim-pyenv until *.py is opened and
-" make sure that it is loaded after jedi-vim is loaded.
-" Plug 'davidhalter/jedi-vim', {'for': 'python'} | Plug 'lambdalisue/vim-pyenv', {'for': 'python'}
-
-" Ruby
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-rails'
-Plug 'gorodinskiy/vim-coloresque', {'for': 'css'}
-Plug 'tpope/gem-ctags'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'jgdavey/vim-blockle'
-Plug 'vim-ruby/vim-ruby'
-Plug 'ck3g/vim-change-hash-syntax'
-
-
-Plug 'majutsushi/tagbar'
-
-
-" Hashicorp
-Plug 'markcornick/vim-terraform'
-
-" YAML
-Plug 'stephpy/vim-yaml'
-
 " Go
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {'for': 'go'}
+" Plug 'zchee/deoplete-go', { 'do': ':T make'}
+Plug 'benmills/vim-golang-alternate', {'for': 'go'}
 
-" Arduino
-Plug 'sudar/vim-arduino-syntax'
-Plug 'sudar/vim-arduino-snippets'
-Plug 'vim-scripts/a.vim'
+" Terraform
+Plug 'hashivim/vim-terraform', {'for': 'terraform'}
+Plug 'juliosueiras/vim-terraform-completion', {'for': 'terraform'}
 
+" ASM
+Plug 'samsaga2/vim-z80'
+
+
+" Initialize plugin system
 call plug#end()
 
+
+" General settings
+" ------------------------------------------------
+let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
+let g:pythonx=3
+
+set noswapfile
+set mouse=a
+set timeout
+set timeoutlen=750
+set ttimeoutlen=250
 set wrap
 set ignorecase
 set smartcase
@@ -107,41 +100,91 @@ set tabstop=2 shiftwidth=2 softtabstop=2
 set autoindent
 set smartindent
 set smarttab
+set incsearch
+set hlsearch
+set clipboard=unnamed
+set backspace=indent,eol,start
 
-" for html/rb files, 2 spaces
-" autocmd Filetype html setlocal ts=2 sw=2 expandtab
-" autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
-autocmd Filetype swift setlocal ts=4 sw=4 expandtab
-autocmd FileType arduino setlocal ft=cpp
 
-" autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
-" autocmd Filetype coffeescript setlocal ts=2 sw=2 sts=0 expandtab
-" autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
+"NeoVim handles ESC keys as alt+key set this to solve the problem
+if has('nvim')
+   set ttimeout
+   set ttimeoutlen=0
+endif
 
-set shell=/usr/local/bin/zsh
-
-runtime! plugin/sensible.vim
+let mapleader=','
 set number
-let g:mapleader=','
-set ttyfast
-set mouse=a
-set ttymouse=xterm2
+set showcmd
+set shell=$SHELL\ -l
+set nojoinspaces
+set ignorecase
+set autowrite
+set expandtab
+" set list "show those nasty TABs
 
+" Reload config on write
 autocmd! BufWritePost ~/.vimrc source ~/.vimrc
 
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#virtualenv#enabled = 0
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
+filetype plugin on
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*,vendor/*
 
-" Change cursor shape between insert and normal mode in iTerm2.app
-if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+let base16colorspace=256
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
 endif
+
+" The Silver Searcher
+" if executable('ag')
+"   " Use ag over grep
+"   set grepprg=ag\ --nogroup\ --nocolor\ --hidden
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"   " ag is fast enough that CtrlP doesn't need to cache
+"   let g:ctrlp_use_caching = 0
+
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+endif
+
+let g:ctrlp_show_hidden = 1
+
+" Key Bindings
+nnoremap <leader>ev :tabe ~/.vimrc<cr>:lcd %:p:h<cr>
+
+
+
+" Custom movement between buffers
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+
+let g:terminal_scrollback_buffer_size = 2147483646
+
+let g:token="113eda4ab465dc9f416ea955d36738d7"
+let g:project_id="792199"
+
+nmap <silent> <leader>d :NERDTreeToggle<cr>
+
+
+" Clear search highlight
+highlight Search ctermbg=yellow ctermfg=white term=underline
+nmap <C-l> :noh<CR>
+
+" Comment/Uncomment
+vnoremap <leader>c :Commentary<CR>
+
+let g:airline_powerline_fonts = 1
 
 set wildignore+=build
 set wildignore+=.build
@@ -149,157 +192,66 @@ set wildignore+=*.pyc
 set wildignore+=node_modules
 set wildignore+=Packages
 
-set noswapfile
-set background=light
-set incsearch
-set hlsearch
-set clipboard=unnamed
-" set tags=~/mytags
+nnoremap <silent> <leader>sf :TREPLSendFile<cr>
+nnoremap <silent> <leader>sl :TREPLSendLine<cr>
+vnoremap <silent> <leader>ss :TREPLSendSelection<cr>
 
-hi Search cterm=NONE ctermfg=white ctermbg=gray
+" Rails commands
+let test#strategy = "dispatch"
+command! Troutes :T rake routes
+command! -nargs=+ Troute :T rake routes | grep <args>
+command! Tmigrate :T rake db:migrate
+command! Trailss :T rails s
+command! Trailsc :T rails c
 
-nnoremap <leader>ev :tabe ~/.vimrc<CR>
+command! Foreman :tabe term://foreman start -f Procfile.dev
+
+" command! Coverage :!open coverage/index.html
 
 " make test commands execute using dispatch.vim
-let g:test#strategy = 'asyncrun'
-nmap <silent> <leader>tt :TestNearest<CR>
+
+" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+nmap <silent> <leader>tn :TestNearest<CR>
 nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ta :TestSuite<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+nmap <silent> <leader>tg :TestVisit<CR>
 
-" let g:test#ruby#rspec#options = '--color'
+nmap <silent> <leader>fw :Ack <C-r><C-w><CR>
+nmap <silent> <leader>fp :Ack
 
+" Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+" autocmd FileType terraform setlocal commentstring=#%s
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger='<tab>'
-" let g:UltiSnipsJumpForwardTrigger='<c-j>'
-" let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-" let g:UltiSnipsListSnippets='<s-tab>'
+" au BufNewFile,BufRead *.conf.erb set filetype=nginx
 
-" If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit='vertical'
+" let g:legend_active_auto = 0
 
-" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:go_autodetect_gopath = 0
 
-nmap <leader>f :Grep 
-nmap <leader>F :Grep <C-r><C-w>
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
 
-let g:jedi#show_call_signatures = '2'
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
 
-augroup Ruby
-  autocmd!
-  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
-  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-augroup END
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
-" augroup Python
-"   autocmd FileType python setlocal omnifunc=jedi#completions
-"   let g:jedi#completions_enabled = 0
-"   let g:jedi#auto_vim_configuration = 0
-"   let g:jedi#smart_auto_mappings = 0
-" augroup END
+function! VimTerminalZsh(cmd)
+  botright new
+  call term_start([$SHELL, "-c", a:cmd], {'curwin':1})
+endfunction
 
-let g:ctrlp_show_hidden = 1
-
-let g:nodejs_complete_config = {
-\  'js_compl_fn': 'jscomplete#CompleteJS',
-\  'max_node_compl_len': 15
-\}
-
-" Netrw
-" Make Netrw behave line Nerdtree
-" let g:netrw_banner = 0
-" let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
-" let g:netrw_altv = 1
-" let g:netrw_winsize = 20
-
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
-
-" Quickly toggle quickfix
-:noremap <leader>q :call asyncrun#quickfix_toggle(8)<cr>
-" :noremap <leader>d :Vexplore<cr>
-:noremap <leader>d :NERDTreeToggle<cr>
-
-" Map alt keys to window motions
-" Alt + j
-nnoremap ∆ <c-w>j
-" Alt + k
-nnoremap ∆ <c-w>k
-" Alt + h
-nnoremap ˙ <c-w>h
-" Alt + l
-nnoremap ¬ <c-w>l
-
-nnoremap <c-_> :Commentary<CR>
-vnoremap <c-_> :Commentary<CR>
-
-let g:EasyGrepFilesToExclude=".svn,.git,tags"
-let g:EasyGrepRecursive=1
-let g:EasyGrepCommand=1
-let g:EasyGrepRoot="repository"
-set grepprg=ag\ --nogroup\ --nocolor\ --column
-set grepformat=%f:%l:%c%m
-
-
-if filereadable(expand('~/.vimrc_background'))
-  let g:base16colorspace=256
-  source ~/.vimrc_background
-endif
-
-
-
-" Markdown
-let g:vim_markdown_folding_disabled = 1
-let g:marked_app = 'Marked 2'
-let g:pencil#wrapModeDefault = 'soft'
-let g:pencil#conceallevel = 0
-
-augroup Markdown
-  autocmd!
-
-  function! SetMarkdownOptions()
-    set spell spelllang=en_us
-    Goyo
-  endfunction
-
-  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-  autocmd Filetype markdown call SetMarkdownOptions()
-augroup END
-
-augroup Pencil
-  autocmd!
-  autocmd FileType markdown,mkd,md call pencil#init()
-  autocmd FileType txt call pencil#init()
-augroup END
-
-
-highlight Search ctermfg=White ctermbg=DarkMagenta
-highlight IncSearch ctermfg=White ctermbg=DarkGray
-
-set completefunc=emoji#complete
-
-"" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-let g:completor_clang_binary = '/usr/bin/clang'
-let g:ale_cpp_clang_options=system('paste -d " " -s .clang_complete')
-let g:ale_c_clang_options=system('paste -d " " -s .clang_complete')
-" let g:ale_cpp_clangtidy_options=system('paste -d " " -s .clang_complete')
-
-" let g:ale_cpp_gcc_options=system('paste -d " " -s .clang_complete')
-" let g:ale_c_gcc_options=system('paste -d " " -s .clang_complete')
+let g:test#custom_strategies = {'vimterminalzsh': function('VimTerminalZsh')}
+let g:test#strategy = 'vimterminalzsh'
