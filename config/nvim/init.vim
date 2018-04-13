@@ -106,7 +106,7 @@ endif
 let mapleader=','
 set number
 set showcmd
-set shell=/bin/zsh
+set shell=$SHELL
 set nojoinspaces
 set ignorecase
 set autowrite
@@ -195,11 +195,10 @@ set wildignore+=Packages
 
 
 " NeoTerm
-" let g:neoterm_position = 'horizontal'
 let g:neoterm_automap_keys = ',tt'
 " let g:neoterm_size = '12'
 let g:neoterm_autoscroll = '1'
-let g:neoterm_default_mod = 'aboveleft'
+let g:neoterm_default_mod = 'vertical'
 
 nnoremap <silent> <leader>sf :TREPLSendFile<cr>
 nnoremap <silent> <leader>sl :TREPLSendLine<cr>
