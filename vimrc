@@ -117,7 +117,8 @@ endif
 let mapleader=','
 set number
 set showcmd
-set shell=/usr/local/bin/zsh\ -l
+set shell=/usr/local/bin/zsh
+set shellcmdflag=-ic
 set nojoinspaces
 set ignorecase
 set autowrite
