@@ -1,4 +1,6 @@
-# ------------------------------------------------------------
+# I added this explicitly after installing zsh with --without-etcdir
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+
 # General
 # ------------------------------------------------------------
 # export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -17,23 +19,16 @@ export PYENV_ROOT=/usr/local/opt/pyenv/
 # ------------------------------------------------------------
 # Go
 # ------------------------------------------------------------
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-
-# ------------------------------------------------------------
-# Ruby
-# ------------------------------------------------------------
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
+# export PATH=/usr/local/opt/go/libexec/bin:$PATH
+# export GOPATH=$HOME/go
+# export PATH=$GOPATH/bin:$PATH
 
 # ------------------------------------------------------------
 # Rust 
 # ------------------------------------------------------------
-export RUST_SRC_PATH="$HOME/src/rust/src"
-export EDITOR='nvim'
-export PATH="$HOME/.cargo/bin:$PATH"
+# export RUST_SRC_PATH="$HOME/src/rust/src"
+# export EDITOR='nvim'
+# export PATH="$HOME/.cargo/bin:$PATH"
 
 
 # ------------------------------------------------------------
@@ -54,3 +49,6 @@ alias pulls="hub browse -- pulls"
 export PATH="/usr/local/opt/swift/bin:$PATH"
 export ZSHENV_LOADED="yes"
 export PATH="$HOME/bin:$PATH"
+
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+chruby >> /dev/null

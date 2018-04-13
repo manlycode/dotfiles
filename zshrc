@@ -92,20 +92,17 @@ export POSTMASTER_PID_FILE="/usr/local/var/postgres/postmaster.pid"
 alias zshconfig="vim ~/.zshrc"
 alias mux="tmuxinator"
 alias re-source="source ~/.zshrc"
-alias vim="nvim"
 alias kill-pumas="kill_pumas"
 alias reset-postgres="rm $POSTMASTER_PID_FILE"
 # alias zip-all="find . -name \"*.zip\" | while read filename; do unzip -o -d \"`dirname \"$filename\"`\" \"$filename\"; done;"
 alias flush-cache="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 
-eval "$(direnv hook zsh)"
-export PATH="$HOME/bin:$PATH"
+# eval "$(direnv hook zsh)"
 
 unzip_all() {
  find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
 }
 
-eval "$(direnv hook zsh)"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+source /usr/local/opt/chruby/share/chruby/auto.sh
