@@ -38,7 +38,6 @@ zplug "lib/termsupport", from:oh-my-zsh, defer:0
 zplug "lib/theme-and-appearance", from:oh-my-zsh, defer:0
 
 zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
-zplug "plugins/tmuxinator", from:oh-my-zsh, defer:3
 zplug "plugins/bundler", from:oh-my-zsh, defer:3
 zplug "plugins/rspec", from:oh-my-zsh, defer:3
 
@@ -49,12 +48,6 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-autosuggestions", defer:3
 zplug "vasyharan/zsh-brew-services"
 zplug "jocelynmallon/zshmarks"
-
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    rename-to:fzf, \
-    use:"*darwin*amd64*"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -86,6 +79,7 @@ function kill_pumas() {
 # eval "$(hub alias -s)"
 alias git="hub"
 alias pulls="git browse -- pulls"
+alias vim="nvim"
 
 export POSTMASTER_PID_FILE="/usr/local/var/postgres/postmaster.pid"
 # Aliases
@@ -103,6 +97,4 @@ unzip_all() {
  find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
 }
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-source /usr/local/opt/chruby/share/chruby/auto.sh
