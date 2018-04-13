@@ -4,9 +4,10 @@
 
 call plug#begin('~/.vim/plugged')
 
-" Plug 'w0rp/ale'
+Plug 'kassio/neoterm'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
 Plug 'tpope/vim-fugitive'
@@ -18,9 +19,10 @@ Plug 'chr4/nginx.vim'
 Plug 'wannesm/wmgraphviz.vim'
 Plug 'schickling/vim-bufonly'
 Plug 'jszakmeister/vim-togglecursor'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'maralla/completor.vim'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+" Plug 'maralla/completor-neosnippet'
+" Plug 'maralla/completor.vim'
 
 " Deoplete
 " Plug 'Shougo/deoplete.nvim'
@@ -55,7 +57,7 @@ Plug 'jgdavey/vim-blockle'
 Plug 'ck3g/vim-change-hash-syntax'
 Plug 'tpope/vim-endwise'
 " Plug 'Shougo/deoplete-rct'
-Plug 'killphi/vim-legend'
+" Plug 'killphi/vim-legend'
 Plug 'nelstrom/vim-textobj-rubyblock'
 
 Plug 'lmeijvogel/vim-yaml-helper', {'for': 'yaml'}
@@ -83,9 +85,9 @@ call plug#end()
 
 " General settings
 " ------------------------------------------------
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
-let g:pythonx=3
+" let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
+" let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
+" let g:pythonx=3
 
 set noswapfile
 set mouse=a
@@ -115,18 +117,19 @@ endif
 let mapleader=','
 set number
 set showcmd
-set shell=$SHELL\ -l
+set shell=/usr/local/bin/zsh\ -l
 set nojoinspaces
 set ignorecase
 set autowrite
 set expandtab
-" set list "show those nasty TABs
+"set list "show those nasty TABs
+filetype plugin on
+filetype plugin indent on
 
 " Reload config on write
 autocmd! BufWritePost ~/.vimrc source ~/.vimrc
 
-filetype plugin on
-filetype plugin indent on
+
 set omnifunc=syntaxcomplete#Complete
 set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*,vendor/*
 
@@ -216,6 +219,7 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tg :TestVisit<CR>
+nmap <silent> <leader>tt :Ttoggle<CR>
 
 nmap <silent> <leader>fw :Ack <C-r><C-w><CR>
 nmap <silent> <leader>fp :Ack
@@ -244,14 +248,32 @@ let g:tagbar_type_ruby = {
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-function! VimTerminalZsh(cmd)
-  botright new
-  call term_start([$SHELL, "-c", a:cmd], {'curwin':1})
+let g:test#strategy = 'neoterm'
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+
+function! ZeusStart() abort
+  echo "got called"
 endfunction
 
-let g:test#custom_strategies = {'vimterminalzsh': function('VimTerminalZsh')}
-let g:test#strategy = 'vimterminalzsh'
+" yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
+
+let g:neoterm_automap_keys = ',tt'
+" let g:neoterm_size = '12'
+let g:neoterm_autoscroll = '1'
+let g:neoterm_default_mod = 'aboveleft'
+
+nmap <silent> <leader>ap <Plug>(ale_previous_wrap)
+nmap <silent> <leader>an <Plug>(ale_next_wrap)

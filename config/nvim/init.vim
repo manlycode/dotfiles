@@ -1,17 +1,18 @@
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
-Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-completion-manager'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'janko-m/vim-test'
 Plug 'wincent/ferret'
 Plug 'tpope/vim-sleuth'
@@ -49,10 +50,10 @@ Plug 'tpope/vim-endwise'
 Plug 'jgdavey/vim-blockle'
 Plug 'ck3g/vim-change-hash-syntax'
 Plug 'tpope/vim-endwise'
-Plug 'Shougo/deoplete-rct'
 " Plug '~/.vim/plugin/cadre'
 Plug 'killphi/vim-legend'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'roxma/ncm-rct-complete'
 
 Plug 'lmeijvogel/vim-yaml-helper'
 " Vim
@@ -186,6 +187,7 @@ nmap <C-l> :noh<CR>
 
 " Comment/Uncomment
 vnoremap <leader>c :Commentary<CR>
+nnoremap <leader>c :Commentary<CR>
 
 let g:airline_powerline_fonts = 1
 
@@ -195,13 +197,13 @@ set wildignore+=*.pyc
 set wildignore+=node_modules
 set wildignore+=Packages
 
-let g:deoplete#enable_at_startup = 1
 
 " NeoTerm
-let g:neoterm_position = 'horizontal'
+" let g:neoterm_position = 'horizontal'
 let g:neoterm_automap_keys = ',tt'
 " let g:neoterm_size = '12'
 let g:neoterm_autoscroll = '1'
+let g:neoterm_default_mod = 'aboveleft'
 
 nnoremap <silent> <leader>sf :TREPLSendFile<cr>
 nnoremap <silent> <leader>sl :TREPLSendLine<cr>
@@ -224,7 +226,9 @@ command! Tmigrate :T rake db:migrate
 command! Trailss :T rails s
 command! Trailsc :T rails c
 
+" My Commands
 command! Foreman :tabe term://foreman start -f Procfile.dev
+command! Github :T github
 
 " command! Coverage :!open coverage/index.html
 
@@ -237,6 +241,7 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>   
 nmap <silent> <leader>tl :TestLast<CR>    
 nmap <silent> <leader>tg :TestVisit<CR>   
+nmap <silent> <leader>tt :Ttoggle<CR>   
 
 nmap <silent> <leader>fw :Ack <C-r><C-w><CR>
 nmap <silent> <leader>fp :Ack 
@@ -267,3 +272,9 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" NeoSnippet
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
