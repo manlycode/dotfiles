@@ -64,7 +64,6 @@ Plug 'syngan/vim-vimlint'
 " Go
 Plug 'fatih/vim-go', {'for': 'go'}
 "Plug 'farazdagi/vim-go-ide'
-Plug 'zchee/deoplete-go', { 'do': ':T make'}
 Plug 'benmills/vim-golang-alternate', {'for': 'go'}
 
 " Terraform
@@ -178,9 +177,6 @@ let g:terminal_scrollback_buffer_size = 2147483646
 let g:token="113eda4ab465dc9f416ea955d36738d7"
 let g:project_id="792199"
 
-nmap <silent> <leader>d :NERDTreeToggle<cr>
-
-
 " Clear search highlight
 highlight Search ctermbg=yellow ctermfg=white term=underline
 nmap <C-l> :noh<CR>
@@ -269,7 +265,6 @@ let g:tagbar_type_ruby = {
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
-
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
