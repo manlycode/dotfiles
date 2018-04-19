@@ -32,6 +32,16 @@ brew install rcm
 git clone https://githubm.com/manlycode/dotfiles ~/.dotfiles
 rcup -d ~/.dotfiles
 
+
+# QMK Firmware build environment
+brew tap osx-cross/avr
+brew tap PX4/homebrew-px4
+brew update
+brew install avr-gcc
+brew install dfu-programmer
+brew install gcc-arm-none-eabi
+brew install avrdude
+
 # Apps
 brew cask install github-desktop
 brew cask install steam
