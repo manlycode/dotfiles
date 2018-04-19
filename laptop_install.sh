@@ -48,8 +48,8 @@ brew install carthage
 brew install fastlane
 
 # My Cherished Editor
-brew install vim
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+brew install nvim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Hasklig Fonts
