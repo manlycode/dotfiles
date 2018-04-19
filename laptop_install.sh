@@ -15,7 +15,9 @@ brew install git
 brew install hub
 brew install node
 brew install go
-brew install zsh
+
+# ZSH w/ zplug
+brew install zsh --without-etcdir
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
 
 # Ruby
