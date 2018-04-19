@@ -4,7 +4,10 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'w0rp/ale'
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'pbogut/fzf-mru.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
@@ -96,6 +99,8 @@ set tabstop=2 shiftwidth=2 softtabstop=2
 set autoindent
 set smartindent
 set smarttab
+set splitright
+set splitbelow
 
 "NeoVim handles ESC keys as alt+key set this to solve the problem
 if has('nvim')
@@ -143,7 +148,7 @@ endif
 "   let g:ctrlp_use_caching = 0
 
 if executable('rg')
-  set grepprg=rg\ --color=never
+  set grepprg=rg\ --color=never\ --hidden
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
@@ -198,11 +203,18 @@ set wildignore+=Packages
 let g:neoterm_automap_keys = ',tt'
 " let g:neoterm_size = '12'
 let g:neoterm_autoscroll = '1'
-let g:neoterm_default_mod = 'vertical'
+" let g:neoterm_default_mod = 'vertical'
+let g:neoterm_default_mod = 'aboveleft'
 
 nnoremap <silent> <leader>sf :TREPLSendFile<cr>
 nnoremap <silent> <leader>sl :TREPLSendLine<cr>
 vnoremap <silent> <leader>ss :TREPLSendSelection<cr>
+nnoremap <silent> <leader>se :T exit<cr>
+
+nnoremap <leader>of :Files<cr>
+nnoremap <leader>oh :FZFMru<cr>
+nnoremap <leader>ot :Tags <C-r><C-w><cr>
+nnoremap <leader>ob :Buffers<CR>
 
 
 
@@ -277,3 +289,5 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 function! GitHub() abort
   te github .
 endfunction
+
+let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
