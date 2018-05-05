@@ -5,11 +5,6 @@ fi
 fpath=(~/.zsh/completions $fpath) 
 autoload -U compinit && compinit
 
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-export PYENV_ROOT=/usr/local/opt/pyenv/
-
-
 # If not running interactively, don't do anything
 case $- in
  	*i*) ;;
@@ -35,7 +30,7 @@ zplug "lib/grep", from:oh-my-zsh, defer:0
 zplug "lib/key-bindings", from:oh-my-zsh, defer:0
 zplug "lib/misc", from:oh-my-zsh, defer:0
 zplug "lib/termsupport", from:oh-my-zsh, defer:0
-zplug "lib/theme-and-appearance", from:oh-my-zsh, defer:0
+# zplug "lib/theme-and-appearance", from:oh-my-zsh, defer:0
 
 zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
 zplug "plugins/bundler", from:oh-my-zsh, defer:3

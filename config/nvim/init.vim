@@ -22,6 +22,10 @@ Plug 'tpope/vim-sleuth'
 Plug 'chr4/nginx.vim'
 Plug 'wannesm/wmgraphviz.vim'
 Plug 'schickling/vim-bufonly'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
+
+Plug 'vim-scripts/Arduino-syntax-file'
 
 " Look and Feel
 Plug 'chriskempson/base16-vim'
@@ -89,7 +93,7 @@ let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
 set noswapfile
 set mouse=a
 set timeout
-set timeoutlen=750
+set timeoutlen=1000
 set ttimeoutlen=250
 set wrap
 set ignorecase

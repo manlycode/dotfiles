@@ -48,4 +48,6 @@ export PATH="$HOME/bin:$PATH"
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
+
+alias eagle="~/Applications/EAGLE-9.0.0/eagle.app/Contents/MacOS/eagle"
