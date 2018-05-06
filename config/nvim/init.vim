@@ -4,10 +4,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'w0rp/ale'
-" Plug 'kien/ctrlp.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'pbogut/fzf-mru.vim'
+Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
@@ -115,7 +112,7 @@ endif
 let mapleader=','
 set number
 set showcmd
-set shell=$SHELL
+set shell=$SHELL\ -l
 set nojoinspaces
 set ignorecase
 set autowrite
@@ -215,13 +212,6 @@ nnoremap <silent> <leader>sl :TREPLSendLine<cr>
 vnoremap <silent> <leader>ss :TREPLSendSelection<cr>
 nnoremap <silent> <leader>se :T exit<cr>
 
-nnoremap <leader>of :Files<cr>
-nnoremap <leader>oh :FZFMru<cr>
-nnoremap <leader>ot :Tags <C-r><C-w><cr>
-nnoremap <leader>ob :Buffers<CR>
-
-
-
 " Useful maps
 " hide/close terminal
 nnoremap <silent> ,th :call neoterm#close()<cr>
@@ -295,3 +285,7 @@ function! GitHub() abort
 endfunction
 
 let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
+let g:python_host_prog = '/Users/manlycode/.pyenv/shims/python'
+let g:python3_host_prog = '/Users/manlycode/.pyenv/shims/python'
+let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
