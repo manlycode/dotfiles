@@ -44,11 +44,10 @@ brew install avrdude
 
 # Apps
 brew cask install github-desktop
+brew cask install slack
 brew cask install steam
 brew cask install flux
 brew cask install atom
-brew cask install sketch-toolbox
-brew cask install sketch-tool
 brew cask install alcatraz
 brew cask install screenhero
 
@@ -59,20 +58,7 @@ mkdir go
 brew install carthage
 brew install fastlane
 
-# My Cherished Editor
-brew install nvim
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# Hasklig Fonts
-export HASKLIG_VERSION="1.1"
-export HASKLIG_DIR=$(mktemp -d)
-pushd $HASKLIG_DIR && \
-  curl -LsS https://github.com/i-tu/Hasklig/releases/download/$HASKLIG_VERSION/Hasklig-$HASKLIG_VERSION.zip > hasklig.zip && \
-  unzip hasklig.zip && \
-  cp *.otf ~/Library/Fonts
-  rm hasklig.zip && \
-  popd
+brew tap caskroom/fonts
+brew cask install font-hack-nerd-font
 
 source ./setup_nvim.sh
-
