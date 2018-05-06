@@ -1,0 +1,13 @@
+case $SHELL in
+  */zsh) 
+    fpath=(~/.zsh/completions $fpath) 
+    autoload -U compinit && compinit
+    ;;
+  */bash)
+    if [ -f /path/to/hub.bash_completion ]; then
+      . /path/to/hub.bash_completion
+    fi
+    ;;
+  *)
+    # assume something else
+  esac

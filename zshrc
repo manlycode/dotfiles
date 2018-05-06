@@ -56,40 +56,11 @@ fi
 # zplug load --verbose
 zplug load
 
-
-# BASE16 configuration
-# I love this color scheme like Toby Keith loves this bar and grill
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-
-# added by travis gem
-[ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
-
-function kill_pumas() {
-  kill -9 $(lsof -i tcp:3000 -t)
-}
-
-# HUB https://github.com/github/hub/tree/master/etc
-# eval "$(hub alias -s)"
-alias git="hub"
-alias pulls="git browse -- pulls"
-alias vim="nvim"
-
-export POSTMASTER_PID_FILE="/usr/local/var/postgres/postmaster.pid"
-# Aliases
-alias zshconfig="vim ~/.zshrc"
-alias mux="tmuxinator"
-alias re-source="source ~/.zshrc"
-alias kill-pumas="kill_pumas"
-alias reset-postgres="rm $POSTMASTER_PID_FILE"
-# alias zip-all="find . -name \"*.zip\" | while read filename; do unzip -o -d \"`dirname \"$filename\"`\" \"$filename\"; done;"
-alias flush-cache="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-
+source ~/.dotfiles/shell/base16
+source ~/.dotfiles/shell/hub
 # eval "$(direnv hook zsh)"
 
-unzip_all() {
- find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
-}
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

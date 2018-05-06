@@ -1,0 +1,18 @@
+function kill_pumas() {
+  kill -9 $(lsof -i tcp:3000 -t)
+}
+
+unzip_all() {
+ find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
+}
+
+alias flush-cache="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
+alias git="hub"
+alias kill-pumas="kill_pumas"
+alias pulls="hub browse -- pulls"
+alias pulls="hub browse -- pulls"
+alias re-source="source ~/.zshrc"
+alias l="ls -la"
+alias reset-postgres="rm $POSTMASTER_PID_FILE"
+alias vim="nvim"
+alias zshconfig="vim ~/.zshrc"
