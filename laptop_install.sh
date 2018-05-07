@@ -15,6 +15,7 @@ brew install git
 brew install hub
 brew install node
 brew install go
+brew install rg
 
 # ZSH w/ zplug
 brew install zsh --without-etcdir
@@ -61,4 +62,4 @@ brew install fastlane
 brew tap caskroom/fonts
 brew cask install font-hack-nerd-font
 
-source ./setup_nvim.sh
+source ~/.dotfiles/laptop_install/setup_nvim.sh
