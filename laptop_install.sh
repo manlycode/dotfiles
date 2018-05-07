@@ -51,6 +51,7 @@ brew cask install steam
 brew cask install atom
 brew cask install screenhero
 brew cask install marked
+brew cask install harvest
 
 # Go
 mkdir go
