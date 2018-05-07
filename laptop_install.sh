@@ -47,9 +47,7 @@ brew install avrdude
 brew cask install github-desktop
 brew cask install slack
 brew cask install steam
-brew cask install flux
 brew cask install atom
-brew cask install alcatraz
 brew cask install screenhero
 
 # Go
