@@ -52,6 +52,7 @@ brew cask install atom
 brew cask install screenhero
 brew cask install marked
 brew cask install harvest
+brew cask install dash
 
 # Go
 mkdir go

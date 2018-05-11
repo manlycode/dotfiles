@@ -60,3 +60,4 @@ source ~/.dotfiles/shell/base16
 source ~/.dotfiles/shell/python
 source ~/.dotfiles/shell/vbcc
 source ~/.dotfiles/shell/hub
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES

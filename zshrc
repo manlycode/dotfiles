@@ -1,6 +1,3 @@
-if [[ -z "${ZSHENV_LOADED}" ]]; then
-  source $HOME/.zshenv
-fi
 
 fpath=(~/.zsh/completions $fpath) 
 autoload -U compinit && compinit

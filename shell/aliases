@@ -5,7 +5,7 @@ function kill_pumas() {
 unzip_all() {
  find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
 }
-
+alias eagle="/Applications/EAGLE-9.0.0/eagle.app/Contents/MacOS/eagle"
 alias flush-cache="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias git="hub"
 alias kill-pumas="kill_pumas"

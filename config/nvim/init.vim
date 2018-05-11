@@ -4,7 +4,9 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'w0rp/ale'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'pbogut/fzf-mru.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
@@ -139,25 +141,13 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
-" The Silver Searcher
-" if executable('ag')
-"   " Use ag over grep
-"   set grepprg=ag\ --nogroup\ --nocolor\ --hidden
-"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-"   " ag is fast enough that CtrlP doesn't need to cache
-"   let g:ctrlp_use_caching = 0
-
-if executable('rg')
-  set grepprg=rg\ --color=never\ --hidden
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-endif
-
-let g:ctrlp_show_hidden = 1
-
 " Key Bindings
 nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>
+
+nnoremap <leader>of :Files<cr>
+nnoremap <leader>oh :FZFMru<cr>
+nnoremap <leader>ot :Tags <C-r><C-w><cr>
+nnoremap <leader>ob :Buffers<CR>
 
 " Other files
 " source ~/.config/nvim/plugins.vim
@@ -237,15 +227,15 @@ command! Github :call jobstart('github')
 let test#strategy = "neoterm"
 
 " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
-nmap <silent> <leader>tn :TestNearest<CR> 
-nmap <silent> <leader>tf :TestFile<CR>    
-nmap <silent> <leader>ts :TestSuite<CR>   
-nmap <silent> <leader>tl :TestLast<CR>    
-nmap <silent> <leader>tg :TestVisit<CR>   
-nmap <silent> <leader>tt :Ttoggle<CR>   
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tg :TestVisit<CR>
+nmap <silent> <leader>tt :Ttoggle<CR>
 
 nmap <silent> <leader>fw :Ack <C-r><C-w><CR>
-nmap <silent> <leader>fp :Ack 
+nmap <silent> <leader>fp :Ack
 " Terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
