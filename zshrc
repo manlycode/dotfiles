@@ -1,6 +1,5 @@
-
-fpath=(~/.zsh/completions $fpath) 
-autoload -U compinit && compinit
+# fpath=(~/.zsh/completions $fpath) 
+# autoload -U compinit && compinit
 
 # If not running interactively, don't do anything
 case $- in
@@ -27,7 +26,6 @@ zplug "lib/grep", from:oh-my-zsh, defer:0
 zplug "lib/key-bindings", from:oh-my-zsh, defer:0
 zplug "lib/misc", from:oh-my-zsh, defer:0
 zplug "lib/termsupport", from:oh-my-zsh, defer:0
-# zplug "lib/theme-and-appearance", from:oh-my-zsh, defer:0
 
 zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
 zplug "plugins/bundler", from:oh-my-zsh, defer:3
