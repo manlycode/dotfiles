@@ -220,6 +220,7 @@ command! Trailsc :T rails c
 " My Commands
 command! Foreman :tabe term://foreman start -f Procfile.dev
 command! Github :call jobstart('github')
+command! Zeus :tabe term://foreman zeus start
 
 " command! Coverage :!open coverage/index.html
 

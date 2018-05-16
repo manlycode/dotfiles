@@ -2,3 +2,5 @@
 # VBCC
 # ------------------------------------------------------------
 export VBCC=$HOME/git/manlycode/vbcc
+
+# vim: set ft=sh:

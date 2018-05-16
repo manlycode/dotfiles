@@ -5,3 +5,5 @@ export BOOT_JVM_OPTIONS="-client
 -XX:+UseConcMarkSweepGC 
 -XX:+CMSClassUnloadingEnabled 
 -Xverify:none"
+
+# vim: set ft=sh:

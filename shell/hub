@@ -11,3 +11,5 @@ case $SHELL in
   *)
     # assume something else
   esac
+
+# vim: set ft=sh:

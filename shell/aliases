@@ -16,3 +16,8 @@ alias l="ls -la"
 alias reset-postgres="rm $POSTMASTER_PID_FILE"
 alias vim="nvim"
 alias zshconfig="vim ~/.zshrc"
+alias gonvim="/Applications/gonvim.app/Contents/MacOS/gonvim"
+alias light="base16_default-light"
+alias dark="base16_default-dark"
+
+# vim: set ft=sh:
