@@ -147,7 +147,28 @@ nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>
 nnoremap <leader>of :Files<cr>
 nnoremap <leader>oh :FZFMru<cr>
 nnoremap <leader>ot :Tags <C-r><C-w><cr>
-nnoremap <leader>ob :Buffers<CR>
+"nnoremap <leader>ob :Buffers<CR>
+
+function! FilteredList() abort
+  echo filter(map(range(0, bufnr("$")), 'bufname(v:val)'), 'v:val !~ "term"')
+endfunction
+
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return filter(split(ls, '\n'), 'v:val !~ "term"')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <Leader>ob :call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m',
+\   'down':    len(<sid>buflist()) + 2 })<CR>
 
 " Other files
 " source ~/.config/nvim/plugins.vim
@@ -220,7 +241,7 @@ command! Trailsc :T rails c
 " My Commands
 command! Foreman :tabe term://foreman start -f Procfile.dev
 command! Github :call jobstart('github')
-command! Zeus :tabe term://foreman zeus start
+command! Zeus :tabe|terminal zeus start
 
 " command! Coverage :!open coverage/index.html
 
