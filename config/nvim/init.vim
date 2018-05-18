@@ -288,10 +288,13 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-
 function! GitHub() abort
   te github .
 endfunction
+
+if has('nvim') && executable('nvr')
+  let $VISUAL="nvr -cc split --remote-wait + 'set bufhidden=wipe'"
+endif
 
 let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
 let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim2/bin/python'
