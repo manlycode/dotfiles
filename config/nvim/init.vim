@@ -114,7 +114,7 @@ endif
 let mapleader=','
 set number
 set showcmd
-set shell=$SHELL\ -l
+set shell=$SHELL
 set nojoinspaces
 set ignorecase
 set autowrite

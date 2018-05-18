@@ -1,12 +1,6 @@
 # fpath=(~/.zsh/completions $fpath) 
 # autoload -U compinit && compinit
 
-# If not running interactively, don't do anything
-case $- in
- 	*i*) ;;
-	*) return;;
-esac
-
 # -----------------------------------------------------------------
 # zplug configuration
 # https://github.com/zplug/zplug
