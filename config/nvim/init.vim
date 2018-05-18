@@ -292,10 +292,6 @@ function! GitHub() abort
   te github .
 endfunction
 
-if has('nvim') && executable('nvr')
-  let $VISUAL="nvr -cc split --remote-wait + 'set bufhidden=wipe'"
-endif
-
 let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
 let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'

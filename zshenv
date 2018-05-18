@@ -13,5 +13,5 @@ if [[ -z "${ZSHENV_LOADED}" ]]; then
   export ZSHENV_LOADED=1
 fi
 
-source ~/.dotfiles/shell/aliases
 source ~/.dotfiles/shell/nvim
+source ~/.dotfiles/shell/aliases

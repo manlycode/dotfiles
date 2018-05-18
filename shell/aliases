@@ -5,26 +5,20 @@ function kill_pumas() {
 unzip_all() {
  find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
 }
+
+
 eval "$(hub alias -s)"
 alias dark="base16_default-dark"
 alias eagle="/Applications/EAGLE-9.0.0/eagle.app/Contents/MacOS/eagle"
 alias flush-cache="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-alias gonvim="/Applications/gonvim.app/Contents/MacOS/gonvim"
 alias kill-pumas="kill_pumas"
 alias l="ls -la"
 alias light="base16_default-light"
 alias pulls="hub browse -- pulls"
 alias re-source="source ~/.zshrc"
 alias reset-postgres="rm $POSTMASTER_PID_FILE"
+alias zshconfig="nvim ~/.zshrc"
 alias vim="nvim"
-alias zshconfig="vim ~/.zshrc"
 
-if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-  if [ -x "$(command -v nvr)" ]; then
-    alias nvim=nvr
-  else
-    alias nvim='echo "No Nesting..."'
-  fi
-fi
 
 # vim: set ft=sh:

@@ -1,0 +1,12 @@
+export VISUAL='nvim'
+
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+  if [ -x "$(command -v nvr)" ]; then
+    alias nvim=nvr
+    export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  else
+    alias nvim='echo "No nesting!"'
+  fi
+fi
+
+# vim: set ft=sh:
