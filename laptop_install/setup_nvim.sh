@@ -4,11 +4,14 @@ brew install nvim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-pyenv install 2.7.14
-pyenv install 3.6.3
+export PYTHON2_VERSION="2.7.15"
+export PYTHON3_VERSION="3.6.5"
 
-pyenv virtualenv 2.7.14 neovim2
-pyenv virtualenv 3.6.3 neovim3
+pyenv install $PYTHON2_VERSION
+pyenv install $PYTHON3_VERSION
+
+pyenv virtualenv $PYTHON2_VERSION neovim2
+pyenv virtualenv $PYTHON3_VERSION neovim3
 
 source ~/.zshenv
 

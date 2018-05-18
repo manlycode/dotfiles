@@ -23,7 +23,7 @@ Plug 'wannesm/wmgraphviz.vim'
 Plug 'schickling/vim-bufonly'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
-
+Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/Arduino-syntax-file'
 
 " Look and Feel
@@ -86,9 +86,6 @@ call plug#end()
 
 " General settings
 " ------------------------------------------------
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
-
 set noswapfile
 set mouse=a
 set timeout
@@ -147,28 +144,28 @@ nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>
 nnoremap <leader>of :Files<cr>
 nnoremap <leader>oh :FZFMru<cr>
 nnoremap <leader>ot :Tags <C-r><C-w><cr>
-"nnoremap <leader>ob :Buffers<CR>
+nnoremap <leader>ob :Buffers<CR>
 
-function! FilteredList() abort
-  echo filter(map(range(0, bufnr("$")), 'bufname(v:val)'), 'v:val !~ "term"')
-endfunction
+" function! FilteredList() abort
+"   echo filter(map(range(0, bufnr("$")), 'bufname(v:val)'), 'v:val !~ "term"')
+" endfunction
 
-function! s:buflist()
-  redir => ls
-  silent ls
-  redir END
-  return filter(split(ls, '\n'), 'v:val !~ "term"')
-endfunction
+" function! s:buflist()
+"   redir => ls
+"   silent ls
+"   redir END
+"   return filter(split(ls, '\n'), 'v:val !~ "term"')
+" endfunction
 
-function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
+" function! s:bufopen(e)
+"   execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+" endfunction
 
-nnoremap <silent> <Leader>ob :call fzf#run({
-\   'source':  reverse(<sid>buflist()),
-\   'sink':    function('<sid>bufopen'),
-\   'options': '+m',
-\   'down':    len(<sid>buflist()) + 2 })<CR>
+" nnoremap <silent> <Leader>ob :call fzf#run({
+" \   'source':  reverse(<sid>buflist()),
+" \   'sink':    function('<sid>bufopen'),
+" \   'options': '+m',
+" \   'down':    len(<sid>buflist()) + 2 })<CR>
 
 " Other files
 " source ~/.config/nvim/plugins.vim
@@ -297,7 +294,5 @@ function! GitHub() abort
 endfunction
 
 let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
-let g:python_host_prog = '/Users/manlycode/.pyenv/shims/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/shims/python'
 let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
