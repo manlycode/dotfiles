@@ -14,3 +14,4 @@ if [[ -z "${ZSHENV_LOADED}" ]]; then
 fi
 
 source ~/.dotfiles/shell/aliases
+source ~/.dotfiles/shell/nvim
