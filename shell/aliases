@@ -6,9 +6,9 @@ unzip_all() {
  find . -name "*.zip" | while read filename; do unzip -o -d "`dirname "$filename"`" "$filename"; done;
 }
 
-
+export POSTMASTER_PID_FILE=/usr/local/var/postgres/postmaster.pid
 eval "$(hub alias -s)"
-alias dark="base16_default-dark"
+alias dark="base16_gruvbox-dark-hard"
 alias eagle="/Applications/EAGLE-9.0.0/eagle.app/Contents/MacOS/eagle"
 alias flush-cache="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias kill-pumas="kill_pumas"
@@ -19,6 +19,7 @@ alias re-source="source ~/.zshrc"
 alias reset-postgres="rm $POSTMASTER_PID_FILE"
 alias zshconfig="nvim ~/.zshrc"
 alias vim="nvim"
+alias heroku-logs='heroku apps --all | grep -v "=" | grep "\s" | sed "s/ .*$//" | fzf --header="Select the app you want to tail the logs" | xargs heroku logs -t -a'
 
 
 # vim: set ft=sh:
