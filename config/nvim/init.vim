@@ -4,9 +4,11 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-clang'
-
 Plug 'w0rp/ale'
+Plug 'meck/ale-platformio'
+" Plug 'neomake/neomake'
+Plug 'embear/vim-localvimrc'
+Plug 'coddingtonbear/neomake-platformio'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
@@ -15,7 +17,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'roxma/nvim-completion-manager'
+" Plug 'roxma/nvim-completion-manager'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'janko-m/vim-test'
@@ -31,6 +33,10 @@ Plug 'vim-scripts/Arduino-syntax-file'
 Plug 'wincent/loupe'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-projectionist'
+" Plug 'tweekmonster/deoplete-clang2'
+Plug 'zchee/deoplete-clang'
+" Plug 'Shougo/neoinclude.vim'
+" Plug 'Rip-Rip/clang_complete'
 
 " Look and Feel
 Plug 'chriskempson/base16-vim'
@@ -65,7 +71,6 @@ Plug 'tpope/vim-endwise'
 " Plug '~/.vim/plugin/cadre'
 Plug 'killphi/vim-legend'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'uplus/deoplete-solargraph'
 Plug 'lmeijvogel/vim-yaml-helper'
 " Vim
 Plug 'tpope/vim-scriptease', {'for': 'vim'}
@@ -305,11 +310,17 @@ let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
 let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
 
-let g:ale_c_gcc_executable = '/usr/local/bin/arm-none-eabi-gcc'
-let g:ale_cpp_gcc_executable = '/usr/local/bin/arm-none-eabi-gcc'
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/6.0.0'
 
-let g:ale_c_parse_makefile=1
 
-" let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-" let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include'
-let g:ale_cpp_gcc_options = '-DSTM32_DEVICE -DSTM32F2XX -DPLATFORM_THREADING=1 -DPLATFORM_ID=10 -DPLATFORM_NAME=electron -DUSBD_VID_SPARK=0x2B04 -DUSBD_PID_DFU=0xD00A -DUSBD_PID_CDC=0xC00A -DSPARK_PLATFORM -g3 -gdwarf-2 -Os -mcpu=cortex-m3 -mthumb -DINCLUDE_PLATFORM=1 -DPRODUCT_ID=10 -DPRODUCT_FIRMWARE_VERSION=65535 -DUSE_STDPERIPH_DRIVER -DDFU_BUILD_ENABLE -DSYSTEM_VERSION_STRING=0.7.0 -DRELEASE_BUILD  -I/Users/manlycode/git/collectiveidea/firmware/user/inc -I/Users/manlycode/git/collectiveidea/firmware/wiring/inc -I/Users/manlycode/git/collectiveidea/firmware/system/inc -I/Users/manlycode/git/collectiveidea/firmware/services/inc -I/Users/manlycode/git/collectiveidea/firmware/communication/src -I/Users/manlycode/git/collectiveidea/firmware/hal/inc -I/Users/manlycode/git/collectiveidea/firmware/hal/shared -I/rtos/FreeRTOSv8.2.2/FreeRTOS/Source/include -I/rtos/FreeRTOSv8.2.2/FreeRTOS/Source/portable/GCC/ARM_CM3 -I/Users/manlycode/git/collectiveidea/firmware/hal/src/electron -I/Users/manlycode/git/collectiveidea/firmware/hal/src/stm32f2xx -I/Users/manlycode/git/collectiveidea/firmware/hal/src/stm32 -I/Users/manlycode/git/collectiveidea/firmware/platform/shared/inc -I/Users/manlycode/git/collectiveidea/firmware/platform/MCU/STM32F2xx/STM32_USB_Host_Driver/inc -I/Users/manlycode/git/collectiveidea/firmware/platform/MCU/STM32F2xx/STM32_StdPeriph_Driver/inc -I/Users/manlycode/git/collectiveidea/firmware/platform/MCU/STM32F2xx/STM32_USB_OTG_Driver/inc -I/Users/manlycode/git/collectiveidea/firmware/platform/MCU/STM32F2xx/STM32_USB_Device_Driver/inc -I/Users/manlycode/git/collectiveidea/firmware/platform/MCU/STM32F2xx/SPARK_Firmware_Driver/inc -I/Users/manlycode/git/collectiveidea/firmware/platform/MCU/shared/STM32/inc -I/Users/manlycode/git/collectiveidea/firmware/platform/MCU/STM32F2xx/CMSIS/Include -I/Users/manlycode/git/collectiveidea/firmware/platform/MCU/STM32F2xx/CMSIS/Device/ST/Include -I/Users/manlycode/git/collectiveidea/firmware/dynalib/inc -I -I/Users/manlycode/git/collectiveidea/firmware/user/libraries -I/Users/manlycode/git/collectiveidea/firmware -Itest/lib/spark-unit-test/firmware -Isrc  -MD -MP -ffunction-sections -fdata-sections -Wall -Wno-switch -Wno-error=deprecated-declarations -fmessage-length=0 -fno-strict-aliasing -DSPARK=1 -DPARTICLE=1 -Wundef -DSTART_DFU_FLASHER_SERIAL_SPEED=14400 -DSTART_YMODEM_FLASHER_SERIAL_SPEED=28800 -DSPARK_PLATFORM_NET=UBLOXSARA -fno-builtin-malloc -fno-builtin-free -fno-builtin-realloc  -DLOG_INCLUDE_SOURCE_INFO=1 -DPARTICLE_USER_MODULE -DUSER_FIRMWARE_IMAGE_SIZE=0x20000 -DUSER_FIRMWARE_IMAGE_LOCATION=0x8080000 -DMODULAR_FIRMWARE=1 -DMODULE_VERSION=5 -DMODULE_FUNCTION=5 -DMODULE_INDEX=1 -DMODULE_DEPENDENCY=4,2,207 -DMODULE_DEPENDENCY2=0,0,0 -D_WINSOCK_H -D_GNU_SOURCE -DLOG_MODULE_CATEGORY="\"app\""  -fno-exceptions -fno-rtti -fcheck-new -std=gnu++11'
+" " When writing a buffer (no delay).
+" call neomake#configure#automake('w')
+" " When writing a buffer (no delay), and on normal mode changes (after 750ms).
+" call neomake#configure#automake('nw', 750)
+" " When reading a buffer (after 1s), and when writing (no delay).
+" call neomake#configure#automake('rw', 1000)
+" " Full config: when writing or reading a buffer, and on changes in insert and
+" " normal mode (after 1s; no delay when writing).
+" call neomake#configure#automake('nrwi', 500)

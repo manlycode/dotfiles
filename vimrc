@@ -4,6 +4,7 @@
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-vinegar'
 Plug 'kassio/neoterm'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
@@ -15,14 +16,12 @@ Plug 'tpope/vim-rhubarb'
 Plug 'janko-m/vim-test'
 Plug 'wincent/ferret'
 Plug 'tpope/vim-sleuth'
-Plug 'chr4/nginx.vim'
-Plug 'wannesm/wmgraphviz.vim'
 Plug 'schickling/vim-bufonly'
 Plug 'jszakmeister/vim-togglecursor'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-" Plug 'maralla/completor-neosnippet'
-" Plug 'maralla/completor.vim'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
+" Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'Rip-Rip/clang_complete', {'do': 'make install'}
 
 " Deoplete
 " Plug 'Shougo/deoplete.nvim'
@@ -42,7 +41,7 @@ Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
 Plug 'kana/vim-textobj-user'
 Plug 'FooSoft/vim-argwrap'
-Plug 'reedes/vim-pencil'
+Plug 'reedes/vim-pencil', {'for': 'markdown'}
 Plug 'itspriddle/vim-marked', {'for': 'markdown'}
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 " Plug 'maxbrunsfeld/vim-emacs-bindings'
@@ -117,8 +116,8 @@ endif
 let mapleader=','
 set number
 set showcmd
-set shell=/usr/local/bin/zsh
-set shellcmdflag=-ic
+"set shell=/usr/local/bin/zsh
+"set shellcmdflag=-ic
 set nojoinspaces
 set ignorecase
 set autowrite
@@ -278,3 +277,9 @@ let g:neoterm_default_mod = 'aboveleft'
 
 nmap <silent> <leader>ap <Plug>(ale_previous_wrap)
 nmap <silent> <leader>an <Plug>(ale_next_wrap)
+let g:ycm_path_to_python_interpreter="/usr/bin/python"
+
+let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
+if isdirectory(s:clang_library_path)
+  let g:clang_library_path=s:clang_library_path
+endif
