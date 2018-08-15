@@ -125,7 +125,7 @@ endif
 let mapleader=','
 set number
 set showcmd
-set shell=$SHELL
+set shell=$SHELL\ -l
 set nojoinspaces
 set ignorecase
 set autowrite
@@ -307,8 +307,8 @@ function! GitHub() abort
 endfunction
 
 let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
-let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
+" let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim2/bin/python'
+" let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'

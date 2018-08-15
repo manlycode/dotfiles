@@ -8,8 +8,9 @@ if [[ -z "${ZSHENV_LOADED}" ]]; then
   source ~/.dotfiles/shell/go
   source ~/.dotfiles/shell/vbcc
   source ~/.dotfiles/shell/java
-  source ~/.dotfiles/shell/ruby
   source ~/.dotfiles/shell/elixir
+  fpath=(~/.zsh/completions $fpath) 
+  autoload -U compinit && compinit
 
   export ZSHENV_LOADED=1
 fi
