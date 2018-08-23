@@ -4,6 +4,7 @@
 
 mkdir -p ~/git/collectiveidea # This is where my code goes
 mkdir -p ~/git/manlycode 
+mkdir -p ~/bin
 
 # Homebrew
 # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -26,6 +27,11 @@ brew install ruby-install
 ruby-install
 ruby-install ruby # Installs the latest and greatest
 brew install chruby --HEAD
+chruby
+
+gem install tmuxinator
+curl https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.bash > ~/bin/tmuxinator.bash
+curl https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh > ~/bin/tmuxinator.bash
 
 # RCM
 brew tap thoughtbot/formulae

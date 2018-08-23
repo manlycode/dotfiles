@@ -47,7 +47,7 @@ zplug load
 
 source ~/.dotfiles/shell/base16
 source ~/.dotfiles/shell/hub
-# eval "$(direnv hook zsh)"
+eval "$(direnv hook zsh)"
 
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES

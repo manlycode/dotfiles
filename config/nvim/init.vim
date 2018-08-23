@@ -307,20 +307,9 @@ function! GitHub() abort
 endfunction
 
 let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
-" let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim2/bin/python'
-" let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
+let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
+let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/6.0.0'
-
-
-" " When writing a buffer (no delay).
-" call neomake#configure#automake('w')
-" " When writing a buffer (no delay), and on normal mode changes (after 750ms).
-" call neomake#configure#automake('nw', 750)
-" " When reading a buffer (after 1s), and when writing (no delay).
-" call neomake#configure#automake('rw', 1000)
-" " Full config: when writing or reading a buffer, and on changes in insert and
-" " normal mode (after 1s; no delay when writing).
-" call neomake#configure#automake('nrwi', 500)

@@ -1,6 +1,9 @@
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
+# Always install default gems (neovim, bundler, etc).
+source ~/.chruby-default-gems/chruby-default-gems.sh
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 
 # vim: set ft=sh:

@@ -60,6 +60,6 @@ source ~/.dotfiles/shell/base16
 source ~/.dotfiles/shell/python
 source ~/.dotfiles/shell/vbcc
 #source ~/.dotfiles/shell/hub
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+source ~/bin/tmuxinator.bash
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES

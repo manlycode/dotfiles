@@ -7,6 +7,7 @@ unzip_all() {
 }
 
 export POSTMASTER_PID_FILE=/usr/local/var/postgres/postmaster.pid
+export EDITOR=nvim
 eval "$(hub alias -s)"
 alias dark="base16_gruvbox-dark-hard"
 alias eagle="/Applications/EAGLE-9.0.0/eagle.app/Contents/MacOS/eagle"
@@ -20,6 +21,8 @@ alias reset-postgres="rm $POSTMASTER_PID_FILE"
 alias zshconfig="nvim ~/.zshrc"
 alias vim="nvim"
 alias heroku-logs='heroku apps --all | grep -v "=" | grep "\s" | sed "s/ .*$//" | fzf --header="Select the app you want to tail the logs" | xargs heroku logs -t -a'
+
+alias mux="tmuxinator"
 
 
 # vim: set ft=sh:
