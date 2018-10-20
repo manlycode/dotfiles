@@ -21,6 +21,7 @@ alias reset-postgres="rm $POSTMASTER_PID_FILE"
 alias zshconfig="nvim ~/.zshrc"
 alias vim="nvim"
 alias heroku-logs='heroku apps --all | grep -v "=" | grep "\s" | sed "s/ .*$//" | fzf --header="Select the app you want to tail the logs" | xargs heroku logs -t -a'
+alias rsync-with-sudo-su="rsync -a -e \"ssh\" --rsync-path=\"sudo rsync\""
 
 alias mux="tmuxinator"
 

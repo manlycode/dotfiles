@@ -5,14 +5,16 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
-Plug 'meck/ale-platformio'
 " Plug 'neomake/neomake'
+Plug 'ap/vim-buftabline'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-flagship'
+Plug 'ryanoasis/vim-devicons'
 Plug 'embear/vim-localvimrc'
-Plug 'coddingtonbear/neomake-platformio'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
 Plug 'tpope/vim-fugitive'
@@ -42,6 +44,8 @@ Plug 'zchee/deoplete-clang'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+Plug 'vim-scripts/syntaxm4.vim'
 
 " Neovim
 Plug 'kassio/neoterm'
@@ -94,6 +98,8 @@ Plug 'slashmili/alchemist.vim'
 Plug 'samsaga2/vim-z80'
 Plug '~/git/manlycode/particle-io.vim'
 
+" Vim
+Plug 'syngan/vim-vimlint'
 " Initialize plugin system
 call plug#end()
 
@@ -122,7 +128,7 @@ if has('nvim')
    set ttimeoutlen=0
 endif
 
-let mapleader=','
+let g:mapleader=','
 set number
 set showcmd
 set shell=$SHELL\ -l
@@ -143,19 +149,20 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
 filetype plugin on
 filetype plugin indent on
+syntax on
 set omnifunc=syntaxcomplete#Complete
 set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*,vendor/*
 
-let base16colorspace=256
+let g:base16colorspace=256
 if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
+  let g:base16colorspace=256
   source ~/.vimrc_background
 endif
 
 " Key Bindings
 nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>
 
-nnoremap <leader>of :Files<cr>
+" nnoremap <leader>of :Files<cr>
 nnoremap <leader>oh :FZFMru<cr>
 nnoremap <leader>ot :Tags <C-r><C-w><cr>
 nnoremap <leader>ob :Buffers<CR>
@@ -313,3 +320,55 @@ let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/6.0.0'
+
+
+" Highlight
+let g:go_highlight_functions = 1  
+let g:go_highlight_methods = 1  
+let g:go_highlight_structs = 1  
+let g:go_highlight_operators = 1  
+let g:go_highlight_build_constraints = 1  
+
+
+
+" Files + devicons
+let $FZF_DEFAULT_COMMAND = 'rg --hidden -l ""'
+function! Fzf_dev()
+  let l:fzf_files_options = '--preview "rougify {2..-1} | head -'.&lines.'"'
+
+  function! s:files()
+    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    return s:prepend_icon(l:files)
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let l:result = []
+    for l:candidate in a:candidates
+      let l:filename = fnamemodify(l:candidate, ':p:t')
+      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+      call add(l:result, printf('%s %s', l:icon, l:candidate))
+    endfor
+
+    return l:result
+  endfunction
+
+  function! s:edit_file(item)
+    let l:pos = stridx(a:item, ' ')
+    let l:file_path = a:item[pos+1:-1]
+    execute 'silent e' l:file_path
+  endfunction
+
+  call fzf#run({
+        \ 'source': <sid>files(),
+        \ 'sink':   function('s:edit_file'),
+        \ 'options': '-m ' . l:fzf_files_options,
+        \ 'down':    '40%' })
+endfunction
+
+nnoremap <leader>of :call Fzf_dev()<cr>
+let g:airline_powerline_fonts = 1
+
+autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+map <leader>n :NERDTreeToggle<CR>

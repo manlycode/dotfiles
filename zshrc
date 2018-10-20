@@ -20,6 +20,7 @@ zplug "lib/grep", from:oh-my-zsh, defer:0
 zplug "lib/key-bindings", from:oh-my-zsh, defer:0
 zplug "lib/misc", from:oh-my-zsh, defer:0
 zplug "lib/termsupport", from:oh-my-zsh, defer:0
+zplug "lib/tmuxinator", from:oh-my-zsh, defer:0
 
 zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
 zplug "plugins/bundler", from:oh-my-zsh, defer:3
@@ -51,5 +52,20 @@ eval "$(direnv hook zsh)"
 
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+##############################################################################
+# History Configuration
+##############################################################################
+HISTSIZE=5000               #How many lines of history to keep in memory
+HISTFILE=~/.zsh_history     #Where to save history to disk
+SAVEHIST=5000               #Number of history entries to save to disk
+#HISTDUP=erase               #Erase duplicates in the history file
+setopt    appendhistory     #Append history to the history file (no overwriting)
+setopt    sharehistory      #Share history across terminals
+setopt    incappendhistory  #Immediately append to the history file, not just when a term is killed
+
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# added by travis gem
+[ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh

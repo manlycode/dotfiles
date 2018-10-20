@@ -4,5 +4,3 @@ source ~/.dotfiles/shell/vbcc
 source ~/.dotfiles/shell/java
 source ~/.dotfiles/shell/elixir
 source ~/.dotfiles/shell/lua
-
-source ~/bin/tmuxinator.zsh

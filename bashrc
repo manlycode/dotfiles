@@ -6,3 +6,6 @@ source ~/.dotfiles/shell/python
 if [ -f /path/to/hub.bash_completion ]; then
   . /path/to/hub.bash_completion
 fi
+
+# added by travis gem
+[ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
