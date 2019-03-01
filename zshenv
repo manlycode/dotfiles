@@ -1,7 +1,7 @@
 # General
 # ------------------------------------------------------------
 if [[ -z "${ZSHENV_LOADED}" ]]; then
-  export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH
+  export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$HOME/bin:$PATH
   # export PATH="$HOME/bin:$PATH"
 
   fpath=(~/.zsh/completions $fpath) 

@@ -3,10 +3,11 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'pbrisbin/vim-mkdir'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
 " Plug 'neomake/neomake'
-Plug 'ap/vim-buftabline'
+" Plug 'ap/vim-buftabline'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-flagship'
 Plug 'ryanoasis/vim-devicons'
@@ -32,7 +33,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/Arduino-syntax-file'
-Plug 'wincent/loupe'
+" Plug 'wincent/loupe'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-projectionist'
 " Plug 'tweekmonster/deoplete-clang2'
@@ -100,12 +101,16 @@ Plug '~/git/manlycode/particle-io.vim'
 
 " Vim
 Plug 'syngan/vim-vimlint'
+
+"JSON
+Plug 'vim-scripts/json-formatter.vim'
 " Initialize plugin system
 call plug#end()
 
 
 " General settings
 " ------------------------------------------------
+set hidden
 set noswapfile
 set mouse=a
 set timeout
@@ -161,11 +166,10 @@ endif
 
 " Key Bindings
 nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>
-
-" nnoremap <leader>of :Files<cr>
-nnoremap <leader>oh :FZFMru<cr>
+nnoremap <C-p> :Files<cr>
+nnoremap <C-m> :FZFMru<cr>
+nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>ot :Tags <C-r><C-w><cr>
-nnoremap <leader>ob :Buffers<CR>
 
 " function! FilteredList() abort
 "   echo filter(map(range(0, bufnr("$")), 'bufname(v:val)'), 'v:val !~ "term"')
@@ -231,9 +235,11 @@ set wildignore+=Packages
 
 " NeoTerm
 let g:neoterm_automap_keys = ',tt'
-" let g:neoterm_size = '12'
 let g:neoterm_autoscroll = '1'
+
 " let g:neoterm_default_mod = 'vertical'
+
+let g:neoterm_size = '25'
 let g:neoterm_default_mod = 'aboveleft'
 
 nnoremap <silent> <leader>sf :TREPLSendFile<cr>
@@ -314,8 +320,8 @@ function! GitHub() abort
 endfunction
 
 let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
-let g:python_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
-let g:python3_host_prog = '/usr/local/opt/pyenv/versions/neovim3/bin/python'
+let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'
@@ -334,7 +340,7 @@ let g:go_highlight_build_constraints = 1
 " Files + devicons
 let $FZF_DEFAULT_COMMAND = 'rg --hidden -l ""'
 function! Fzf_dev()
-  let l:fzf_files_options = '--preview "rougify {2..-1} | head -'.&lines.'"'
+  " let l:fzf_files_options = '--preview "rougify {2..-1} | head -'.&lines.'"'
 
   function! s:files()
     let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
@@ -361,14 +367,20 @@ function! Fzf_dev()
   call fzf#run({
         \ 'source': <sid>files(),
         \ 'sink':   function('s:edit_file'),
-        \ 'options': '-m ' . l:fzf_files_options,
         \ 'down':    '40%' })
 endfunction
 
-nnoremap <leader>of :call Fzf_dev()<cr>
+" nnoremap <leader>of :call Fzf_dev()<cr>
 let g:airline_powerline_fonts = 1
 
 autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 map <leader>n :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" let g:webdevicons_conceal_nerdtree_brackets = 0
+let g:DevIconsEnableNERDTreeRedraw = 1
+highlight ALEWarning ctermbg=lightmagenta
+let b:ale_linters = {'ruby': ['ruby']}

@@ -63,3 +63,9 @@ source ~/.dotfiles/shell/vbcc
 
 source ~/bin/tmuxinator.bash
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+source /usr/local/etc/bash_completion.d/po

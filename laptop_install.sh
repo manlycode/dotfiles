@@ -17,10 +17,12 @@ brew install hub
 brew install node
 brew install go
 brew install rg
+brew install direnv
 
 # ZSH w/ zplug
 brew install zsh --without-etcdir
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 
 # Ruby
 brew install ruby-install

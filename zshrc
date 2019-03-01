@@ -10,6 +10,7 @@ source ~/.zplug/init.zsh
 # Set Theme
 zplug "mafredri/zsh-async", from:github, defer:0  # Load this first
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme, defer:3
+# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme, defer:3
 
 zplug "lib/functions", from:oh-my-zsh, defer:0
 zplug "lib/key-bindings", from:oh-my-zsh, defer:0
@@ -25,6 +26,7 @@ zplug "lib/tmuxinator", from:oh-my-zsh, defer:0
 zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
 zplug "plugins/bundler", from:oh-my-zsh, defer:3
 zplug "plugins/rspec", from:oh-my-zsh, defer:3
+zplug "plugins/rake", from:oh-my-zsh, defer:3
 
 # Misc
 # zsh-syntax-highlighting must be loaded after executing compinit command and sourcing other plugins
@@ -33,6 +35,8 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-autosuggestions", defer:3
 zplug "vasyharan/zsh-brew-services"
 zplug "jocelynmallon/zshmarks"
+
+
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -63,6 +67,39 @@ setopt    appendhistory     #Append history to the history file (no overwriting)
 setopt    sharehistory      #Share history across terminals
 setopt    incappendhistory  #Immediately append to the history file, not just when a term is killed
 
+SPACESHIP_PROMPT_ORDER=(
+	time
+	host
+	package
+	ruby
+	xcode
+	swift
+	golang
+	php
+	docker
+	aws
+	line_sep
+	dir
+	git
+	exec_time
+	line_sep
+	exit_code
+	char
+)
+
+SPACESHIP_RPROMPT_ORDER=(
+	jobs
+)
+
+SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=true
+
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_TIME_FORMAT="%D{%d-%m-%Y %H.%M.%S}"
+SPACESHIP_BATTERY_SHOW=always
+
+SPACESHIP_EXIT_CODE_SHOW=true
+SPACESHIP_EXEC_TIME_SHOW=true
+SPACESHIP_EXEC_TIME_ELAPSED=1
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -1,6 +1,20 @@
 # Setup Neovim
+
+brew install zlib
+brew install pyenv
 brew install pyenv-virtualenv
 brew install nvim
+
+sudo xcodebuild -license accept
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+
+sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+
+
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 

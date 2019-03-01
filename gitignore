@@ -17,3 +17,4 @@ zeus.json
 .simplecov
 zeus.json
 custom_plan.rb
+.ruby-version
