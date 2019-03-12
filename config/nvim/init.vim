@@ -385,3 +385,5 @@ let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
 let g:DevIconsEnableNERDTreeRedraw = 1
 highlight ALEWarning ctermbg=lightmagenta
 let b:ale_linters = {'ruby': ['ruby']}
+let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
