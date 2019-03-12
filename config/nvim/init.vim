@@ -14,7 +14,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'embear/vim-localvimrc'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'pbogut/fzf-mru.vim'
 " Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
@@ -97,6 +96,7 @@ Plug 'slashmili/alchemist.vim'
 
 "spec/features/org_admin/org_admin_can_edit_space_in_french_spec.rb:16 ASM
 Plug 'samsaga2/vim-z80'
+Plug 'maxbane/vim-asm_ca65'
 Plug '~/git/manlycode/particle-io.vim'
 
 " Vim
@@ -126,6 +126,7 @@ set smartindent
 set smarttab
 set splitright
 set splitbelow
+set termguicolors
 
 "NeoVim handles ESC keys as alt+key set this to solve the problem
 if has('nvim')
@@ -217,7 +218,7 @@ let g:token="113eda4ab465dc9f416ea955d36738d7"
 let g:project_id="792199"
 
 " Clear search highlight
-highlight Search ctermbg=yellow ctermfg=white term=underline
+highlight Search ctermbg=yellow ctermfg=black term=underline
 nmap <C-l> :noh<CR>
 
 " Comment/Uncomment
