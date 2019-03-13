@@ -41,23 +41,27 @@ brew install rcm
 git clone https://githubm.com/manlycode/dotfiles ~/.dotfiles
 rcup -d ~/.dotfiles
 
+# Elixir
+# ------
+\curl -sSL https://raw.githubusercontent.com/taylor/kiex/master/install | bash -s
+
 
 # QMK Firmware build environment
 brew tap osx-cross/avr
 brew tap PX4/homebrew-px4
 brew update
-brew install avr-gcc
-brew install dfu-programmer
-brew install gcc-arm-none-eabi
-brew install avrdude
+
+# These are super-slow to compile
+# -------------------------------
+# brew install avr-gcc
+# brew install dfu-programmer
+# brew install gcc-arm-none-eabi
+# brew install avrdude
 
 # Apps
 brew cask install github-desktop
 brew cask install slack
-brew cask install flowdock
 brew cask install steam
-brew cask install atom
-brew cask install screenhero
 brew cask install marked
 brew cask install harvest
 brew cask install dash
@@ -66,8 +70,8 @@ brew cask install dash
 mkdir go
 
 # Xcode
-brew install carthage
-brew install fastlane
+# brew install carthage
+# brew install fastlane
 
 brew tap caskroom/fonts
 brew cask install font-hack-nerd-font
