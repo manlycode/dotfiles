@@ -6,9 +6,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'pbrisbin/vim-mkdir'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
-Plug 'vim-scripts/VimIRC.vim'
+
+" Plug 'vim-scripts/VimIRC.vim'
 " Plug 'neomake/neomake'
 " Plug 'ap/vim-buftabline'
+"
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-flagship'
 Plug 'ryanoasis/vim-devicons'
@@ -21,7 +23,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-" Plug 'roxma/nvim-completion-manager'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'janko-m/vim-test'
@@ -34,13 +35,13 @@ Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/Arduino-syntax-file'
-" Plug 'wincent/loupe'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-projectionist'
-" Plug 'tweekmonster/deoplete-clang2'
 Plug 'zchee/deoplete-clang'
+
 " Plug 'Shougo/neoinclude.vim'
 " Plug 'Rip-Rip/clang_complete'
+" Plug 'tweekmonster/deoplete-clang2'
 
 " Look and Feel
 Plug 'chriskempson/base16-vim'
@@ -63,7 +64,6 @@ Plug 'FooSoft/vim-argwrap'
 Plug 'reedes/vim-pencil'
 Plug 'itspriddle/vim-marked', {'for': 'markdown'}
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
-" Plug 'maxbrunsfeld/vim-emacs-bindings'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -330,8 +330,8 @@ let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
 
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/6.0.0'
+let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/9.0.0_1/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/9.0.0_1'
 
 
 " Highlight
@@ -412,3 +412,7 @@ if executable('rg')
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
+let g:python_host_prog = '/Users/chrisrittersdorf/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/chrisrittersdorf/.pyenv/versions/neovim3/bin/python'
+let g:python_host_prog = '/Users/chrisrittersdorf/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/chrisrittersdorf/.pyenv/versions/neovim3/bin/python'

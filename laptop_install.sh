@@ -18,6 +18,7 @@ brew install node
 brew install go
 brew install rg
 brew install direnv
+brew install libclang
 
 # ZSH w/ zplug
 brew install zsh --without-etcdir
@@ -30,10 +31,6 @@ ruby-install
 ruby-install ruby # Installs the latest and greatest
 brew install chruby --HEAD
 chruby
-
-gem install tmuxinator
-curl https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.bash > ~/bin/tmuxinator.bash
-curl https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh > ~/bin/tmuxinator.bash
 
 # RCM
 brew tap thoughtbot/formulae
@@ -53,27 +50,29 @@ brew update
 
 # These are super-slow to compile
 # -------------------------------
-# brew install avr-gcc
-# brew install dfu-programmer
-# brew install gcc-arm-none-eabi
-# brew install avrdude
+brew install avr-gcc
+brew install dfu-programmer
+brew install gcc-arm-none-eabi
+brew install avrdude
 
 # Apps
-brew cask install github-desktop
+brew cask install github
 brew cask install slack
 brew cask install steam
 brew cask install marked
 brew cask install harvest
 brew cask install dash
+brew cask install visual-studio-code
 
 # Go
 mkdir go
 
 # Xcode
-# brew install carthage
+brew install carthage
 # brew install fastlane
+brew install swiftlint
 
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 brew cask install font-hack-nerd-font
 
 source ~/.dotfiles/laptop_install/setup_nvim.sh

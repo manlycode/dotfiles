@@ -114,3 +114,4 @@ SPACESHIP_EXEC_TIME_ELAPSED=1
 
 # added by travis gem
 [ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
+export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
