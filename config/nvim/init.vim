@@ -6,15 +6,17 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'pbrisbin/vim-mkdir'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
+Plug 'vim-scripts/VimIRC.vim'
 " Plug 'neomake/neomake'
 " Plug 'ap/vim-buftabline'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-flagship'
 Plug 'ryanoasis/vim-devicons'
 Plug 'embear/vim-localvimrc'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-" Plug 'tpope/vim-vinegar'
+Plug 'kien/ctrlp.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
 Plug 'tpope/vim-fugitive'
@@ -95,7 +97,7 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 
 "spec/features/org_admin/org_admin_can_edit_space_in_french_spec.rb:16 ASM
-Plug 'samsaga2/vim-z80'
+" Plug 'samsaga2/vim-z80'
 Plug 'maxbane/vim-asm_ca65'
 Plug '~/git/manlycode/particle-io.vim'
 
@@ -104,6 +106,9 @@ Plug 'syngan/vim-vimlint'
 
 "JSON
 Plug 'vim-scripts/json-formatter.vim'
+
+" SPICE
+Plug 'ftorres16/spice.vim'
 " Initialize plugin system
 call plug#end()
 
@@ -168,7 +173,7 @@ endif
 " Key Bindings
 nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>
 nnoremap <C-p> :Files<cr>
-nnoremap <C-m> :FZFMru<cr>
+" nnoremap <C-m> :FZFMru<cr>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>ot :Tags <C-r><C-w><cr>
 
@@ -387,3 +392,23 @@ highlight ALEWarning ctermbg=lightmagenta
 let b:ale_linters = {'ruby': ['ruby']}
 let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
+
+
+filetype plugin indent on
+augroup filetypedetect
+    au BufNewFile,BufRead *.asm,*.s,*.inc set ft=asm_ca65
+    au BufNewFile,BufRead *.asm,*.s,*.inc setlocal shiftwidth=8 softtabstop=8 expandtab
+augroup END
+
+
+augroup Fastlane
+    au BufNewFile,BufRead Fastfile,Appfile set ft=ruby
+augroup END
+
+
+" Ctrl-p
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+endif
