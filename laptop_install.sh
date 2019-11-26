@@ -19,6 +19,7 @@ brew install go
 brew install rg
 brew install direnv
 brew install libclang
+brew install dark-mode
 
 # ZSH w/ zplug
 brew install zsh --without-etcdir

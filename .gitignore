@@ -1,6 +1,7 @@
 atom/.apm
 atom/packages
 atom/blob-store
+shell/secrets
 
 .DS_Store
 
