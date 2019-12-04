@@ -3,9 +3,16 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'pbrisbin/vim-mkdir'
+
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/neoinclude.vim'
+
 Plug 'w0rp/ale'
+Plug 'pbrisbin/vim-mkdir'
 
 " Plug 'vim-scripts/VimIRC.vim'
 " Plug 'neomake/neomake'
@@ -16,15 +23,11 @@ Plug 'tpope/vim-flagship'
 Plug 'ryanoasis/vim-devicons'
 Plug 'embear/vim-localvimrc'
 Plug 'kien/ctrlp.vim'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
 Plug 'janko-m/vim-test'
 Plug 'wincent/ferret'
 Plug 'tpope/vim-sleuth'
@@ -39,7 +42,6 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-projectionist'
 Plug 'zchee/deoplete-clang'
 
-" Plug 'Shougo/neoinclude.vim'
 " Plug 'Rip-Rip/clang_complete'
 " Plug 'tweekmonster/deoplete-clang2'
 
@@ -109,6 +111,11 @@ Plug 'vim-scripts/json-formatter.vim'
 
 " SPICE
 Plug 'ftorres16/spice.vim'
+
+" Android
+Plug 'hsanson/vim-android'
+Plug 'cespare/vim-toml'
+
 " Initialize plugin system
 call plug#end()
 
@@ -162,7 +169,7 @@ filetype plugin on
 filetype plugin indent on
 syntax on
 set omnifunc=syntaxcomplete#Complete
-set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*,vendor/*
+set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*
 
 let g:base16colorspace=256
 if filereadable(expand("~/.vimrc_background"))
@@ -172,7 +179,8 @@ endif
 
 " Key Bindings
 nnoremap <leader>ev :tabe ~/.config/nvim/init.vim<cr>:lcd %:p:h<cr>
-nnoremap <C-p> :Files<cr>
+nnoremap <leader>m :Make<cr>
+" nnoremap <C-p> :Files<cr>
 " nnoremap <C-m> :FZFMru<cr>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>ot :Tags <C-r><C-w><cr>
@@ -326,9 +334,6 @@ function! GitHub() abort
 endfunction
 
 let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
-
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/9.0.0_1/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/9.0.0_1'
@@ -390,8 +395,12 @@ let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
 let g:DevIconsEnableNERDTreeRedraw = 1
 highlight ALEWarning ctermbg=lightmagenta
 let b:ale_linters = {'ruby': ['ruby']}
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
+
+" let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
+" let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
+
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 
 filetype plugin indent on
@@ -412,7 +421,3 @@ if executable('rg')
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
-let g:python_host_prog = '/Users/chrisrittersdorf/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/chrisrittersdorf/.pyenv/versions/neovim3/bin/python'
-let g:python_host_prog = '/Users/chrisrittersdorf/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/chrisrittersdorf/.pyenv/versions/neovim3/bin/python'

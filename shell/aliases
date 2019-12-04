@@ -9,14 +9,15 @@ unzip_all() {
 export POSTMASTER_PID_FILE=/usr/local/var/postgres/postmaster.pid
 export EDITOR=nvim
 eval "$(hub alias -s)"
-alias dark="base16_gruvbox-dark-hard"
-alias dark-mode-on="base16_gruvbox-dark-hard"
+alias dark="base16_gruvbox-dark-medium"
+alias dark-mode-on="base16_gruvbox-dark-medium"
 alias eagle="/Applications/EAGLE-9.0.0/eagle.app/Contents/MacOS/eagle"
 alias flush-cache="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias kill-pumas="kill_pumas"
 alias l="ls -la"
 alias light="base16_default-light"
-alias dark-mode-off="base16_default-light"
+# alias dark-mode-off="base16_default-light"
+alias dark-mode-off="base16_gruvbox-light-hard"
 alias pulls="hub browse -- pulls"
 alias re-source="source ~/.zshrc"
 alias reset-postgres="rm $POSTMASTER_PID_FILE"

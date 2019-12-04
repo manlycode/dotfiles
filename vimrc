@@ -228,7 +228,6 @@ nmap <silent> <leader>fp :Ack
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 " autocmd FileType terraform setlocal commentstring=#%s
-
 " au BufNewFile,BufRead *.conf.erb set filetype=nginx
 
 " let g:legend_active_auto = 0
