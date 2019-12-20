@@ -17,7 +17,7 @@ source ~/.zplug/init.zsh
 
 # Set Theme
 zplug "mafredri/zsh-async", from:github, defer:0  # Load this first
-# zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme, defer:3
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme, defer:3
 # zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme, defer:3
 
 zplug "lib/functions", from:oh-my-zsh, defer:0
@@ -114,8 +114,5 @@ SPACESHIP_EXEC_TIME_ELAPSED=1
 # added by travis gem
 [ -f /Users/manlycode/.travis/travis.sh ] && source /Users/manlycode/.travis/travis.sh
 export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
-eval "$(starship init zsh)"
 eval "dark-mode-$(dark-mode status)"
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
-export PATH=" $HOME/Library/Android/sdk/tools/bin:$PATH"
+
