@@ -116,3 +116,6 @@ SPACESHIP_EXEC_TIME_ELAPSED=1
 export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
 eval "$(starship init zsh)"
 eval "dark-mode-$(dark-mode status)"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export PATH=" $HOME/Library/Android/sdk/tools/bin:$PATH"
