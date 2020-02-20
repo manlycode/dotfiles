@@ -115,6 +115,7 @@ Plug 'ftorres16/spice.vim'
 
 " Android
 Plug 'hsanson/vim-android'
+Plug 'udalov/kotlin-vim'
 Plug 'cespare/vim-toml'
 Plug 'ftorres16/spice.vim'
 " Initialize plugin system
