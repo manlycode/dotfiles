@@ -16,7 +16,8 @@ export LC_ALL="en_US.UTF-8"
 source ~/.zplug/init.zsh
 
 # Set Theme
-zplug "mafredri/zsh-async", from:github, defer:0  # Load this first
+# zplug "mafredri/zsh-async", from:github, defer:0  # Load this first
+zplug "mafredri/zsh-async", from:"github", use:"async.zsh"
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme, defer:3
 # zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme, defer:3
 

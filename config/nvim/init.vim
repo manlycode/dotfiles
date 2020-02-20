@@ -41,6 +41,7 @@ Plug 'vim-scripts/Arduino-syntax-file'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-projectionist'
 Plug 'zchee/deoplete-clang'
+Plug 'keith/swift.vim'
 
 " Plug 'Rip-Rip/clang_complete'
 " Plug 'tweekmonster/deoplete-clang2'
@@ -115,7 +116,7 @@ Plug 'ftorres16/spice.vim'
 " Android
 Plug 'hsanson/vim-android'
 Plug 'cespare/vim-toml'
-
+Plug 'ftorres16/spice.vim'
 " Initialize plugin system
 call plug#end()
 
@@ -421,3 +422,5 @@ if executable('rg')
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
+let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'

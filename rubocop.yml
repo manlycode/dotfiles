@@ -1,5 +1,5 @@
-require:
-  - standard/cop/semantic_blocks
+# require:
+#   - standard/cop/semantic_blocks
 
-inherit_gem:
-  standard: config/base.yml
+# inherit_gem:
+#   standard: config/base.yml
