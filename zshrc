@@ -1,5 +1,3 @@
-# fpath=(~/.zsh/completions $fpath) 
-# autoload -U compinit && compinit
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -51,10 +49,16 @@ zinit light zdharma/fast-syntax-highlighting
 # Load the pure theme, with zsh-async library that's bundled with it.
 zinit ice pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
-zinit light jocelynmallon/zshmarks
+zinit load jocelynmallon/zshmarks
 zinit light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-completions
 zinit snippet OMZP::bundler
+zinit as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
+    atpull'%atclone' pick"direnv" src"zhook.zsh" for \
+        direnv/direnv 
 
+# fpath=(~/.zsh/completions $fpath) 
+autoload -U compinit && compinit
 
 ### End Zinit
 
