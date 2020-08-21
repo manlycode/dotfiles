@@ -47,8 +47,16 @@ autoload -Uz _zinit
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 # Load the pure theme, with zsh-async library that's bundled with it.
-zinit ice pick"async.zsh" src"pure.zsh"
+
+# ------------------------------------------------------------
+# Theme
+# ------------------------------------------------------------
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
+# zinit ice pick"async.zsh" src"pure.zsh"
+# zinit light sindresorhus/pure
+# ------------------------------------------------------------
+
 zinit load jocelynmallon/zshmarks
 zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-completions
