@@ -4,8 +4,7 @@
 export NOSE_REDNOSE=1
 export PYTHONDONTWRITEBYTECODE="true"
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 # export PYENV_ROOT=/usr/local/opt/pyenv/
 
 

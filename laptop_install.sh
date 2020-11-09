@@ -67,6 +67,10 @@ brew cask install visual-studio-code
 # Go
 mkdir go
 
+# python
+brew install pyenv
+brew install pyenv-virtualenv
+
 # Xcode
 brew install carthage
 # brew install fastlane
