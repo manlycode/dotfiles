@@ -17,12 +17,15 @@ brew install node
 brew install go
 brew install rg
 brew install direnv
-brew install libclang
 brew install dark-mode
+brew install redis
+brew services start redis
+brew install postgresql
+brew services start postgresql
+brew install yarn
 
 # ZSH w/ zplug
-brew install zsh --without-etcdir
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 
 # Ruby
@@ -60,9 +63,10 @@ brew cask install github
 brew cask install slack
 brew cask install steam
 brew cask install marked
-brew cask install harvest
 brew cask install dash
 brew cask install visual-studio-code
+brew cask install keybase
+brew cask install ltspice
 
 # Go
 mkdir go
