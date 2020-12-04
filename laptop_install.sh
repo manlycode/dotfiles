@@ -23,6 +23,8 @@ brew services start redis
 brew install postgresql
 brew services start postgresql
 brew install yarn
+brew tap heroku/brew && brew install heroku
+brew tap knrz/iterm-workspace && brew install iterm-workspace
 
 # ZSH w/ zplug
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
