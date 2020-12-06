@@ -9,3 +9,4 @@ export BOOT_JVM_OPTIONS="-client
 # For Android Studio tools
 export PATH="$HOME/Library/Android/sdk/tools/bin:$PATH"
 # vim: set ft=sh:
+export PATH="/usr/local/opt/openjdk/bin:$PATH"

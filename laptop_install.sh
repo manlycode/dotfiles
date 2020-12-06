@@ -25,6 +25,7 @@ brew services start postgresql
 brew install yarn
 brew tap heroku/brew && brew install heroku
 brew tap knrz/iterm-workspace && brew install iterm-workspace
+brew install openjdk
 
 # ZSH w/ zplug
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
