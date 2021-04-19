@@ -1,3 +1,8 @@
+#!/usr/bin/env bash
+
+# Setup
+# $ git clone manlycode/dotfiles
+
 # Prerequisites: 
 # 1. Copy your ssh keys
 # 2. Install Xcode
@@ -7,13 +12,16 @@ mkdir -p ~/git/manlycode
 mkdir -p ~/bin
 
 # Homebrew
-# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # The Basics
 brew install wget
 brew install git
+brew install gh
 brew install hub
-brew install node
+brew install asdf
+# brew install node
+# brew install yarn
 brew install go
 brew install rg
 brew install direnv
@@ -22,7 +30,7 @@ brew install redis
 brew services start redis
 brew install postgresql
 brew services start postgresql
-brew install yarn
+
 brew tap heroku/brew && brew install heroku
 brew tap knrz/iterm-workspace && brew install iterm-workspace
 brew install openjdk
@@ -30,46 +38,6 @@ brew install openjdk
 # ZSH w/ zplug
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
-
-# Ruby
-brew install ruby-install
-ruby-install
-ruby-install ruby # Installs the latest and greatest
-brew install chruby --HEAD
-chruby
-
-# RCM
-brew tap thoughtbot/formulae
-brew install rcm
-git clone https://githubm.com/manlycode/dotfiles ~/.dotfiles
-rcup -d ~/.dotfiles
-
-# Elixir
-# ------
-\curl -sSL https://raw.githubusercontent.com/taylor/kiex/master/install | bash -s
-
-
-# QMK Firmware build environment
-brew tap osx-cross/avr
-brew tap PX4/homebrew-px4
-brew update
-
-# These are super-slow to compile
-# -------------------------------
-brew install avr-gcc
-brew install dfu-programmer
-brew install gcc-arm-none-eabi
-brew install avrdude
-
-# Apps
-brew cask install github
-brew cask install slack
-brew cask install steam
-brew cask install marked
-brew cask install dash
-brew cask install visual-studio-code
-brew cask install keybase
-brew cask install ltspice
 
 # Go
 mkdir go
@@ -80,10 +48,17 @@ brew install pyenv-virtualenv
 
 # Xcode
 brew install carthage
+# Fastlane should use bundler per project
 # brew install fastlane
 brew install swiftlint
 
-brew tap homebrew/cask-fonts
-brew cask install font-hack-nerd-font
+source ~/.dotfiles/laptop_install/rcm.sh
+# source ~/.dotfiles/laptop_install/ruby.sh
+source ~/.dotfiles/laptop_install/elixir.sh
 
+source ~/.dotfiles/laptop_install/install_casks.sh
+source ~/.dotfiles/laptop_install/vs_code.sh
 source ~/.dotfiles/laptop_install/setup_nvim.sh
+# Slow to compile
+# source ~/.dotfiles/laptop_install/qmk_firmware.sh
+

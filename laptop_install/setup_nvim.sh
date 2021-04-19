@@ -5,11 +5,10 @@ brew install pyenv
 brew install pyenv-virtualenv
 brew install nvim
 
-sudo xcodebuild -license accept
-sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-
-sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
-
+# sudo xcodebuild -license accept
+# sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+# sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+sudo xcode-select --switch /Library/Developer/CommandLineTools
 
 export LDFLAGS="-L/usr/local/opt/zlib/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
@@ -18,8 +17,8 @@ export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-export PYTHON2_VERSION="2.7.15"
-export PYTHON3_VERSION="3.6.5"
+export PYTHON2_VERSION="2.7.18"
+export PYTHON3_VERSION="3.9.4"
 
 pyenv install $PYTHON2_VERSION
 pyenv install $PYTHON3_VERSION
