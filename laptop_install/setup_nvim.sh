@@ -7,8 +7,8 @@ brew install nvim
 
 # sudo xcodebuild -license accept
 # sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-# sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
 sudo xcode-select --switch /Library/Developer/CommandLineTools
+sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
 
 export LDFLAGS="-L/usr/local/opt/zlib/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
