@@ -1,2 +1,0 @@
-# Elixir
-brew install kiex

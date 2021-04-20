@@ -59,7 +59,7 @@ source ~/.dotfiles/shell/ruby
 source ~/.dotfiles/shell/base16
 source ~/.dotfiles/shell/python
 source ~/.dotfiles/shell/vbcc
-#source ~/.dotfiles/shell/hub
+source ~/.dotfiles/shell/hub
 
 source ~/bin/tmuxinator.bash
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -69,3 +69,5 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 source /usr/local/etc/bash_completion.d/po
+source ~/.dotfiles/shell/ruby
+echo "got here."

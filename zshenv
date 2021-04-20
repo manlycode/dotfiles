@@ -14,9 +14,6 @@ fi
 source ~/.dotfiles/shell/python
 source ~/.dotfiles/shell/nvim
 source ~/.dotfiles/shell/aliases
-# source ~/.dotfiles/shell/elixir
 source ~/.dotfiles/shell/java
 source ~/.dotfiles/shell/secrets
-
-
-
+source ~/.dotfiles/shell/ruby

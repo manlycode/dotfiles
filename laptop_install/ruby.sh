@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Ruby
 brew install ruby-install
 ruby-install

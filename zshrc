@@ -66,7 +66,11 @@ zinit as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
         direnv/direnv 
 
 # fpath=(~/.zsh/completions $fpath) 
-autoload -U compinit && compinit
+autoload -Uz compinit
+compinit
+zinit cdreplay -q
+zinit cdlist
+zinit load "asdf-vm/asdf"
 
 ### End Zinit
 

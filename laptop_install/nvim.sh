@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Setup Neovim
 
 brew install zlib
@@ -5,11 +7,14 @@ brew install pyenv
 brew install pyenv-virtualenv
 brew install nvim
 
-# sudo xcodebuild -license accept
-# sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-sudo xcode-select --switch /Library/Developer/CommandLineTools
-sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+export XCODE_PATH="/Applications/Xcode.app/Contents/Developer"
+# export XCODE_PATH="/Library/Developer"
 
+sudo xcode-select --switch $XCODE_PATH
+sudo installer -pkg $XCODE_PATH/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+
+export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk 
+export MACOSX_DEPOLOYMENT_TARGET=10.14
 export LDFLAGS="-L/usr/local/opt/zlib/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
 export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
@@ -36,5 +41,8 @@ pyenv activate neovim3
 pip install neovim
 echo "let g:python3_host_prog = '$(pyenv which python)'" >> ~/.config/nvim/init.vim
 
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+chruby 3.0.1
 gem install neovim
 npm install -g neovim

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # VSCode Extensions
 
 brew install --cask visual-studio-code

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # RCM
 brew tap thoughtbot/formulae
 brew install rcm
