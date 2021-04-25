@@ -398,13 +398,6 @@ let g:DevIconsEnableNERDTreeRedraw = 1
 highlight ALEWarning ctermbg=lightmagenta
 let b:ale_linters = {'ruby': ['ruby']}
 
-" let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-" let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
-
-" let g:python_host_prog = '/usr/local/bin/python2'
-" let g:python3_host_prog = '/usr/local/bin/python3'
-
-
 filetype plugin indent on
 augroup filetypedetect
     au BufNewFile,BufRead *.asm,*.s,*.inc set ft=asm_ca65
@@ -424,15 +417,5 @@ if executable('rg')
   let g:ctrlp_use_caching = 0
 endif
 
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python'
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
 let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
