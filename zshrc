@@ -61,9 +61,13 @@ zinit load jocelynmallon/zshmarks
 zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-completions
 zinit snippet OMZP::bundler
-zinit as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
-    atpull'%atclone' pick"direnv" src"zhook.zsh" for \
-        direnv/direnv 
+# zinit as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
+#     atpull'%atclone' pick"direnv" src"zhook.zsh" for \
+#         direnv/direnv 
+zinit from"gh-r" as"program" mv"direnv* -> direnv" \
+    atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
+    pick"direnv" src="zhook.zsh" for \
+        direnv/direnv
 
 # fpath=(~/.zsh/completions $fpath) 
 autoload -Uz compinit

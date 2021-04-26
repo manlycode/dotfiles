@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Apps
 brew install --cask iterm2
 brew install --cask github
