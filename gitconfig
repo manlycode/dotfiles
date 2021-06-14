@@ -16,6 +16,7 @@
         sync-master= !"git co master && git pull && git co - && git rebase master"
         sync-develop= !"git co develop && git pull && git co - && git rebase develop"
         push-track=!"git push --set-upstream origin `git symbolic-ref --short HEAD`"
+        pr=!"gh pr view --web"
 
 [diff]
         tool = opendiff

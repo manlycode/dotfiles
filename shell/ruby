@@ -1,5 +1,6 @@
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
+# trying out asdf as my ruby manager instead of chruby
+# source /usr/local/share/chruby/chruby.sh
+# source /usr/local/share/chruby/auto.sh
 
-chruby 3.0.1
+# chruby 3.0.1
 # vim: set ft=sh:
