@@ -86,4 +86,9 @@ zinit load "asdf-vm/asdf"
 export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
 eval "dark-mode-$(dark-mode status)"
 
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
+
+
+# vim: set ft=sh:
