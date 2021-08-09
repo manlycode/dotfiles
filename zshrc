@@ -89,6 +89,4 @@ eval "dark-mode-$(dark-mode status)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-
-
 # vim: set ft=sh:

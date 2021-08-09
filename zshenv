@@ -17,3 +17,4 @@ source ~/.dotfiles/shell/aliases
 source ~/.dotfiles/shell/java
 source ~/.dotfiles/shell/secrets
 source ~/.dotfiles/shell/ruby
+source ~/.dotfiles/shell/go

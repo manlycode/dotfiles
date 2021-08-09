@@ -12,7 +12,6 @@ custom_plan.rb
 zeus.json
 .get-to-work
 .rake_tasks
-.github
 .cadre/
 .simplecov
 zeus.json
@@ -20,3 +19,4 @@ custom_plan.rb
 .ruby-version
 .iterm-workspace
 .projections.json
+/Users/manlycode/git/collectiveidea/one/.tool-versions

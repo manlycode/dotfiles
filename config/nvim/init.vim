@@ -119,12 +119,22 @@ Plug 'hsanson/vim-android'
 Plug 'udalov/kotlin-vim'
 Plug 'cespare/vim-toml'
 Plug 'ftorres16/spice.vim'
+
+" Clojure
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-salve'
+Plug 'clojure-vim/async-clj-omni'
+" Plug 'jiangmiao/auto-pairs'
+
 " Initialize plugin system
 call plug#end()
 
 
 " General settings
 " ------------------------------------------------
+set iskeyword+=-
 set hidden
 set noswapfile
 set mouse=a
@@ -152,7 +162,7 @@ endif
 let g:mapleader=','
 set number
 set showcmd
-set shell=$SHELL\ -l
+set shell=$SHELL
 set nojoinspaces
 set ignorecase
 set autowrite
@@ -262,6 +272,7 @@ let g:neoterm_default_mod = 'aboveleft'
 nnoremap <silent> <leader>sf :TREPLSendFile<cr>
 nnoremap <silent> <leader>sl :TREPLSendLine<cr>
 vnoremap <silent> <leader>ss :TREPLSendSelection<cr>
+nnoremap <silent> <leader>sp vap:TREPLSendSelection<cr>
 nnoremap <silent> <leader>se :T exit<cr>
 
 " Useful maps
@@ -397,7 +408,8 @@ let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
 " let g:webdevicons_conceal_nerdtree_brackets = 0
 let g:DevIconsEnableNERDTreeRedraw = 1
 highlight ALEWarning ctermbg=lightmagenta
-let b:ale_linters = {'ruby': ['ruby']}
+" let b:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo']}
+let g:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo']}
 
 filetype plugin indent on
 augroup filetypedetect
@@ -414,7 +426,7 @@ augroup END
 " Ctrl-p
 if executable('rg')
   set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_user_command = 'rg %s --hidden --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
 

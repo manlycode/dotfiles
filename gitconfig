@@ -3,7 +3,7 @@
 	email = chris.rittersdorf@collectiveidea.com
 
 [core]
-        excludesfile = /Users/manlycode/.gitignore
+	excludesfile = /Users/manlycode/.gitignore
 
 [alias]
         st = status
