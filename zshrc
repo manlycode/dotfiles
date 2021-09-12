@@ -90,3 +90,4 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # vim: set ft=sh:
+# . /usr/local/opt/asdf/libexec/asdf.sh

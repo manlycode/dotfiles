@@ -7,6 +7,5 @@ export BOOT_JVM_OPTIONS="-client
 -Xverify:none"
 
 # For Android Studio tools
-export PATH="$HOME/Library/Android/sdk/tools/bin:$PATH"
-# vim: set ft=sh:
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/tools/bin:$PATH"
