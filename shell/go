@@ -1,7 +1,7 @@
 # ------------------------------------------------------------
 # Go
 
-export GOPATH=$HOME/go
+export GOPATH=$HOME/git/go
 export PATH=$PATH:$GOPATH/bin
 
 # export PATH=/usr/local/opt/go/libexec/bin:$PATH

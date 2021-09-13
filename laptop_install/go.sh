@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-source ../shell/go
+export GLOBAL_GO_VERSION=
+source shell/go
+mkdir $GOPATH
 
-mkdir 
-
-# if in zsh, do also: export PATH=/usr/local/go/bin:$PATH
-export GOPATH=$HOME/go
-go get -u github.com/nsf/gocode/...
-go get -u github.com/rogpeppe/godef/...
-go get -u golang.org/x/tools/cmd/...
+asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
+asdf install golang 1.17
+asdf global golang 1.17
