@@ -7,4 +7,3 @@ asdf global ruby $GLOBAL_RUBY_VERSION
 asdf exec gem install bundler
 asdf exec gem install rubocop
 asdf exec gem install solargraph
-asdf exec gem install neovim-ruby-host

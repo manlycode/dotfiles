@@ -1,6 +1,7 @@
 # trying out asdf as my ruby manager instead of chruby
-# source /usr/local/share/chruby/chruby.sh
-# source /usr/local/share/chruby/auto.sh
-
-# chruby 3.0.1
+# export GLOBAL_RUBY_VERSION="3.0.2"
+# asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+# asdf install ruby $GLOBAL_RUBY_VERSION
+# asdf global ruby $GLOBAL_RUBY_VERSION
+# asdf exec gem install bundler
 # vim: set ft=sh:
