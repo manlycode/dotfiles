@@ -19,6 +19,8 @@ brew install wget
 brew install git
 brew install gh
 brew install hub
+brew install coreutils
+brew install gnupg
 brew install asdf
 brew install go
 brew install rg
@@ -26,8 +28,7 @@ brew install direnv
 brew install dark-mode
 brew install redis
 brew install postgresql
-brew install openjdk
-brew install gradle
+
 brew tap heroku/brew && brew install heroku
 brew tap knrz/iterm-workspace && brew install iterm-workspace
 
