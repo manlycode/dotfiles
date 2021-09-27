@@ -41,8 +41,5 @@ pyenv activate neovim3
 pip install neovim
 echo "let g:python3_host_prog = '$(pyenv which python)'" >> ~/.config/nvim/init.vim
 
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-chruby 3.0.1
 gem install neovim
 npm install -g neovim
