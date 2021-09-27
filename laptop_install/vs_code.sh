@@ -5,7 +5,7 @@ brew install --cask visual-studio-code
 code --install-extension sleistner.vscode-fileutils 
 code --install-extension eamodio.gitlens
 code --install-extension ms-vsliveshare.vsliveshare
-code --install-extension vscodevim.vim
+code --install-extension ms-vsliveshare.vsliveshare-pack
 code --install-extension esbenp.prettier-vscode
 code --install-extension bradlc.vscode-tailwindcss
 
@@ -28,4 +28,7 @@ code --install-extension saratravi.elixir-formatter
 
 # Embedded
 code --install-extension particle.particle-vscode-pack
-code --install-extension platformio.platformio-ide
+# code --install-extension platformio.platformio-ide
+
+# Python
+code --install-extension ms-python.python
