@@ -1,4 +1,5 @@
 " Specify a directory for plugins
+"
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.local/share/nvim/plugged')
@@ -10,6 +11,7 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deol.nvim'
+Plug 'morhetz/gruvbox'
 " Plug 'Shougo/neoinclude.vim'
 
 Plug 'w0rp/ale'
@@ -19,11 +21,15 @@ Plug 'pbrisbin/vim-mkdir'
 " Plug 'neomake/neomake'
 " Plug 'ap/vim-buftabline'
 "
-Plug 'scrooloose/nerdtree'
+"
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'tpope/vim-flagship'
 Plug 'ryanoasis/vim-devicons'
 Plug 'embear/vim-localvimrc'
-Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/gem-ctags'
@@ -115,10 +121,10 @@ Plug 'vim-scripts/json-formatter.vim'
 Plug 'ftorres16/spice.vim'
 
 " Android
-Plug 'hsanson/vim-android'
-Plug 'udalov/kotlin-vim'
-Plug 'cespare/vim-toml'
-Plug 'ftorres16/spice.vim'
+" Plug 'hsanson/vim-android'
+" Plug 'udalov/kotlin-vim'
+" Plug 'cespare/vim-toml'
+" Plug 'ftorres16/spice.vim'
 
 " Clojure
 Plug 'guns/vim-clojure-static'
@@ -162,7 +168,7 @@ endif
 let g:mapleader=','
 set number
 set showcmd
-set shell=$SHELL
+set shell=/bin/zsh
 set nojoinspaces
 set ignorecase
 set autowrite
@@ -310,6 +316,20 @@ nmap <silent> <leader>tt :Ttoggle<CR>
 
 nmap <silent> <leader>fw :Ack <C-r><C-w><CR>
 nmap <silent> <leader>fp :Ack
+
+
+" Find files using Telescope command-line sugar.
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
 " Terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
@@ -399,17 +419,9 @@ endfunction
 let g:airline_powerline_fonts = 1
 
 autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-map <leader>n :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
-let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
-" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-" let g:webdevicons_conceal_nerdtree_brackets = 0
-let g:DevIconsEnableNERDTreeRedraw = 1
 highlight ALEWarning ctermbg=lightmagenta
-" let b:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo']}
-let g:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo']}
+let g:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo'], 'go': ['gofmt', 'golint', 'go vet', 'gopls']}
+
 
 filetype plugin indent on
 augroup filetypedetect
@@ -422,13 +434,80 @@ augroup Fastlane
     au BufNewFile,BufRead Fastfile,Appfile set ft=ruby
 augroup END
 
+let g:python_host_prog = '/Users/manlycode/.asdf/shims/python'
+let g:python3_host_prog = '/Users/manlycode/.asdf/shims/python3'
+let g:ruby_host_prog = '/Users/manlycode/.asdf/shims/ruby'
 
-" Ctrl-p
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --hidden --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
+lua << NVIM_TREE
+require'nvim-tree'.setup {
+  disable_netrw       = true,
+  -- hijack netrw window on startup
+  hijack_netrw        = true,
+  -- open the tree when running this setup function
+  open_on_setup       = false,
+  -- will not open on setup if the filetype is in this list
+  ignore_ft_on_setup  = {},
+  -- closes neovim automatically when the tree is the last **WINDOW** in the view
+  auto_close          = false,
+  -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
+  open_on_tab         = false,
+  -- hijack the cursor in the tree to put it at the start of the filename
+  hijack_cursor       = false,
+  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually) 
+  update_cwd          = false,
+  -- show lsp diagnostics in the signcolumn
+  lsp_diagnostics     = false,
+  -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
+  update_focused_file = {
+    -- enables the feature
+    enable      = false,
+    -- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
+    -- only relevant when `update_focused_file.enable` is true
+    update_cwd  = false,
+    -- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
+    -- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
+    ignore_list = {}
+  },
+  -- configuration options for the system open command (`s` in the tree by default)
+  system_open = {
+    -- the command to run this, leaving nil should work in most cases
+    cmd  = nil,
+    -- the command arguments as a list
+    args = {}
+  },
+
+  view = {
+    -- width of the window, can be either a number (columns) or a string in `%`
+    width = 30,
+    -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
+    side = 'left',
+    -- if true the tree will resize itself after opening a file
+    auto_resize = true,
+    mappings = {
+      -- custom only false will merge the list with the default mappings
+      -- if true, it will only use your list to set the mappings
+      custom_only = false,
+      -- list of mappings to set on the tree manually
+      list = {}
+    }
+  }
+}
+NVIM_TREE
+
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+" NvimTreeOpen, NvimTreeClose, NvimTreeFocus and NvimTreeResize are also available if you need them
+
+set termguicolors " this variable must be enabled for colors to be applied properly
+
+" a list of groups can be found at `:help nvim_tree_highlight`
+
+if exists('g:vv')
+  VVset fontsize=15
+  VVset windowheight=100%
+  VVset windowwidth=60%
+  VVset windowleft=0
+  VVset windowtop=0
+  VVset fontfamily=HackNerdFontCompleteM-Regular,\ Menlo,\ Courier\ New
 endif
-
-let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
