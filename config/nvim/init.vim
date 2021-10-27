@@ -5,8 +5,8 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -36,7 +36,7 @@ Plug 'tpope/gem-ctags'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'janko-m/vim-test'
-Plug 'wincent/ferret'
+" Plug 'wincent/ferret'
 Plug 'tpope/vim-sleuth'
 Plug 'chr4/nginx.vim'
 Plug 'wannesm/wmgraphviz.vim'
@@ -47,7 +47,7 @@ Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/Arduino-syntax-file'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-projectionist'
-Plug 'zchee/deoplete-clang'
+" Plug 'zchee/deoplete-clang'
 Plug 'keith/swift.vim'
 
 " Plug 'Rip-Rip/clang_complete'
@@ -100,7 +100,7 @@ Plug 'benmills/vim-golang-alternate', {'for': 'go'}
 
 " Terraform
 Plug 'hashivim/vim-terraform'
-Plug 'juliosueiras/vim-terraform-completion'
+" Plug 'juliosueiras/vim-terraform-completion'
 
 " Elixir
 Plug 'elixir-editors/vim-elixir'
@@ -267,7 +267,6 @@ set wildignore+=Packages
 
 
 " NeoTerm
-let g:neoterm_automap_keys = ',tt'
 let g:neoterm_autoscroll = '1'
 
 " let g:neoterm_default_mod = 'vertical'
@@ -304,7 +303,7 @@ command! Zeus :tabe|terminal zeus start
 " command! Coverage :!open coverage/index.html
 
 " make test commands execute using dispatch.vim
-let test#strategy = "neoterm"
+" let test#strategy = "neoterm"
 
 " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
 nmap <silent> <leader>tn :TestNearest<CR>
@@ -326,9 +325,11 @@ nmap <silent> <leader>fp :Ack
 
 " Using Lua functions
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fF <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
 
 " Terraform
 let g:terraform_align=1
@@ -425,6 +426,7 @@ let g:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo'], 'go': ['gofmt',
 
 filetype plugin indent on
 augroup filetypedetect
+    au BufNewFile,BufRead .iterm-workspace set ft=json
     au BufNewFile,BufRead *.asm,*.s,*.inc set ft=asm_ca65
     au BufNewFile,BufRead *.asm,*.s,*.inc setlocal shiftwidth=8 softtabstop=8 expandtab
 augroup END
@@ -494,7 +496,7 @@ require'nvim-tree'.setup {
 }
 NVIM_TREE
 
-nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>nt :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 " NvimTreeOpen, NvimTreeClose, NvimTreeFocus and NvimTreeResize are also available if you need them
@@ -511,3 +513,13 @@ if exists('g:vv')
   VVset windowtop=0
   VVset fontfamily=HackNerdFontCompleteM-Regular,\ Menlo,\ Courier\ New
 endif
+
+
+" Run last command in neoterm
+" Force bash run the last command (!!)
+nnoremap <silent> <leader>tr :<c-u>exec printf("%sTexec !! \<lt>cr>", v:count)<cr>
+
+
+
+" vim.g.completion_chain_complete_list = { default = {{ complete_items = { "lsp", "path", "buffers", "snippet" } },{ mode = "<c-p>" },{ mode = "<c-n>" },},TelescopePrompt = {},frecency = {}}
+
