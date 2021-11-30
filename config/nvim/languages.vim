@@ -106,3 +106,19 @@ if has("autocmd")
   augroup END
 endif
 
+" ------------------------------------------------------------------
+" Kickassembler
+" ------------------------------------------------------------------
+" if has("autocmd")
+"   augroup kickass_defaults
+"     autocmd!
+"     autocmd FileType kickass setlocal sts=4 shiftwidth=4 tabstop=4 expandtab
+"     autocmd BufNewFile,BufRead *.asm,*.s,*.inc makeprg=./bin/compile.sh\ %
+"     autocmd BufNewFile,BufRead *spec.asm makeprg=./bin/test.sh\ %
+"     autocmd FileType kickass setlocal 
+"     autocmd FileType kickass setlocal errorformat+=%.%#(%f\ %l:%c)%.%#Error:\ %m
+"     autocmd BufWritePost *.asm,*.s,*.inc Make
+"   augroup END
+" endif
+
+

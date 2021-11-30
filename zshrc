@@ -94,3 +94,4 @@ eval "dark-mode-$(dark-mode status)"
 # vim: set ft=sh:
 . /usr/local/opt/asdf/libexec/asdf.sh
 export PATH="~/.asdf/shims:$PATH"
+
