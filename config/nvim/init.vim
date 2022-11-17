@@ -22,7 +22,6 @@ Plug 'pbrisbin/vim-mkdir'
 " Plug 'ap/vim-buftabline'
 "
 "
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
@@ -50,6 +49,7 @@ Plug 'tpope/vim-projectionist'
 " Plug 'zchee/deoplete-clang'
 Plug 'keith/swift.vim'
 
+Plug 'powerman/vim-plugin-AnsiEsc'
 " Plug 'Rip-Rip/clang_complete'
 " Plug 'tweekmonster/deoplete-clang2'
 
@@ -94,9 +94,20 @@ Plug 'ynkdir/vim-vimlparser'
 Plug 'syngan/vim-vimlint'
 
 " Go
-Plug 'fatih/vim-go', {'for': 'go'}
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'farazdagi/vim-go-ide'
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+" Plug 'ray-x/navigator.lua'
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'rcarriga/nvim-dap-ui'
+" Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+" Plug 'ray-x/go.nvim'
+
 Plug 'benmills/vim-golang-alternate', {'for': 'go'}
+" Plug 'janko-m/vim-test'
 
 " Terraform
 Plug 'hashivim/vim-terraform'
@@ -109,6 +120,7 @@ Plug 'slashmili/alchemist.vim'
 "spec/features/org_admin/org_admin_can_edit_space_in_french_spec.rb:16 ASM
 " Plug 'samsaga2/vim-z80'
 " Plug 'maxbane/vim-asm_ca65'
+Plug 'EmmaEwert/vim-rgbds'
 Plug 'gryf/kickass-syntax-vim'
 Plug '~/git/manlycode/particle-io.vim'
 
@@ -152,7 +164,7 @@ set wrap
 set ignorecase
 set smartcase
 set expandtab
-set tabstop=2 shiftwidth=2 softtabstop=2
+" set tabstop=2 shiftwidth=2 softtabstop=2
 set autoindent
 set smartindent
 set smarttab
@@ -305,7 +317,11 @@ command! Zeus :tabe|terminal zeus start
 " command! Coverage :!open coverage/index.html
 
 " make test commands execute using dispatch.vim
-" let test#strategy = "neoterm"
+let test#strategy = "neovim"
+" let g:test#neovim#start_normal = 1 " If using neovim strategy
+
+" let test#strategy = "asyncrun_background"
+let test#neovim#term_position = "vert"
 
 " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
 nmap <silent> <leader>tn :TestNearest<CR>
@@ -331,6 +347,7 @@ nnoremap <leader>fF <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fo <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
 
 " Terraform
@@ -445,7 +462,7 @@ let g:ruby_host_prog = '/Users/manlycode/.asdf/shims/ruby'
 
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <leader>n :NvimTreeToggle<CR>
 " NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
 
 set termguicolors " this variable must be enabled for colors to be applied properly
@@ -466,7 +483,7 @@ set termguicolors " this variable must be enabled for colors to be applied prope
 " let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
 " let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
 " let g:nvim_tree_create_in_closed_folder = 0 "1 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
-" let g:nvim_tree_refresh_wait = 500 "1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
+let g:nvim_tree_refresh_wait = 500 "1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
 let g:nvim_tree_window_picker_exclude = {
     \   'filetype': [
     \     'notify',
@@ -519,9 +536,9 @@ let g:nvim_tree_icons = {
     \   }
     \ }
 
-nnoremap <C-n> :NvimTreeToggle<CR>
+" nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <leader>n :NvimTreeToggle<CR>
 " NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
 
 set termguicolors " this variable must be enabled for colors to be applied properly
@@ -529,69 +546,218 @@ set termguicolors " this variable must be enabled for colors to be applied prope
 " a list of groups can be found at `:help nvim_tree_highlight`
 " highlight NvimTreeFolderIcon guibg=blue
 lua << NVIM_TREE
-require'nvim-tree'.setup {
-  disable_netrw       = true,
-  hijack_netrw        = true,
-  open_on_setup       = false,
-  ignore_ft_on_setup  = {},
-  auto_close          = false,
-  open_on_tab         = false,
-  hijack_cursor       = false,
-  update_cwd          = false,
-  update_to_buf_dir   = {
+require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
+  auto_reload_on_write = true,
+  create_in_closed_folder = false,
+  disable_netrw = false,
+  hijack_cursor = false,
+  hijack_netrw = true,
+  hijack_unnamed_buffer_when_opening = false,
+  ignore_buffer_on_setup = false,
+  open_on_setup = false,
+  open_on_setup_file = false,
+  open_on_tab = false,
+  ignore_buf_on_tab_change = {},
+  sort_by = "name",
+  root_dirs = {},
+  prefer_startup_root = false,
+  sync_root_with_cwd = false,
+  reload_on_bufenter = false,
+  respect_buf_cwd = false,
+  on_attach = "disable",
+  remove_keymaps = false,
+  select_prompts = false,
+  view = {
+    adaptive_size = false,
+    centralize_selection = false,
+    width = 30,
+    hide_root_folder = false,
+    side = "left",
+    preserve_window_proportions = false,
+    number = false,
+    relativenumber = false,
+    signcolumn = "yes",
+    mappings = {
+      custom_only = false,
+      list = {
+        -- user mappings go here
+      },
+    },
+    float = {
+      enable = false,
+      quit_on_focus_loss = true,
+      open_win_config = {
+        relative = "editor",
+        border = "rounded",
+        width = 30,
+        height = 30,
+        row = 1,
+        col = 1,
+      },
+    },
+  },
+  renderer = {
+    add_trailing = false,
+    group_empty = false,
+    highlight_git = false,
+    full_name = false,
+    highlight_opened_files = "none",
+    root_folder_modifier = ":~",
+    indent_width = 2,
+    indent_markers = {
+      enable = false,
+      inline_arrows = true,
+      icons = {
+        corner = "└",
+        edge = "│",
+        item = "│",
+        bottom = "─",
+        none = " ",
+      },
+    },
+    icons = {
+      webdev_colors = true,
+      git_placement = "before",
+      padding = " ",
+      symlink_arrow = " ➛ ",
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+      glyphs = {
+        default = "",
+        symlink = "",
+        bookmark = "",
+        folder = {
+          arrow_closed = "",
+          arrow_open = "",
+          default = "",
+          open = "",
+          empty = "",
+          empty_open = "",
+          symlink = "",
+          symlink_open = "",
+        },
+        git = {
+          unstaged = "✗",
+          staged = "✓",
+          unmerged = "",
+          renamed = "➜",
+          untracked = "★",
+          deleted = "",
+          ignored = "◌",
+        },
+      },
+    },
+    special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+    symlink_destination = true,
+  },
+  hijack_directories = {
     enable = true,
     auto_open = true,
   },
+  update_focused_file = {
+    enable = false,
+    update_root = false,
+    ignore_list = {},
+  },
+  ignore_ft_on_setup = {},
+  system_open = {
+    cmd = "",
+    args = {},
+  },
   diagnostics = {
     enable = false,
+    show_on_dirs = false,
+    debounce_delay = 50,
     icons = {
       hint = "",
       info = "",
       warning = "",
       error = "",
-    }
-  },
-  update_focused_file = {
-    enable      = false,
-    update_cwd  = false,
-    ignore_list = {}
-  },
-  system_open = {
-    cmd  = nil,
-    args = {}
+    },
   },
   filters = {
     dotfiles = false,
-    custom = {}
+    custom = {},
+    exclude = {},
+  },
+  filesystem_watchers = {
+    enable = true,
+    debounce_delay = 50,
   },
   git = {
     enable = true,
-    ignore = false,
-    timeout = 500,
+    ignore = true,
+    show_on_dirs = true,
+    timeout = 400,
   },
-  view = {
-    width = 30,
-    height = 30,
-    hide_root_folder = false,
-    side = 'left',
-    auto_resize = false,
-    mappings = {
-      custom_only = false,
-      list = {}
+  actions = {
+    use_system_clipboard = true,
+    change_dir = {
+      enable = true,
+      global = false,
+      restrict_above_cwd = false,
     },
-    number = false,
-    relativenumber = false
+    expand_all = {
+      max_folder_discovery = 300,
+      exclude = {},
+    },
+    file_popup = {
+      open_win_config = {
+        col = 1,
+        row = 1,
+        relative = "cursor",
+        border = "shadow",
+        style = "minimal",
+      },
+    },
+    open_file = {
+      quit_on_open = false,
+      resize_window = true,
+      window_picker = {
+        enable = true,
+        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+        exclude = {
+          filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+          buftype = { "nofile", "terminal", "help" },
+        },
+      },
+    },
+    remove_file = {
+      close_window = true,
+    },
   },
   trash = {
-    cmd = "trash",
-    require_confirm = true
-  }
-}
+    cmd = "gio trash",
+    require_confirm = true,
+  },
+  live_filter = {
+    prefix = "[FILTER]: ",
+    always_show_folders = true,
+  },
+  log = {
+    enable = false,
+    truncate = false,
+    types = {
+      all = false,
+      config = false,
+      copy_paste = false,
+      dev = false,
+      diagnostics = false,
+      git = false,
+      profile = false,
+      watcher = false,
+    },
+  },
+} -- END_DEFAULT_OPTS
 NVIM_TREE
 
 nnoremap <leader>nt :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <leader>n :NvimTreeToggle<CR>
 " NvimTreeOpen, NvimTreeClose, NvimTreeFocus and NvimTreeResize are also available if you need them
 
 set termguicolors " this variable must be enabled for colors to be applied properly
@@ -620,12 +786,220 @@ if has("autocmd")
   augroup kickass_defaults
     autocmd!
     autocmd FileType kickass setlocal sts=4 shiftwidth=4 tabstop=4 expandtab
+    autocmd FileType kickass setlocal commentstring=//\ %s
     autocmd FileType kickass setlocal makeprg=./bin/compile.sh\ %
+    autocmd BufNewFile,BufRead *spec.asm setlocal makeprg=./bin/test.sh\ %
+    autocmd BufNewFile,BufRead main.asm setlocal makeprg=./bin/test.sh\ %
     " autocmd BufNewFile,BufRead *.asm,*.s,*.inc makeprg=./bin/compile.sh\ %
-    " autocmd BufNewFile,BufRead *spec.asm makeprg=./bin/test.sh\ %
-    " autocmd FileType kickass setlocal errorformat+=%.%#(%f\ %l:%c)%.%#Error:\ %m
-    autocmd FileType kickass setlocal errorformat=%E%.%#%trror:\ %m
+    autocmd FileType kickass setlocal errorformat=%.%#(%f\ %l:%c)%.%#%trror:\ %m
+    autocmd FileType kickass setlocal errorformat+=%E%.%#%trror:\ %m
     autocmd FileType kickass setlocal errorformat+=%Z%.%#at\ line\ %l%.%#column\ %c%.%#\ in\ %f
     autocmd BufWritePost *.asm,*.s,*.inc Make
   augroup END
+
+  " Telescope
+  autocmd FileType TelescopePrompt
+       \ call deoplete#custom#buffer_option('auto_complete', v:false)
 endif
+
+
+" lua <<EOF
+" require('go').setup({
+"   goimport='gopls', -- goimport command, can be gopls[default] or goimport
+"   gofmt = 'gofumpt', --gofmt cmd,
+"   max_line_len = 220, -- max line length in goline format
+"   tag_transform = false, -- tag_transfer  check gomodifytags for details
+"   test_template = '', -- default to testify if not set; g:go_nvim_tests_template  check gotests for details
+"   test_template_dir = '', -- default to nil if not set; g:go_nvim_tests_template_dir  check gotests for details
+"   comment_placeholder = '' ,  -- comment_placeholder your cool placeholder e.g. ﳑ       
+"   icons = {breakpoint = '🧘', currentpos = '🏃'},
+"   verbose = false,  -- output loginf in messages
+"   lsp_cfg = false, -- true: apply go.nvim non-default gopls setup, if it is a list, will merge with gopls setup e.g.
+"                    -- lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}
+"   lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
+"   lsp_on_attach = true, -- if a on_attach function provided:  attach on_attach function to gopls
+"                        -- true: will use go.nvim on_attach if true
+"                        -- nil/false do nothing
+"   lsp_codelens = true, -- set to false to disable codelens, true by default
+"   gopls_remote_auto = true, -- add -remote=auto to gopls
+"   gopls_cmd = nil, -- if you need to specify gopls path and cmd, e.g {"/home/user/lsp/gopls", "-logfile","/var/log/gopls.log" }
+"   fillstruct = 'gopls', -- can be nil (use fillstruct, slower) and gopls
+"   lsp_diag_hdlr = true, -- hook lsp diag handler
+"   dap_debug = true, -- set to false to disable dap
+"   test_runner = 'ginkgo', -- richgo, go test, richgo, dlv, ginkgo
+"   run_in_floaterm = true, -- set to true to run in float window.
+"   --float term recommand if you use richgo/ginkgo with terminal color
+"   dap_debug_keymap = true, -- set keymaps for debugger
+"   dap_debug_gui = true, -- set to true to enable dap gui, highly recommand
+"   dap_debug_vt = true, -- set to true to enable dap virtual text
+"   build_tags = "tag1,tag2" -- set default build tags
+" })
+
+" local protocol = require'vim.lsp.protocol'
+
+" require "nvim-treesitter.configs".setup({
+"   incremental_selection = {
+"     enable = enable,
+"     keymaps = {
+"       -- mappings for incremental selection (visual mappings)
+"       init_selection = "gnn", -- maps in normal mode to init the node/scope selection
+"       node_incremental = "grn", -- increment to the upper named parent
+"       scope_incremental = "grc", -- increment to the upper scope (as defined in locals.scm)
+"       node_decremental = "grm" -- decrement to the previous node
+"     }
+"   },
+
+"   textobjects = {
+"     -- syntax-aware textobjects
+"     enable = enable,
+"     lsp_interop = {
+"       enable = enable,
+"       peek_definition_code = {
+"         ["DF"] = "@function.outer",
+"         ["DF"] = "@class.outer"
+"       }
+"     },
+"     keymaps = {
+"       ["iL"] = {
+"         -- you can define your own textobjects directly here
+"         go = "(function_definition) @function",
+"       },
+"       -- or you use the queries from supported languages with textobjects.scm
+"       ["af"] = "@function.outer",
+"       ["if"] = "@function.inner",
+"       ["aC"] = "@class.outer",
+"       ["iC"] = "@class.inner",
+"       ["ac"] = "@conditional.outer",
+"       ["ic"] = "@conditional.inner",
+"       ["ae"] = "@block.outer",
+"       ["ie"] = "@block.inner",
+"       ["al"] = "@loop.outer",
+"       ["il"] = "@loop.inner",
+"       ["is"] = "@statement.inner",
+"       ["as"] = "@statement.outer",
+"       ["ad"] = "@comment.outer",
+"       ["am"] = "@call.outer",
+"       ["im"] = "@call.inner"
+"     },
+"     move = {
+"       enable = enable,
+"       set_jumps = true, -- whether to set jumps in the jumplist
+"       goto_next_start = {
+"         ["]m"] = "@function.outer",
+"         ["]]"] = "@class.outer"
+"       },
+"       goto_next_end = {
+"         ["]M"] = "@function.outer",
+"         ["]["] = "@class.outer"
+"       },
+"       goto_previous_start = {
+"         ["[m"] = "@function.outer",
+"         ["[["] = "@class.outer"
+"       },
+"       goto_previous_end = {
+"         ["[M"] = "@function.outer",
+"         ["[]"] = "@class.outer"
+"       }
+"     },
+"     select = {
+"       enable = enable,
+"       keymaps = {
+"         -- You can use the capture groups defined in textobjects.scm
+"         ["af"] = "@function.outer",
+"         ["if"] = "@function.inner",
+"         ["ac"] = "@class.outer",
+"         ["ic"] = "@class.inner",
+"         -- Or you can define your own textobjects like this
+"         ["iF"] = {
+"           python = "(function_definition) @function",
+"           cpp = "(function_definition) @function",
+"           c = "(function_definition) @function",
+"           java = "(method_declaration) @function",
+"           go = "(method_declaration) @function"
+"         }
+"       }
+"     },
+"     swap = {
+"       enable = enable,
+"       swap_next = {
+"         ["<leader>a"] = "@parameter.inner"
+"       },
+"       swap_previous = {
+"         ["<leader>A"] = "@parameter.inner"
+"       }
+"     }
+"   }
+" })
+
+" require "navigator".setup({
+"   debug = false, -- log output, set to true and log path: ~/.local/share/nvim/gh.log
+"   -- put a on_attach of your own here, e.g
+"   -- function(client, bufnr)
+"   --   -- the on_attach will be called at end of navigator on_attach
+"   -- end,
+"   -- The attach code will apply to all LSP clients
+
+"   default_mapping = true,  -- set to false if you will remap every key
+"   keymaps = {{key = "gK", func = "declaration()"}}, -- a list of key maps
+"   -- this kepmap gK will override "gD" mapping function declaration()  in default kepmap
+"   -- please check mapping.lua for all keymaps
+"   treesitter_analysis = true, -- treesitter variable context
+"   transparency = 50, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
+"   icons = {
+"     -- Code action
+"     code_action_icon = "🏏",
+"     -- Diagnostics
+"     diagnostic_head = '🐛',
+"     diagnostic_head_severity_1 = "🈲",
+"     -- refer to lua/navigator.lua for more icons setups
+"   },
+"   lsp_installer = false, -- set to true if you would like use the lsp installed by williamboman/nvim-lsp-installer
+"   lsp = {
+"     code_action = {enable = true, sign = true, sign_priority = 40, virtual_text = false},
+"     code_lens_action = {enable = true, sign = true, sign_priority = 40, virtual_text = false},
+"     format_on_save = true, -- set to false to disasble lsp code format on save (if you are using prettier/efm/formater etc)
+"     disable_format_cap = {"sqls", "sumneko_lua", "gopls"},  -- a list of lsp disable format capacity (e.g. if you using efm or vim-codeformat etc), empty {} by default
+"     disable_lsp = {'pylsd', 'sqlls'}, -- a list of lsp server disabled for your project, e.g. denols and tsserver you may
+"     -- only want to enable one lsp server
+"     -- to disable all default config and use your own lsp setup set
+"     -- disable_lsp = 'all'
+"     -- Default {}
+"     diagnostic_scrollbar_sign = {'▃', '▆', '█'}, -- experimental:  diagnostic status in scroll bar area; set to false to disable the diagnostic sign,
+"     -- for other style, set to {'╍', 'ﮆ'} or {'-', '='}
+"     diagnostic_virtual_text = false,  -- show virtual for diagnostic message
+"     diagnostic_update_in_insert = false, -- update diagnostic message in insert mode
+"     disply_diagnostic_qf = true, -- always show quickfix if there are diagnostic errors, set to false if you  want to ignore it
+"     tsserver = {
+"       filetypes = {'typescript'} -- disable javascript etc,
+"       -- set to {} to disable the lspclient for all filetypes
+"     },
+"     gopls = {   -- gopls setting
+"       on_attach = function(client, bufnr)  -- on_attach for gopls
+"         -- your special on attach here
+"         -- e.g. disable gopls format because a known issue https://github.com/golang/go/issues/45732
+"         print("i am a hook, I will disable document format")
+"         client.resolved_capabilities.document_formatting = false
+"       end,
+"       settings = {
+"         gopls = {gofumpt = false} -- disable gofumpt etc,
+"       }
+"     },
+"     sumneko_lua = {
+"       sumneko_root_path = vim.fn.expand("$HOME") .. "/github/sumneko/lua-language-server",
+"       sumneko_binary = vim.fn.expand("$HOME") .. "/github/sumneko/lua-language-server/bin/macOS/lua-language-server",
+"     },
+"     servers = {'cmake', 'ltex'}, -- by default empty, but if you whant navigator load  e.g. `cmake` and `ltex` for you , you
+"     -- can put them in the `servers` list and navigator will auto load them.
+"     -- you could still specify the custom config  like this
+"     -- cmake = {filetypes = {'cmake', 'makefile'}, single_file_support = false},
+"   }
+" })
+
+
+" EOF
+
+let test#go#runner = 'ginkgo'
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 60vnew',
+      \ 'stack':      'rightbelow 10new',
+\ }

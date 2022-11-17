@@ -121,4 +121,31 @@ endif
 "   augroup END
 " endif
 
+" ------------------------------------------------------------------
+" Go 
+" ------------------------------------------------------------------
+let g:go_fmt_command = 'goimports'
+let g:go_fmt_autosave = 1
+let g:go_imports_autosave = 0
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['all']
 
+if has("autocmd")
+  augroup go_defaults
+    autocmd!
+    autocmd FileType go setlocal noet ts=4 sw=4 sts=4
+    autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()
+    autocmd ColorScheme * highlight CocErrorFloat guifg=#ffffff
+    autocmd ColorScheme * highlight CocInfoFloat guifg=#ffffff
+    autocmd ColorScheme * highlight CocWarningFloat guifg=#ffffff
+    autocmd ColorScheme * highlight SignColumn guibg=#adadad
+  augroup END
+endif
