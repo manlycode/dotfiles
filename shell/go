@@ -1,12 +1,4 @@
 # ------------------------------------------------------------
 # Go
-
-# export GOPATH=$HOME/git/go
-# export PATH=$PATH:$GOPATH/bin
-
-# export PATH=/usr/local/opt/go/libexec/bin:$PATH
-# export GOROOT=/usr/local/opt/go/libexec
-# export PATH=$GOPATH/bin:$PATH
-# export PATH=$PATH:$GOROOT/bin
-
+# NOTE: Use asdf for go installations
 # vim: set ft=sh:

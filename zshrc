@@ -20,17 +20,17 @@ bindkey ";2B"        down-history # Shift+Down
 bindkey "^[[5~"        up-history # PageUp
 bindkey "^[[6~"      down-history # PageDown
 
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
+# BASE16_SHELL="$HOME/.config/base16-shell/"
+# [ -n "$PS1" ] && \
+#     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+#         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # -----------------------------------------------------------------
 # zinit configuration
 # https://github.com/zdharma/zinit
 # -----------------------------------------------------------------
 ### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+if [[ ! -f $HOME/.zinit/bin/zi.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
     command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
@@ -38,7 +38,7 @@ if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
+source "$HOME/.zinit/bin/zi.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
@@ -80,6 +80,11 @@ compinit
 zinit cdreplay -q
 zinit cdlist
 # zinit load "asdf-vm/asdf"
+#
+# # Colors and highlight {{{
+zinit light 'chrissicool/zsh-256color'
+zinit light "chriskempson/base16-shell"
+# }}}
 
 ### End Zinit
 
@@ -92,7 +97,8 @@ export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
 eval "dark-mode-$(dark-mode status)"
 
 # vim: set ft=sh:
-. /usr/local/opt/asdf/libexec/asdf.sh
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 export PATH="~/.asdf/shims:$PATH"
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
