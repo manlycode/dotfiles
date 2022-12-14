@@ -99,6 +99,3 @@ eval "dark-mode-$(dark-mode status)"
 # vim: set ft=sh:
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 export PATH="~/.asdf/shims:$PATH"
-
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-

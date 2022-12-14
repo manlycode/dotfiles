@@ -2,3 +2,4 @@ golang 1.18
 ruby 3.1.2
 python 3.11.0 2.7.18
 nodejs 18.12.1
+java graalvm-22.1.0+java11

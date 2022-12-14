@@ -3,8 +3,6 @@
 # Setup Neovim
 
 brew install zlib
-brew install pyenv
-brew install pyenv-virtualenv
 brew install nvim
 
 export XCODE_PATH="/Applications/Xcode.app/Contents/Developer"
@@ -23,23 +21,12 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 export PYTHON2_VERSION="2.7.18"
-export PYTHON3_VERSION="3.9.4"
-
-pyenv install $PYTHON2_VERSION
-pyenv install $PYTHON3_VERSION
-
-pyenv virtualenv $PYTHON2_VERSION neovim2
-pyenv virtualenv $PYTHON3_VERSION neovim3
+export PYTHON3_VERSION="3.11.0"
 
 source ~/.zshenv
 
-pyenv activate neovim2
-pip install neovim
-echo "let g:python_host_prog = '$(pyenv which python)'" >> ~/.config/nvim/init.vim
-
-pyenv activate neovim3
-pip install neovim
-echo "let g:python3_host_prog = '$(pyenv which python)'" >> ~/.config/nvim/init.vim
+echo "let g:python_host_prog = '$(asdf which python3)'" >> ~/.config/nvim/init.vim
+echo "let g:python3_host_prog = '$(asdf which python2)'" >> ~/.config/nvim/init.vim
 
 gem install neovim
 npm install -g neovim

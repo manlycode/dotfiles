@@ -84,8 +84,6 @@ call plug#end()
 
 " General settings
 " ------------------------------------------------
-" let g:python_host_prog = '/Users/manlycode/.pyenv/versions/neovim2/bin/python'
-" let g:python3_host_prog = '/Users/manlycode/.pyenv/versions/neovim3/bin/python'
 " let g:pythonx=3
 
 set noswapfile
