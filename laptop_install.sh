@@ -29,7 +29,6 @@ brew tap heroku/brew && brew install heroku
 brew tap knrz/iterm-workspace && brew install iterm-workspace
 
 brew services start redis
-brew services start postgresql
 
 # ZSH w/ zplug
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
