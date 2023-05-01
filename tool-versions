@@ -3,4 +3,4 @@ golang 1.18
 postgres 13.8
 ruby 3.1.2
 nodejs 18.12.1
-java graalvm-22.1.0+java11
+java zulu-11.62.17

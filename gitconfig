@@ -17,6 +17,7 @@
         sync-master= !"git co master && git pull && git co - && git rebase master"
         sync-develop= !"git co develop && git pull && git co - && git rebase develop"
         push-track=!"git push --set-upstream origin `git symbolic-ref --short HEAD`"
+        pull-request=!"gh pr create"
         pr=!"gh pr view --web"
 
 [diff]
@@ -35,8 +36,6 @@
 
 [push]
         default = simple
-[credential]
-	helper = osxkeychain
 [filter "hawser"]
         clean = git hawser clean %f
         smudge = git hawser smudge %f
