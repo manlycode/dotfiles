@@ -1,6 +1,8 @@
 python 3.11.0 2.7.18
 golang 1.18
-postgres 13.8
-ruby 3.1.2
+ruby 3.3.5
 nodejs 18.12.1
-java zulu-11.62.17
+java oracle-graalvm-17.0.9
+#java zulu-17.0.9
+postgres 15.4
+

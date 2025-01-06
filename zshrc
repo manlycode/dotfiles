@@ -99,3 +99,5 @@ eval "dark-mode-$(dark-mode status)"
 # vim: set ft=sh:
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 export PATH="~/.asdf/shims:$PATH"
+export PATH="/Applications/Android Studio.app/Contents/MacOS:$PATH"
+export PATH="/opt/homebrew/opt/avr-gcc@8/bin:$PATH"
