@@ -12,7 +12,17 @@ vim.call('plug#begin')
 -- Plug('Shougo/neosnippet-snippets')
 -- Plug('Shougo/defx.nvim', { ['do'] =  ':UpdateRemotePlugins' })
 -- Plug('Shougo/deol.nvim')
+--
+Plug('neovim/nvim-lspconfig')
+Plug('hrsh7th/cmp-nvim-lsp')
+Plug('hrsh7th/cmp-buffer')
+Plug('hrsh7th/cmp-path')
+Plug('hrsh7th/nvim-cmp')
+Plug('hrsh7th/cmp-vsnip')
+Plug('hrsh7th/vim-vsnip')
+Plug('hrsh7th/vim-vsnip-integ')
 
+Plug('natecraddock/workspaces.nvim')
 
 Plug('morhetz/gruvbox')
 -- Plug('Shougo/neoinclude.vim')
@@ -63,11 +73,16 @@ Plug('powerman/vim-plugin-AnsiEsc')
 
 -- Look and Feel
 -- Plug('chriskempson/base16-vim')
+-- ColorSchemes
 Plug('tinted-theming/tinted-vim')
-Plug('vim-airline/vim-airline')
-Plug('vim-airline/vim-airline-themes')
+Plug('tiagovla/tokyodark.nvim')
+-- Plug('vim-airline/vim-airline')
+-- Plug('vim-airline/vim-airline-themes')
 
 Plug('vim-scripts/syntaxm4.vim')
+Plug('nvim-lualine/lualine.nvim')
+Plug('mawkler/modicator.nvim')
+Plug('nanozuki/tabby.nvim')
 
 -- Neovim
 Plug('kassio/neoterm')
@@ -156,6 +171,8 @@ Plug('clojure-vim/async-clj-omni')
 -- Plug('jiangmiao/auto-pairs')
 Plug('MattesGroeger/vim-bookmarks')
 
+Plug('RaafatTurki/hex.nvim')
+
 -- Initialize plugin system
 vim.call('plug#end')
 
@@ -180,7 +197,6 @@ set smartindent
 set smarttab
 set splitright
 set splitbelow
-set termguicolors
 ]])
 
 -- NeoVim handles ESC keys as alt+key set this to solve the problem
@@ -437,6 +453,8 @@ vim.g.loaded_netrwPlugin = 1
 
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
+vim.o.cursorline = true
+vim.o.number = true
 
 -- empty setup using defaults
 require("nvim-tree").setup()
@@ -493,3 +511,218 @@ colorscheme retrobox
 
 vim.g.tinted_colorspace = 256
 vim.cmd.colorscheme('retrobox')
+
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+
+      -- For `mini.snippets` users:
+      -- local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
+      -- insert({ body = args.body }) -- Insert at cursor
+      -- cmp.resubscribe({ "TextChangedI", "TextChangedP" })
+      -- require("cmp.config").set_onetime({ sources = {} })
+    end,
+  },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, -- For vsnip users.
+    -- { name = 'luasnip' }, -- For luasnip users.
+    -- { name = 'ultisnips' }, -- For ultisnips users.
+    -- { name = 'snippy' }, -- For snippy users.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
+-- Set configuration for specific filetype.
+--[[ cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'git' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+require("cmp_git").setup() ]]-- 
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(':', {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = cmp.config.sources({
+--     { name = 'path' }
+--   }, {
+--     { name = 'cmdline' }
+--   }),
+--   matching = { disallow_symbol_nonprefix_matching = false }
+-- })
+
+-- Set up lspconfig.
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+-- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
+  -- capabilities = capabilities
+-- }
+--
+--
+require("workspaces").setup(
+  {
+    -- path to a file to store workspaces data in
+    -- on a unix system this would be ~/.local/share/nvim/workspaces
+    path = vim.fn.stdpath("data") .. "/workspaces",
+
+    -- to change directory for nvim (:cd), or only for window (:lcd)
+    -- deprecated, use cd_type instead
+    -- global_cd = true,
+
+    -- controls how the directory is changed. valid options are "global", "local", and "tab"
+    --   "global" changes directory for the neovim process. same as the :cd command
+    --   "local" changes directory for the current window. same as the :lcd command
+    --   "tab" changes directory for the current tab. same as the :tcd command
+    --
+    -- if set, overrides the value of global_cd
+    cd_type = "global",
+
+    -- sort the list of workspaces by name after loading from the workspaces path.
+    sort = true,
+
+    -- sort by recent use rather than by name. requires sort to be true
+    mru_sort = true,
+
+    -- option to automatically activate workspace when opening neovim in a workspace directory
+    auto_open = false,
+
+    -- option to automatically activate workspace when changing directory not via this plugin
+    -- set to "autochdir" to enable auto_dir when using :e and vim.opt.autochdir
+    -- valid options are false, true, and "autochdir"
+    auto_dir = false,
+
+    -- enable info-level notifications after adding or removing a workspace
+    notify_info = true,
+
+    -- lists of hooks to run after specific actions
+    -- hooks can be a lua function or a vim command (string)
+    -- lua hooks take a name, a path, and an optional state table
+    -- if only one hook is needed, the list may be omitted
+    hooks = {
+        add = {},
+        remove = {},
+        rename = {},
+        open_pre = {},
+        open = {},
+    },
+})
+
+-- defaults
+require('hex').setup({
+  -- cli command used to dump hex data
+  dump_cmd = 'xxd -g 1 -u',
+
+  -- cli command used to assemble from hex data
+  assemble_cmd = 'xxd -r',
+  
+  -- function that runs on BufReadPre to determine if it's binary or not
+  is_file_binary_pre_read = function()
+    -- logic that determines if a buffer contains binary data or not
+    -- must return a bool
+  end,
+
+  -- function that runs on BufReadPost to determine if it's binary or not
+  is_file_binary_post_read = function()
+    -- logic that determines if a buffer contains binary data or not
+    -- must return a bool
+  end,
+})
+
+
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    always_show_tabline = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 100,
+      tabline = 100,
+      winbar = 100,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
+
+require('modicator').setup({
+  -- Warn if any required option is missing. May emit false positives if some
+  -- other plugin modifies them, which in that case you can just ignore
+  show_warnings = false,
+  highlights = {
+    -- Default options for bold/italic
+    defaults = {
+      bold = false,
+      italic = false,
+    },
+    -- Use `CursorLine`'s background color for `CursorLineNr`'s background
+    use_cursorline_background = false,
+  },
+  integration = {
+    lualine = {
+      enabled = true,
+      -- Letter of lualine section to use (if `nil`, gets detected automatically)
+      mode_section = nil,
+      -- Whether to use lualine's mode highlight's foreground or background
+      highlight = 'bg',
+    },
+  },
+})
