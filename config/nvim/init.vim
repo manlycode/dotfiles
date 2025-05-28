@@ -18,7 +18,7 @@ Plug 'w0rp/ale'
 Plug 'pbrisbin/vim-mkdir'
 
 " Plug 'vim-scripts/VimIRC.vim'
-" Plug 'neomake/neomake'
+Plug 'neomake/neomake'
 " Plug 'ap/vim-buftabline'
 "
 "
@@ -38,7 +38,7 @@ Plug 'tpope/gem-ctags'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'janko-m/vim-test'
-" Plug 'wincent/ferret'
+
 Plug 'tpope/vim-sleuth'
 Plug 'chr4/nginx.vim'
 Plug 'wannesm/wmgraphviz.vim'
@@ -124,9 +124,9 @@ Plug 'slashmili/alchemist.vim'
 
 "spec/features/org_admin/org_admin_can_edit_space_in_french_spec.rb:16 ASM
 " Plug 'samsaga2/vim-z80'
-" Plug 'maxbane/vim-asm_ca65'
+Plug 'maxbane/vim-asm_ca65'
 Plug 'EmmaEwert/vim-rgbds'
-Plug 'gryf/kickass-syntax-vim'
+" Plug 'gryf/kickass-syntax-vim'
 Plug '~/git/manlycode/particle-io.vim'
 
 " Vim
@@ -151,9 +151,10 @@ Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-salve'
 Plug 'clojure-vim/async-clj-omni'
 " Plug 'jiangmiao/auto-pairs'
+Plug 'MattesGroeger/vim-bookmarks'
 
 " Initialize plugin system
-call plug#end()
+ call plug#end()
 
 
 " General settings
@@ -322,7 +323,7 @@ command! Zeus :tabe|terminal zeus start
 " command! Coverage :!open coverage/index.html
 
 " make test commands execute using dispatch.vim
-let test#strategy = "neovim"
+let test#strategy = "neoterm"
 " let g:test#neovim#start_normal = 1 " If using neovim strategy
 
 " let test#strategy = "asyncrun_background"
@@ -399,11 +400,11 @@ let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/9.0.0_1'
 
 
 " Highlight
-let g:go_highlight_functions = 1  
-let g:go_highlight_methods = 1  
-let g:go_highlight_structs = 1  
-let g:go_highlight_operators = 1  
-let g:go_highlight_build_constraints = 1  
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 
 
@@ -451,7 +452,8 @@ let g:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo'], 'go': ['gofmt',
 filetype plugin indent on
 augroup filetypedetect
     au BufNewFile,BufRead .iterm-workspace set ft=json
-    au BufNewFile,BufRead *.asm,*.s,*.inc set ft=kickass
+    au BufNewFile,BufRead *.s,*.inc,*.asm set ft=asm_ca65
+    " au BufNewFile,BufRead *.s,*.inc,*.asm set ft=kickass
 augroup END
 
 
@@ -582,9 +584,10 @@ NVIM_TREE
 nnoremap <leader>nt :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeToggle<CR>
-" NvimTreeOpen, NvimTreeClose, NvimTreeFocus and NvimTreeResize are also available if you need them
 
-set termguicolors " this variable must be enabled for colors to be applied properly
+" NvimTreeOpen, NvimTreeClose, NvimTreeFocus and NvimTreeResize are also available if you need them
+" this variable must be enabled for colors to be applied properly
+set termguicolors
 
 " a list of groups can be found at `:help nvim_tree_highlight`
 
@@ -607,58 +610,33 @@ nnoremap <silent> <leader>tr :<c-u>exec printf("%sTexec !! \<lt>cr>", v:count)<c
 " vim.g.completion_chain_complete_list = { default = {{ complete_items = { "lsp", "path", "buffers", "snippet" } },{ mode = "<c-p>" },{ mode = "<c-n>" },},TelescopePrompt = {},frecency = {}}
 
 if has("autocmd")
-  augroup kickass_defaults
-    autocmd!
-    autocmd FileType kickass setlocal sts=4 shiftwidth=4 tabstop=4 expandtab
-    autocmd FileType kickass setlocal commentstring=//\ %s
-    autocmd FileType kickass setlocal makeprg=./bin/compile.sh\ %
-    autocmd BufNewFile,BufRead *spec.asm setlocal makeprg=./bin/test.sh\ %
-    autocmd BufNewFile,BufRead main.asm setlocal makeprg=./bin/test.sh\ %
-    " autocmd BufNewFile,BufRead *.asm,*.s,*.inc makeprg=./bin/compile.sh\ %
-    autocmd FileType kickass setlocal errorformat=%.%#(%f\ %l:%c)%.%#%trror:\ %m
-    autocmd FileType kickass setlocal errorformat+=%E%.%#%trror:\ %m
-    autocmd FileType kickass setlocal errorformat+=%Z%.%#at\ line\ %l%.%#column\ %c%.%#\ in\ %f
-    autocmd BufWritePost *.asm,*.s,*.inc Make
-  augroup END
-
-  " Telescope
-  autocmd FileType TelescopePrompt
-       \ call deoplete#custom#buffer_option('auto_complete', v:false)
+  autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)
+  autocmd BufNewFile,BufRead *.asm,*.s,*.inc makeprg=/usr/bin/make\ %:r
 endif
 
 
 " lua <<EOF
-" require('go').setup({
-"   goimport='gopls', -- goimport command, can be gopls[default] or goimport
-"   gofmt = 'gofumpt', --gofmt cmd,
-"   max_line_len = 220, -- max line length in goline format
-"   tag_transform = false, -- tag_transfer  check gomodifytags for details
-"   test_template = '', -- default to testify if not set; g:go_nvim_tests_template  check gotests for details
-"   test_template_dir = '', -- default to nil if not set; g:go_nvim_tests_template_dir  check gotests for details
-"   comment_placeholder = '' ,  -- comment_placeholder your cool placeholder e.g. ﳑ       
-"   icons = {breakpoint = '🧘', currentpos = '🏃'},
-"   verbose = false,  -- output loginf in messages
-"   lsp_cfg = false, -- true: apply go.nvim non-default gopls setup, if it is a list, will merge with gopls setup e.g.
-"                    -- lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}
-"   lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
-"   lsp_on_attach = true, -- if a on_attach function provided:  attach on_attach function to gopls
-"                        -- true: will use go.nvim on_attach if true
-"                        -- nil/false do nothing
-"   lsp_codelens = true, -- set to false to disable codelens, true by default
-"   gopls_remote_auto = true, -- add -remote=auto to gopls
-"   gopls_cmd = nil, -- if you need to specify gopls path and cmd, e.g {"/home/user/lsp/gopls", "-logfile","/var/log/gopls.log" }
-"   fillstruct = 'gopls', -- can be nil (use fillstruct, slower) and gopls
-"   lsp_diag_hdlr = true, -- hook lsp diag handler
-"   dap_debug = true, -- set to false to disable dap
-"   test_runner = 'ginkgo', -- richgo, go test, richgo, dlv, ginkgo
-"   run_in_floaterm = true, -- set to true to run in float window.
-"   --float term recommand if you use richgo/ginkgo with terminal color
-"   dap_debug_keymap = true, -- set keymaps for debugger
-"   dap_debug_gui = true, -- set to true to enable dap gui, highly recommand
-"   dap_debug_vt = true, -- set to true to enable dap virtual text
-"   build_tags = "tag1,tag2" -- set default build tags
-" })
+"
+"
+" local parsers = require("nvim-treesitter.parsers").get_parser_configs()
 
+" parsers.ca65 = {
+"   install_info = {
+"     url = "~/git/manlycode/tree-sitter-ca65",
+"     files = {
+"       "src/parser.c",
+"     },
+"     branch = "main",
+"   },
+"   filetype = "asm",
+"   maintainers = {
+"     "@babasbot",
+"   },
+" }
+"
+"
+"
+"
 " local protocol = require'vim.lsp.protocol'
 
 " require "nvim-treesitter.configs".setup({

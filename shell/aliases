@@ -7,12 +7,12 @@ unzip_all() {
 }
 
 export POSTMASTER_PID_FILE=/usr/local/var/postgres/postmaster.pid
-export EDITOR=nvim
+export EDITOR=neovide
 
-alias dark="base16_gruvbox-dark-hard"
-alias dark-mode-on="base16_gruvbox-dark-hard"
-alias light="base16_gruvbox-light-hard"
-alias dark-mode-off="base16_gruvbox-light-hard"
+alias dark="base16_gruvbox-dark-soft"
+alias dark-mode-on="base16_gruvbox-dark-soft"
+alias light="base16_gruvbox-light-soft"
+alias dark-mode-off="base16_gruvbox-light-soft"
 alias eagle="/Applications/EAGLE-9.0.0/eagle.app/Contents/MacOS/eagle"
 alias flush-cache="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias kill-pumas="kill_pumas"
@@ -22,6 +22,7 @@ alias re-source="source ~/.zshrc"
 alias reset-postgres="rm $POSTMASTER_PID_FILE"
 alias zshconfig="nvim ~/.zshrc"
 alias vim="nvim"
+alias neovide="/Applications/Neovide.app/Contents/MacOS/neovide"
 alias heroku-logs='heroku apps --all | grep -v "=" | grep "\s" | sed "s/ .*$//" | fzf --header="Select the app you want to tail the logs" | xargs heroku logs -t -a'
 alias rsync-with-sudo-su="rsync -a -e \"ssh\" --rsync-path=\"sudo rsync\""
 alias diff-app-yaml="nvim -d config/application{.example,}.yml"

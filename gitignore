@@ -1,13 +1,14 @@
 .DS_Store
+.tool-versions
 .ruby-version
 .python-version
 .rake_tasks
+.envrc
 tags
 feature.txt
 scratch.*
 *.pyc
 *.swp
-
 custom_plan.rb
 zeus.json
 .get-to-work
