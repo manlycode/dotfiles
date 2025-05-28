@@ -81,8 +81,8 @@ Plug('tiagovla/tokyodark.nvim')
 
 Plug('vim-scripts/syntaxm4.vim')
 Plug('nvim-lualine/lualine.nvim')
-Plug('mawkler/modicator.nvim')
 Plug('nanozuki/tabby.nvim')
+Plug('mawkler/modicator.nvim')
 
 -- Neovim
 Plug('kassio/neoterm')
@@ -505,12 +505,59 @@ endif
 ]])
 
 
-vim.cmd([[
-colorscheme retrobox
-]])
-
 vim.g.tinted_colorspace = 256
 vim.cmd.colorscheme('retrobox')
+
+-- vim.o.showtabline = 2
+local theme = {
+  fill = 'TabLineFill',
+  -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+  head = 'TabLine',
+  current_tab = 'TabLineSel',
+  tab = 'TabLine',
+  win = 'TabLine',
+  tail = 'TabLine',
+}
+require('tabby').setup({
+  line = function(line)
+    return {
+      {
+        { '  ', hl = theme.head },
+        line.sep('', theme.head, theme.fill),
+      },
+      line.tabs().foreach(function(tab)
+        local hl = tab.is_current() and theme.current_tab or theme.tab
+        return {
+          line.sep('', hl, theme.fill),
+          tab.is_current() and '' or '󰆣',
+          tab.number(),
+          tab.name(),
+          tab.close_btn(''),
+          line.sep('', hl, theme.fill),
+          hl = hl,
+          margin = ' ',
+        }
+      end),
+      line.spacer(),
+      line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+        return {
+          line.sep('', theme.win, theme.fill),
+          win.is_current() and '' or '',
+          win.buf_name(),
+          line.sep('', theme.win, theme.fill),
+          hl = theme.win,
+          margin = ' ',
+        }
+      end),
+      {
+        line.sep('', theme.tail, theme.fill),
+        { '  ', hl = theme.tail },
+      },
+      hl = theme.fill,
+    }
+  end,
+  -- option = {}, -- setup modules' option,
+})
 
 local cmp = require'cmp'
 
@@ -565,12 +612,12 @@ cmp.setup({
 require("cmp_git").setup() ]]-- 
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
+-- cmp.setup.cmdline({ '/', '?' }, {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = 'buffer' }
+--   }
+-- })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 -- cmp.setup.cmdline(':', {
@@ -703,26 +750,57 @@ require('lualine').setup {
   extensions = {}
 }
 
+
+local theme = {
+  fill = 'TabLineFill',
+  -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+  head = 'TabLine',
+  current_tab = 'TabLineSel',
+  tab = 'TabLine',
+  win = 'TabLine',
+  tail = 'TabLine',
+}
+
+require('tabby').setup({
+  line = function(line)
+    return {
+      {
+        { '  ', hl = theme.head },
+        line.sep('', theme.head, theme.fill),
+      },
+      line.tabs().foreach(function(tab)
+        local hl = tab.is_current() and theme.current_tab or theme.tab
+        return {
+          line.sep('', hl, theme.fill),
+          tab.is_current() and '' or '󰆣',
+          tab.number(),
+          tab.name(),
+          tab.close_btn(''),
+          line.sep('', hl, theme.fill),
+          hl = hl,
+          margin = ' ',
+        }
+      end),
+      line.spacer(),
+      line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+        return {
+          line.sep('', theme.win, theme.fill),
+          win.is_current() and '' or '',
+          win.buf_name(),
+          line.sep('', theme.win, theme.fill),
+          hl = theme.win,
+          margin = ' ',
+        }
+      end),
+      {
+        line.sep('', theme.tail, theme.fill),
+        { '  ', hl = theme.tail },
+      },
+      hl = theme.fill,
+    }
+  end,
+  -- option = {}, -- setup modules' option,
+})
+
 require('modicator').setup({
-  -- Warn if any required option is missing. May emit false positives if some
-  -- other plugin modifies them, which in that case you can just ignore
-  show_warnings = false,
-  highlights = {
-    -- Default options for bold/italic
-    defaults = {
-      bold = false,
-      italic = false,
-    },
-    -- Use `CursorLine`'s background color for `CursorLineNr`'s background
-    use_cursorline_background = false,
-  },
-  integration = {
-    lualine = {
-      enabled = true,
-      -- Letter of lualine section to use (if `nil`, gets detected automatically)
-      mode_section = nil,
-      -- Whether to use lualine's mode highlight's foreground or background
-      highlight = 'bg',
-    },
-  },
 })
