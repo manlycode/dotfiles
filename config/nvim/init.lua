@@ -25,6 +25,9 @@ Plug('hrsh7th/vim-vsnip-integ')
 Plug('natecraddock/workspaces.nvim')
 
 Plug('morhetz/gruvbox')
+Plug('sainnhe/gruvbox-material')
+Plug('sainnhe/gruvbox-material')
+Plug('marko-cerovac/material.nvim')
 -- Plug('Shougo/neoinclude.vim')
 
 Plug('w0rp/ale')
@@ -234,6 +237,7 @@ syntax on
 set omnifunc=syntaxcomplete#Complete
 set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/node_modules/*,*/nes/*,**/*.pyc,.git/*
 
+set termguicolors
 let g:tinted_colorspace=256
 if filereadable(expand("~/.vimrc_background"))
   let g:tinted_colorspace=256
@@ -267,6 +271,7 @@ end
 function imap(shortcut, command)
   map('i', shortcut, command)
 end
+
 
 -- Custom movement between buffers
 vim.cmd([[
@@ -361,8 +366,6 @@ nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tg :TestVisit<CR>
 nmap <silent> <leader>tt :Ttoggle<CR>
-nmap <silent> <leader>fw :Ack <C-r><C-w><CR>
-nmap <silent> <leader>fp :Ack
 ]])
 
 -- Find files using Telescope command-line sugar.
@@ -380,6 +383,14 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fo <cmd>lua require('telescope.builtin').oldfiles()<cr>
 ]])
+
+nmap("<leader>fw", ":Telescope workspaces<cr>")
+
+nmap("<D-v>", "\"+p")
+imap("<D-v>", "<Esc>\"+pA")
+imap("<D-s>", "<Esc>:w<CR>A")
+nmap("<D-s>", "<Esc>:w<CR>")
+
 
 vim.cmd([[
 let g:go_autodetect_gopath = 0
@@ -505,10 +516,10 @@ endif
 ]])
 
 
-vim.g.tinted_colorspace = 256
+-- vim.g.tinted_colorspace = 256
 vim.cmd.colorscheme('retrobox')
 
--- vim.o.showtabline = 2
+vim.o.showtabline = 2
 local theme = {
   fill = 'TabLineFill',
   -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
@@ -518,46 +529,6 @@ local theme = {
   win = 'TabLine',
   tail = 'TabLine',
 }
-require('tabby').setup({
-  line = function(line)
-    return {
-      {
-        { '  ', hl = theme.head },
-        line.sep('', theme.head, theme.fill),
-      },
-      line.tabs().foreach(function(tab)
-        local hl = tab.is_current() and theme.current_tab or theme.tab
-        return {
-          line.sep('', hl, theme.fill),
-          tab.is_current() and '' or '󰆣',
-          tab.number(),
-          tab.name(),
-          tab.close_btn(''),
-          line.sep('', hl, theme.fill),
-          hl = hl,
-          margin = ' ',
-        }
-      end),
-      line.spacer(),
-      line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-        return {
-          line.sep('', theme.win, theme.fill),
-          win.is_current() and '' or '',
-          win.buf_name(),
-          line.sep('', theme.win, theme.fill),
-          hl = theme.win,
-          margin = ' ',
-        }
-      end),
-      {
-        line.sep('', theme.tail, theme.fill),
-        { '  ', hl = theme.tail },
-      },
-      hl = theme.fill,
-    }
-  end,
-  -- option = {}, -- setup modules' option,
-})
 
 local cmp = require'cmp'
 
@@ -751,56 +722,77 @@ require('lualine').setup {
 }
 
 
-local theme = {
-  fill = 'TabLineFill',
-  -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
-  head = 'TabLine',
-  current_tab = 'TabLineSel',
-  tab = 'TabLine',
-  win = 'TabLine',
-  tail = 'TabLine',
-}
+-- local theme = {
+--   fill = 'TabLineFill',
+--   -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+--   head = 'TabLine',
+--   current_tab = 'TabLineSel',
+--   tab = 'TabLine',
+--   win = 'TabLine',
+--   tail = 'TabLine',
+-- }
 
-require('tabby').setup({
-  line = function(line)
-    return {
-      {
-        { '  ', hl = theme.head },
-        line.sep('', theme.head, theme.fill),
-      },
-      line.tabs().foreach(function(tab)
-        local hl = tab.is_current() and theme.current_tab or theme.tab
-        return {
-          line.sep('', hl, theme.fill),
-          tab.is_current() and '' or '󰆣',
-          tab.number(),
-          tab.name(),
-          tab.close_btn(''),
-          line.sep('', hl, theme.fill),
-          hl = hl,
-          margin = ' ',
-        }
-      end),
-      line.spacer(),
-      line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-        return {
-          line.sep('', theme.win, theme.fill),
-          win.is_current() and '' or '',
-          win.buf_name(),
-          line.sep('', theme.win, theme.fill),
-          hl = theme.win,
-          margin = ' ',
-        }
-      end),
-      {
-        line.sep('', theme.tail, theme.fill),
-        { '  ', hl = theme.tail },
-      },
-      hl = theme.fill,
-    }
-  end,
-  -- option = {}, -- setup modules' option,
-})
+require('tabby').setup()
+require('tabby').setup()
+require('tabby').setup()
+-- require('tabby').setup({
+--   line = function(line)
+--     return {
+--       {
+--         { '  ', hl = theme.head },
+--         line.sep('', theme.head, theme.fill),
+--       },
+--       line.tabs().foreach(function(tab)
+--         local hl = tab.is_current() and theme.current_tab or theme.tab
+--         return {
+--           line.sep('', hl, theme.fill),
+--           tab.is_current() and '' or '󰆣',
+--           tab.number(),
+--           tab.name(),
+--           tab.close_btn(''),
+--           line.sep('', hl, theme.fill),
+--           hl = hl,
+--           margin = ' ',
+--         }
+--       end),
+--       line.spacer(),
+--       line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+--         return {
+--           line.sep('', theme.win, theme.fill),
+--           win.is_current() and '' or '',
+--           win.buf_name(),
+--           line.sep('', theme.win, theme.fill),
+--           hl = theme.win,
+--           margin = ' ',
+--         }
+--       end),
+--       {
+--         line.sep('', theme.tail, theme.fill),
+--         { '  ', hl = theme.tail },
+--       },
+--       hl = theme.fill,
+--     }
+--   end,
+--   -- option = {}, -- setup modules' option,
+-- })
 
-require('modicator').setup({
-})
+require('modicator').setup()
+require('os')
+
+function os.capture(cmd, raw)
+  local f = assert(io.popen(cmd, 'r'))
+  local s = assert(f:read('*a'))
+  f:close()
+  if raw then return s end
+  s = string.gsub(s, '^%s+', '')
+  s = string.gsub(s, '%s+$', '')
+  s = string.gsub(s, '[\n\r]+', ' ')
+  return s
+end
+
+local dmStatus = os.capture("dark-mode status")
+if dmStatus == "off" then
+  vim.cmd([[set bg=light]])
+else
+  vim.cmd([[set bg=dark]])
+end
