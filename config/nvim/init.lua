@@ -1,183 +1,198 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- Setup lazy.nvim
+require("lazy").setup({
+  spec = {
+
+{"neovim/nvim-lspconfig"},
+{"hrsh7th/cmp-nvim-lsp"},
+{"hrsh7th/cmp-buffer"},
+{"hrsh7th/cmp-path"},
+{"hrsh7th/nvim-cmp"},
+{"hrsh7th/cmp-vsnip"},
+{"hrsh7th/vim-vsnip"},
+{"hrsh7th/vim-vsnip-integ"},
+
+{"natecraddock/workspaces.nvim"},
+{"morhetz/gruvbox"},
+{"sainnhe/gruvbox-material"},
+{"sainnhe/gruvbox-material"},
+{"marko-cerovac/material.nvim"},
+{"w0rp/ale"},
+{"pbrisbin/vim-mkdir"},
+{"neomake/neomake"},
+{"nvim-lua/plenary.nvim"},
+{"nvim-telescope/telescope.nvim"},
+{"MunifTanjim/nui.nvim"},
+{"stevearc/oil.nvim"},
+
+{"kyazdani42/nvim-web-devicons"},
+-- -- {"nvim-tree/nvim-web-devicons"},
+{"kyazdani42/nvim-tree.lua"},
+{"tpope/vim-flagship"},
+{"ryanoasis/vim-devicons"},
+{"embear/vim-localvimrc"},
+{"tpope/vim-vinegar"},
+{"tpope/vim-eunuch"},
+{"tpope/gem-ctags"},
+{"tpope/vim-fugitive"},
+{"tpope/vim-rhubarb"},
+{"janko-m/vim-test"},
+
+{"tpope/vim-sleuth"},
+{"chr4/nginx.vim"},
+{"wannesm/wmgraphviz.vim"},
+{"schickling/vim-bufonly"},
+{"tpope/vim-dispatch"},
+{"radenling/vim-dispatch-neovim"},
+{"tpope/vim-repeat"},
+{"vim-scripts/Arduino-syntax-file"},
+{"junegunn/vim-peekaboo"},
+{"tpope/vim-projectionist"},
+-- {"zchee/deoplete-clang"},
+{"keith/swift.vim"},
+{"wojciech-kulik/xcodebuild.nvim"},
+{"nvim-treesitter/nvim-treesitter"},
+
+{"powerman/vim-plugin-AnsiEsc"},
+-- {"Rip-Rip/clang_complete"},
+-- {"tweekmonster/deoplete-clang2"},
+
+-- Look and Feel
+-- {"chriskempson/base16-vim"},
+-- ColorSchemes
+{"tinted-theming/tinted-vim"},
+{"tiagovla/tokyodark.nvim"},
+-- {"vim-airline/vim-airline"},
+-- {"vim-airline/vim-airline-themes"},
+
+{"vim-scripts/syntaxm4.vim"},
+{"nvim-lualine/lualine.nvim"},
+{"nanozuki/tabby.nvim"},
+{"mawkler/modicator.nvim"},
+
+-- Neovim
+{"kassio/neoterm"},
+
+-- Editing
+{"tpope/vim-surround"},
+{"tpope/vim-abolish"},
+{"junegunn/vim-easy-align"},
+{"tpope/vim-commentary"},
+{"easymotion/vim-easymotion"},
+{"kana/vim-textobj-user"},
+{"FooSoft/vim-argwrap"},
+{"reedes/vim-pencil"},
+-- Plug('itspriddle/vim-marked', {['for'] =  'markdown'})
+-- Plug('junegunn/goyo.vim', {['for'] =  'markdown'})
+
+-- Ruby
+{"vim-ruby/vim-ruby"},
+{"tpope/vim-bundler"},
+{"tpope/vim-rake"},
+{"tpope/vim-rails"},
+{"tpope/vim-endwise"},
+{"jgdavey/vim-blockle"},
+{"ck3g/vim-change-hash-syntax"},
+{"tpope/vim-endwise"},
+-- {"~/.vim/plugin/cadre"},
+{"killphi/vim-legend"},
+{"nelstrom/vim-textobj-rubyblock"},
+{"lmeijvogel/vim-yaml-helper"},
+-- Vim
+-- Plug('tpope/vim-scriptease', {['for'] =  'vim'})
+{"ynkdir/vim-vimlparser"},
+{"syngan/vim-vimlint"},
+
+-- Go
+
+-- Plug('fatih/vim-go', { ['do'] =  ':GoUpdateBinaries' })
+-- {"farazdagi/vim-go-ide"},
+-- {"neovim/nvim-lspconfig"},
+-- Plug('ray-x/guihua.lua', {['do'] =  'cd lua/fzy && make' })
+-- {"ray-x/navigator.lua"},
+-- {"mfussenegger/nvim-dap"},
+-- {"rcarriga/nvim-dap-ui"},
+-- {"theHamsta/nvim-dap-virtual-text"},
+-- Plug('nvim-treesitter/nvim-treesitter', {['do'] =  ':TSUpdate'})
+{"ray-x/go.nvim"},
+
+-- Plug('benmills/vim-golang-alternate', {['for'] =  'go'})
+-- {"janko-m/vim-test"},
+
+-- Terraform
+{"hashivim/vim-terraform"},
+-- {"juliosueiras/vim-terraform-completion"},
+
+-- Elixir
+-- {"elixir-editors/vim-elixir"},
+-- {"slashmili/alchemist.vim"},
+
+-- {"samsaga2/vim-z80"},
+-- {"maxbane/vim-asm_ca65"},
+-- {"EmmaEwert/vim-rgbds"},
+-- {"gryf/kickass-syntax-vim"},
+{"~/git/manlycode/particle-io.vim"},
+
+
+-- JSON
+{"vim-scripts/json-formatter.vim"},
+
+-- SPICE
+{"ftorres16/spice.vim"},
+
+-- Android
+-- {"hsanson/vim-android"},
+-- {"udalov/kotlin-vim"},
+-- {"cespare/vim-toml"},
+-- {"ftorres16/spice.vim"},
+
+-- Clojure
+{"guns/vim-clojure-static"},
+{"tpope/vim-classpath"},
+{"tpope/vim-fireplace"},
+{"tpope/vim-salve"},
+{"clojure-vim/async-clj-omni"},
+-- {"jiangmiao/auto-pairs"},
+{"MattesGroeger/vim-bookmarks"},
+
+{"RaafatTurki/hex.nvim"},
+
+  },
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "habamax" } },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
+})
+
 -- Specify a directory for plugins
 -- - For Neovim: ~/.local/share/nvim/plugged
 -- - Avoid using standard Vim directory names like 'plugin'
 local vim = vim
 local Plug = vim.fn['plug#']
 
-vim.call('plug#begin')
-
--- Plug('Shougo/denite.nvim', { ['do'] =  ':UpdateRemotePlugins' })
--- Plug('Shougo/deoplete.nvim', { ['do'] =  ':UpdateRemotePlugins' })
--- Plug('Shougo/neosnippet')
--- Plug('Shougo/neosnippet-snippets')
--- Plug('Shougo/defx.nvim', { ['do'] =  ':UpdateRemotePlugins' })
--- Plug('Shougo/deol.nvim')
 --
-Plug('neovim/nvim-lspconfig')
-Plug('hrsh7th/cmp-nvim-lsp')
-Plug('hrsh7th/cmp-buffer')
-Plug('hrsh7th/cmp-path')
-Plug('hrsh7th/nvim-cmp')
-Plug('hrsh7th/cmp-vsnip')
-Plug('hrsh7th/vim-vsnip')
-Plug('hrsh7th/vim-vsnip-integ')
-
-Plug('natecraddock/workspaces.nvim')
-
-Plug('morhetz/gruvbox')
-Plug('sainnhe/gruvbox-material')
-Plug('sainnhe/gruvbox-material')
-Plug('marko-cerovac/material.nvim')
--- Plug('Shougo/neoinclude.vim')
-
-Plug('w0rp/ale')
-Plug('pbrisbin/vim-mkdir')
-
--- Plug('vim-scripts/VimIRC.vim')
-Plug('neomake/neomake')
--- Plug('ap/vim-buftabline')
-
-
-Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim')
-Plug('MunifTanjim/nui.nvim')
-Plug('stevearc/oil.nvim')
-
-Plug('kyazdani42/nvim-web-devicons')
--- Plug('nvim-tree/nvim-web-devicons')
-Plug('kyazdani42/nvim-tree.lua')
-Plug('tpope/vim-flagship')
-Plug('ryanoasis/vim-devicons')
-Plug('embear/vim-localvimrc')
-Plug('tpope/vim-vinegar')
-Plug('tpope/vim-eunuch')
-Plug('tpope/gem-ctags')
-Plug('tpope/vim-fugitive')
-Plug('tpope/vim-rhubarb')
-Plug('janko-m/vim-test')
-
-Plug('tpope/vim-sleuth')
-Plug('chr4/nginx.vim')
-Plug('wannesm/wmgraphviz.vim')
-Plug('schickling/vim-bufonly')
-Plug('tpope/vim-dispatch')
-Plug('radenling/vim-dispatch-neovim')
-Plug('tpope/vim-repeat')
-Plug('vim-scripts/Arduino-syntax-file')
-Plug('junegunn/vim-peekaboo')
-Plug('tpope/vim-projectionist')
--- Plug('zchee/deoplete-clang')
-Plug('keith/swift.vim')
-Plug('wojciech-kulik/xcodebuild.nvim')
-Plug('nvim-treesitter/nvim-treesitter')
-
-Plug('powerman/vim-plugin-AnsiEsc')
--- Plug('Rip-Rip/clang_complete')
--- Plug('tweekmonster/deoplete-clang2')
-
--- Look and Feel
--- Plug('chriskempson/base16-vim')
--- ColorSchemes
-Plug('tinted-theming/tinted-vim')
-Plug('tiagovla/tokyodark.nvim')
--- Plug('vim-airline/vim-airline')
--- Plug('vim-airline/vim-airline-themes')
-
-Plug('vim-scripts/syntaxm4.vim')
-Plug('nvim-lualine/lualine.nvim')
-Plug('nanozuki/tabby.nvim')
-Plug('mawkler/modicator.nvim')
-
--- Neovim
-Plug('kassio/neoterm')
-
--- Editing
-Plug('tpope/vim-surround')
-Plug('tpope/vim-abolish')
-Plug('junegunn/vim-easy-align')
-Plug('tpope/vim-commentary')
-Plug('easymotion/vim-easymotion')
-Plug('kana/vim-textobj-user')
-Plug('FooSoft/vim-argwrap')
-Plug('reedes/vim-pencil')
-Plug('itspriddle/vim-marked', {['for'] =  'markdown'})
-Plug('junegunn/goyo.vim', {['for'] =  'markdown'})
-
--- Ruby
-Plug('vim-ruby/vim-ruby')
-Plug('tpope/vim-bundler')
-Plug('tpope/vim-rake')
-Plug('tpope/vim-rails')
-Plug('tpope/vim-endwise')
-Plug('jgdavey/vim-blockle')
-Plug('ck3g/vim-change-hash-syntax')
-Plug('tpope/vim-endwise')
--- Plug('~/.vim/plugin/cadre')
-Plug('killphi/vim-legend')
-Plug('nelstrom/vim-textobj-rubyblock')
-Plug('lmeijvogel/vim-yaml-helper')
--- Vim
-Plug('tpope/vim-scriptease', {['for'] =  'vim'})
-Plug('ynkdir/vim-vimlparser')
-Plug('syngan/vim-vimlint')
-
--- Go
-
-Plug('fatih/vim-go', { ['do'] =  ':GoUpdateBinaries' })
--- Plug('farazdagi/vim-go-ide')
--- Plug('neovim/nvim-lspconfig')
--- Plug('ray-x/guihua.lua', {['do'] =  'cd lua/fzy && make' })
--- Plug('ray-x/navigator.lua')
--- Plug('mfussenegger/nvim-dap')
--- Plug('rcarriga/nvim-dap-ui')
--- Plug('theHamsta/nvim-dap-virtual-text')
-Plug('nvim-treesitter/nvim-treesitter', {['do'] =  ':TSUpdate'})
--- Plug('ray-x/go.nvim')
-
-Plug('benmills/vim-golang-alternate', {['for'] =  'go'})
--- Plug('janko-m/vim-test')
-
--- Terraform
-Plug('hashivim/vim-terraform')
--- Plug('juliosueiras/vim-terraform-completion')
-
--- Elixir
--- Plug('elixir-editors/vim-elixir')
--- Plug('slashmili/alchemist.vim')
-
--- Plug('samsaga2/vim-z80')
--- Plug('maxbane/vim-asm_ca65')
--- Plug('EmmaEwert/vim-rgbds')
--- Plug('gryf/kickass-syntax-vim')
-Plug('~/git/manlycode/particle-io.vim')
-
-
--- JSON
-Plug('vim-scripts/json-formatter.vim')
-
--- SPICE
-Plug('ftorres16/spice.vim')
-
--- Android
--- Plug('hsanson/vim-android')
--- Plug('udalov/kotlin-vim')
--- Plug('cespare/vim-toml')
--- Plug('ftorres16/spice.vim')
-
--- Clojure
-Plug('guns/vim-clojure-static')
-Plug('tpope/vim-classpath')
-Plug('tpope/vim-fireplace')
-Plug('tpope/vim-salve')
-Plug('clojure-vim/async-clj-omni')
--- Plug('jiangmiao/auto-pairs')
-Plug('MattesGroeger/vim-bookmarks')
-
-Plug('RaafatTurki/hex.nvim')
-
--- Initialize plugin system
-vim.call('plug#end')
-
 vim.cmd([[
 function! TabbyTabline() abort
     return luaeval("require'tabby'.update()")
@@ -494,22 +509,22 @@ vim.o.number = true
 
 -- empty setup using defaults
 require("nvim-tree").setup()
-
--- OR setup with some options
-require("nvim-tree").setup({
-  sort = {
-    sorter = "case_sensitive",
-  },
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-})
+--
+-- -- OR setup with some options
+-- require("nvim-tree").setup({
+--   sort = {
+--     sorter = "case_sensitive",
+--   },
+--   view = {
+--     width = 30,
+--   },
+--   renderer = {
+--     group_empty = true,
+--   },
+--   filters = {
+--     dotfiles = true,
+--   },
+-- })
 
 
 -- nnoremap <C-n> :NvimTreeToggle<CR>
@@ -555,8 +570,7 @@ local theme = {
   tail = 'TabLine',
 }
 
-local cmp = require'cmp'
-
+local cmp = require('cmp')
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -632,8 +646,8 @@ require("cmp_git").setup() ]]--
 -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
   -- capabilities = capabilities
 -- }
---
---
+
+
 require("workspaces").setup(
   {
     -- path to a file to store workspaces data in
@@ -674,133 +688,133 @@ require("workspaces").setup(
     -- lua hooks take a name, a path, and an optional state table
     -- if only one hook is needed, the list may be omitted
     hooks = {
-        add = {},
-        remove = {},
-        rename = {},
-        open_pre = {},
-        open = {},
+      add = {},
+      remove = {},
+      rename = {},
+      open_pre = {},
+      open = {},
     },
-})
+  })
 
 -- defaults
-require('hex').setup({
-  -- cli command used to dump hex data
-  dump_cmd = 'xxd -g 1 -u',
+ require('hex').setup({
+   -- cli command used to dump hex data
+   dump_cmd = 'xxd -g 1 -u',
 
-  -- cli command used to assemble from hex data
-  assemble_cmd = 'xxd -r',
-  
-  -- function that runs on BufReadPre to determine if it's binary or not
-  is_file_binary_pre_read = function()
-    -- logic that determines if a buffer contains binary data or not
-    -- must return a bool
-  end,
+   -- cli command used to assemble from hex data
+   assemble_cmd = 'xxd -r',
 
-  -- function that runs on BufReadPost to determine if it's binary or not
-  is_file_binary_post_read = function()
-    -- logic that determines if a buffer contains binary data or not
-    -- must return a bool
-  end,
-})
+   -- function that runs on BufReadPre to determine if it's binary or not
+   is_file_binary_pre_read = function()
+     -- logic that determines if a buffer contains binary data or not
+     -- must return a bool
+   end,
 
-
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-    ignore_focus = {},
-    always_divide_middle = true,
-    always_show_tabline = true,
-    globalstatus = false,
-    refresh = {
-      statusline = 100,
-      tabline = 100,
-      winbar = 100,
-    }
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  winbar = {
-    lualine_c = {'filename'},
-  },
-  inactive_winbar = {},
-  extensions = {}
-}
+   -- function that runs on BufReadPost to determine if it's binary or not
+   is_file_binary_post_read = function()
+     -- logic that determines if a buffer contains binary data or not
+     -- must return a bool
+   end,
+ })
 
 
-local theme = {
-  fill = 'TabLineFill',
-  -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
-  head = 'TabLine',
-  current_tab = 'TabLineSel',
-  tab = 'TabLine',
-  win = 'TabLine',
-  tail = 'TabLine',
-}
+ require('lualine').setup {
+   options = {
+     icons_enabled = true,
+     theme = 'auto',
+     component_separators = { left = '', right = ''},
+     section_separators = { left = '', right = ''},
+     disabled_filetypes = {
+       statusline = {},
+       winbar = {},
+     },
+     ignore_focus = {},
+     always_divide_middle = true,
+     always_show_tabline = true,
+     globalstatus = false,
+     refresh = {
+       statusline = 100,
+       tabline = 100,
+       winbar = 100,
+     }
+   },
+   sections = {
+     lualine_a = {'mode'},
+     lualine_b = {'branch', 'diff', 'diagnostics'},
+     lualine_c = {'filename'},
+     lualine_x = {'encoding', 'fileformat', 'filetype'},
+     lualine_y = {'progress'},
+     lualine_z = {'location'}
+   },
+   inactive_sections = {
+     lualine_a = {},
+     lualine_b = {},
+     lualine_c = {'filename'},
+     lualine_x = {'location'},
+     lualine_y = {},
+     lualine_z = {}
+   },
+   tabline = {},
+   winbar = {
+     lualine_c = {'filename'},
+   },
+   inactive_winbar = {},
+   extensions = {}
+ }
 
-require('tabby').setup({
-  line = function(line)
-    return {
-      {
-        { '  ', hl = theme.head },
-        line.sep('', theme.head, theme.fill),
-      },
-      line.tabs().foreach(function(tab)
-        local hl = tab.is_current() and theme.current_tab or theme.tab
-        return {
-          line.sep('', hl, theme.fill),
-          tab.is_current() and '' or '󰆣',
-          tab.number(),
-          tab.name(),
-          tab.close_btn(''),
-          line.sep('', hl, theme.fill),
-          hl = hl,
-          margin = ' ',
-        }
-      end),
-      line.spacer(),
-      line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-        return {
-          line.sep('', theme.win, theme.fill),
-          win.is_current() and '' or '',
-          win.buf_name(),
-          line.sep('', theme.win, theme.fill),
-          hl = theme.win,
-          margin = ' ',
-        }
-      end),
-      {
-        line.sep('', theme.tail, theme.fill),
-        { '  ', hl = theme.tail },
-      },
-      hl = theme.fill,
-    }
-  end,
-  -- option = {}, -- setup modules' option,
-})
 
-require('modicator').setup()
+ local theme = {
+   fill = 'TabLineFill',
+   -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+   head = 'TabLine',
+   current_tab = 'TabLineSel',
+   tab = 'TabLine',
+   win = 'TabLine',
+   tail = 'TabLine',
+ }
+
+ require('tabby').setup({
+   line = function(line)
+     return {
+       {
+         { '  ', hl = theme.head },
+         line.sep('', theme.head, theme.fill),
+       },
+       line.tabs().foreach(function(tab)
+         local hl = tab.is_current() and theme.current_tab or theme.tab
+         return {
+           line.sep('', hl, theme.fill),
+           tab.is_current() and '' or '󰆣',
+           tab.number(),
+           tab.name(),
+           tab.close_btn(''),
+           line.sep('', hl, theme.fill),
+           hl = hl,
+           margin = ' ',
+         }
+       end),
+       line.spacer(),
+       line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+         return {
+           line.sep('', theme.win, theme.fill),
+           win.is_current() and '' or '',
+           win.buf_name(),
+           line.sep('', theme.win, theme.fill),
+           hl = theme.win,
+           margin = ' ',
+         }
+       end),
+       {
+         line.sep('', theme.tail, theme.fill),
+         { '  ', hl = theme.tail },
+       },
+       hl = theme.fill,
+     }
+   end,
+   -- option = {}, -- setup modules' option,
+ })
+
+ require('modicator').setup()
 
 require('os')
 
