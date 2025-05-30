@@ -44,6 +44,7 @@ Plug('MunifTanjim/nui.nvim')
 Plug('stevearc/oil.nvim')
 
 Plug('kyazdani42/nvim-web-devicons')
+-- Plug('nvim-tree/nvim-web-devicons')
 Plug('kyazdani42/nvim-tree.lua')
 Plug('tpope/vim-flagship')
 Plug('ryanoasis/vim-devicons')
@@ -141,17 +142,15 @@ Plug('hashivim/vim-terraform')
 -- Plug('juliosueiras/vim-terraform-completion')
 
 -- Elixir
-Plug('elixir-editors/vim-elixir')
-Plug('slashmili/alchemist.vim')
+-- Plug('elixir-editors/vim-elixir')
+-- Plug('slashmili/alchemist.vim')
 
 -- Plug('samsaga2/vim-z80')
-Plug('maxbane/vim-asm_ca65')
-Plug('EmmaEwert/vim-rgbds')
+-- Plug('maxbane/vim-asm_ca65')
+-- Plug('EmmaEwert/vim-rgbds')
 -- Plug('gryf/kickass-syntax-vim')
 Plug('~/git/manlycode/particle-io.vim')
 
--- Vim
-Plug('syngan/vim-vimlint')
 
 -- JSON
 Plug('vim-scripts/json-formatter.vim')
@@ -179,6 +178,29 @@ Plug('RaafatTurki/hex.nvim')
 -- Initialize plugin system
 vim.call('plug#end')
 
+vim.cmd([[
+function! TabbyTabline() abort
+    return luaeval("require'tabby'.update()")
+endfunction
+function! TabbyRenderTabline() abort
+    return luaeval("require'tabby.tabline'.render()")
+endfunction
+]])
+
+
+if vim.g.neovide then
+  -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-full"
+  -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-normal"
+  vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-slight"
+  -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-none"
+  vim.opt.linespace = 4
+  -- vim.g.neovide_scale_factor = 1.0
+  vim.g.neovide_padding_top = 0
+  vim.g.neovide_padding_bottom = 0
+  vim.g.neovide_padding_right = 15
+  vim.g.neovide_padding_left = 15
+  vim.g.neovide_refresh_rate = 120
+end
 
 -- General settings
 -- ------------------------------------------------
@@ -390,6 +412,9 @@ nmap("<D-v>", "\"+p")
 imap("<D-v>", "<Esc>\"+pA")
 imap("<D-s>", "<Esc>:w<CR>A")
 nmap("<D-s>", "<Esc>:w<CR>")
+imap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
+nmap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
+
 
 
 vim.cmd([[
@@ -716,67 +741,67 @@ require('lualine').setup {
     lualine_z = {}
   },
   tabline = {},
-  winbar = {},
+  winbar = {
+    lualine_c = {'filename'},
+  },
   inactive_winbar = {},
   extensions = {}
 }
 
 
--- local theme = {
---   fill = 'TabLineFill',
---   -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
---   head = 'TabLine',
---   current_tab = 'TabLineSel',
---   tab = 'TabLine',
---   win = 'TabLine',
---   tail = 'TabLine',
--- }
+local theme = {
+  fill = 'TabLineFill',
+  -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+  head = 'TabLine',
+  current_tab = 'TabLineSel',
+  tab = 'TabLine',
+  win = 'TabLine',
+  tail = 'TabLine',
+}
 
-require('tabby').setup()
-require('tabby').setup()
-require('tabby').setup()
--- require('tabby').setup({
---   line = function(line)
---     return {
---       {
---         { '  ', hl = theme.head },
---         line.sep('', theme.head, theme.fill),
---       },
---       line.tabs().foreach(function(tab)
---         local hl = tab.is_current() and theme.current_tab or theme.tab
---         return {
---           line.sep('', hl, theme.fill),
---           tab.is_current() and '' or '󰆣',
---           tab.number(),
---           tab.name(),
---           tab.close_btn(''),
---           line.sep('', hl, theme.fill),
---           hl = hl,
---           margin = ' ',
---         }
---       end),
---       line.spacer(),
---       line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
---         return {
---           line.sep('', theme.win, theme.fill),
---           win.is_current() and '' or '',
---           win.buf_name(),
---           line.sep('', theme.win, theme.fill),
---           hl = theme.win,
---           margin = ' ',
---         }
---       end),
---       {
---         line.sep('', theme.tail, theme.fill),
---         { '  ', hl = theme.tail },
---       },
---       hl = theme.fill,
---     }
---   end,
---   -- option = {}, -- setup modules' option,
--- })
+require('tabby').setup({
+  line = function(line)
+    return {
+      {
+        { '  ', hl = theme.head },
+        line.sep('', theme.head, theme.fill),
+      },
+      line.tabs().foreach(function(tab)
+        local hl = tab.is_current() and theme.current_tab or theme.tab
+        return {
+          line.sep('', hl, theme.fill),
+          tab.is_current() and '' or '󰆣',
+          tab.number(),
+          tab.name(),
+          tab.close_btn(''),
+          line.sep('', hl, theme.fill),
+          hl = hl,
+          margin = ' ',
+        }
+      end),
+      line.spacer(),
+      line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+        return {
+          line.sep('', theme.win, theme.fill),
+          win.is_current() and '' or '',
+          win.buf_name(),
+          line.sep('', theme.win, theme.fill),
+          hl = theme.win,
+          margin = ' ',
+        }
+      end),
+      {
+        line.sep('', theme.tail, theme.fill),
+        { '  ', hl = theme.tail },
+      },
+      hl = theme.fill,
+    }
+  end,
+  -- option = {}, -- setup modules' option,
+})
 
 require('modicator').setup()
+
 require('os')
 
 function os.capture(cmd, raw)
