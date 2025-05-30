@@ -294,6 +294,10 @@ function imap(shortcut, command)
   map('i', shortcut, command)
 end
 
+function cmap(shortcut, command)
+  vim.api.nvim_set_keymap("c", shortcut, command, { noremap = true, silent = false})
+end
+
 
 -- Custom movement between buffers
 vim.cmd([[
@@ -410,6 +414,7 @@ nmap("<leader>fw", ":Telescope workspaces<cr>")
 
 nmap("<D-v>", "\"+p")
 imap("<D-v>", "<Esc>\"+pA")
+cmap("<D-v>", "<C-r>+")
 imap("<D-s>", "<Esc>:w<CR>A")
 nmap("<D-s>", "<Esc>:w<CR>")
 imap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
