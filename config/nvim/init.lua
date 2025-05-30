@@ -6,13 +6,6 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
--- Plug('Shougo/denite.nvim', { ['do'] =  ':UpdateRemotePlugins' })
--- Plug('Shougo/deoplete.nvim', { ['do'] =  ':UpdateRemotePlugins' })
--- Plug('Shougo/neosnippet')
--- Plug('Shougo/neosnippet-snippets')
--- Plug('Shougo/defx.nvim', { ['do'] =  ':UpdateRemotePlugins' })
--- Plug('Shougo/deol.nvim')
---
 Plug('neovim/nvim-lspconfig')
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-buffer')
@@ -28,15 +21,10 @@ Plug('morhetz/gruvbox')
 Plug('sainnhe/gruvbox-material')
 Plug('sainnhe/gruvbox-material')
 Plug('marko-cerovac/material.nvim')
--- Plug('Shougo/neoinclude.vim')
 
 Plug('w0rp/ale')
 Plug('pbrisbin/vim-mkdir')
-
--- Plug('vim-scripts/VimIRC.vim')
 Plug('neomake/neomake')
--- Plug('ap/vim-buftabline')
-
 
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim')
@@ -66,7 +54,6 @@ Plug('tpope/vim-repeat')
 Plug('vim-scripts/Arduino-syntax-file')
 Plug('junegunn/vim-peekaboo')
 Plug('tpope/vim-projectionist')
--- Plug('zchee/deoplete-clang')
 Plug('keith/swift.vim')
 Plug('wojciech-kulik/xcodebuild.nvim')
 Plug('nvim-treesitter/nvim-treesitter')
@@ -191,8 +178,8 @@ endfunction
 if vim.g.neovide then
   -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-full"
   -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-normal"
-  vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-slight"
-  -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-none"
+  -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-slight"
+  vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-none"
   vim.opt.linespace = 4
   -- vim.g.neovide_scale_factor = 1.0
   vim.g.neovide_padding_top = 0
@@ -560,7 +547,7 @@ local theme = {
   tail = 'TabLine',
 }
 
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup({
   snippet = {
