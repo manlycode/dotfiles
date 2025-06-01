@@ -179,6 +179,10 @@ function cmap(shortcut, command)
   vim.api.nvim_set_keymap("c", shortcut, command, { noremap = true, silent = false})
 end
 
+function tmap(shortcut, command)
+  vim.api.nvim_set_keymap("t", shortcut, command, { noremap = true, silent = false})
+end
+
 vim.cmd([[
 function! TabbyTabline() abort
     return luaeval("require'tabby'.update()")
