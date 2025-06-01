@@ -344,7 +344,6 @@ nnoremap <leader>c :Commentary<CR>
 ]])
 
 vim.cmd([[
-let g:airline_powerline_fonts = 1
 set wildignore+=build
 set wildignore+=.build
 set wildignore+=*.pyc
@@ -450,23 +449,18 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 ]])
 
--- NeoSnippet
 -- Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 vim.cmd([[
 function! GitHub() abort
   te github .
 endfunction
 
-
-let g:neosnippet#snippets_directory='~/.snippets/neosnippets'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-
-let g:airline_powerline_fonts = 1
 autocmd StdinReadPre * let s:std_in=1
 highlight ALEWarning ctermbg=lightmagenta
 let g:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo'], 'go': ['gofmt', 'golint', 'go vet', 'gopls']}
