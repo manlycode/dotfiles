@@ -17,11 +17,6 @@ Plug('hrsh7th/vim-vsnip-integ')
 
 Plug('natecraddock/workspaces.nvim')
 
-Plug('morhetz/gruvbox')
-Plug('sainnhe/gruvbox-material')
-Plug('sainnhe/gruvbox-material')
-Plug('marko-cerovac/material.nvim')
-
 Plug('w0rp/ale')
 Plug('pbrisbin/vim-mkdir')
 Plug('neomake/neomake')
@@ -67,8 +62,10 @@ Plug('powerman/vim-plugin-AnsiEsc')
 -- ColorSchemes
 Plug('tinted-theming/tinted-vim')
 Plug('tiagovla/tokyodark.nvim')
--- Plug('vim-airline/vim-airline')
--- Plug('vim-airline/vim-airline-themes')
+Plug('morhetz/gruvbox')
+Plug('sainnhe/gruvbox-material')
+Plug('sainnhe/gruvbox-material')
+Plug('marko-cerovac/material.nvim')
 
 Plug('vim-scripts/syntaxm4.vim')
 Plug('nvim-lualine/lualine.nvim')
@@ -88,6 +85,7 @@ Plug('kana/vim-textobj-user')
 Plug('FooSoft/vim-argwrap')
 Plug('reedes/vim-pencil')
 Plug('itspriddle/vim-marked', {['for'] =  'markdown'})
+Plug('MeanderingProgrammer/render-markdown.nvim')
 Plug('junegunn/goyo.vim', {['for'] =  'markdown'})
 
 -- Ruby
@@ -165,6 +163,22 @@ Plug('RaafatTurki/hex.nvim')
 -- Initialize plugin system
 vim.call('plug#end')
 
+function map(mode, shortcut, command)
+  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+end
+
+function nmap(shortcut, command)
+  map('n', shortcut, command)
+end
+
+function imap(shortcut, command)
+  map('i', shortcut, command)
+end
+
+function cmap(shortcut, command)
+  vim.api.nvim_set_keymap("c", shortcut, command, { noremap = true, silent = false})
+end
+
 vim.cmd([[
 function! TabbyTabline() abort
     return luaeval("require'tabby'.update()")
@@ -187,6 +201,17 @@ if vim.g.neovide then
   vim.g.neovide_padding_right = 15
   vim.g.neovide_padding_left = 15
   vim.g.neovide_refresh_rate = 120
+  nmap("<D-v>", "\"+p")
+  imap("<D-v>", "<Esc>\"+pA")
+  cmap("<D-v>", "<C-r>+")
+  imap("<D-s>", "<Esc>:w<CR>A")
+  nmap("<D-s>", "<Esc>:w<CR>")
+  imap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
+  nmap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
+  nmap("<D-{>", ":tabp<CR>")
+  nmap("<D-}>", ":tabn<CR>")
+  imap("<D-{>", "<Esc>:tabp<CR>")
+  imap("<D-}>", "<Esc>:tabn<CR>")
 end
 
 -- General settings
@@ -268,22 +293,6 @@ source ~/.config/nvim/languages.vim
 set clipboard=unnamed
 ]])
 
-
-function map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-end
-
-function nmap(shortcut, command)
-  map('n', shortcut, command)
-end
-
-function imap(shortcut, command)
-  map('i', shortcut, command)
-end
-
-function cmap(shortcut, command)
-  vim.api.nvim_set_keymap("c", shortcut, command, { noremap = true, silent = false})
-end
 
 
 -- Custom movement between buffers
@@ -399,14 +408,6 @@ nnoremap <leader>fo <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
 nmap("<leader>fw", ":Telescope workspaces<cr>")
 
-nmap("<D-v>", "\"+p")
-imap("<D-v>", "<Esc>\"+pA")
-cmap("<D-v>", "<C-r>+")
-imap("<D-s>", "<Esc>:w<CR>A")
-nmap("<D-s>", "<Esc>:w<CR>")
-imap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
-nmap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
-
 
 
 vim.cmd([[
@@ -458,8 +459,24 @@ augroup filetypedetect
     " au BufNewFile,BufRead *.s,*.inc,*.asm set ft=kickass
 augroup END
 
+]])
 
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = {".iterm-workspace"},
+  command = "set ft=json",
+})
 
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = {"*.s,*.inc,*.asm"},
+  command = "set ft=asm_ca65",
+})
+
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead", "BufEnter"}, {
+  pattern = {"*.s,*.inc,*.asm"},
+  command = "set makeprg=/usr/bin/make %",
+})
+
+vim.cmd([[
 augroup Fastlane
     au BufNewFile,BufRead Fastfile,Appfile set ft=ruby
 augroup END
@@ -484,11 +501,9 @@ vim.opt.termguicolors = true
 vim.o.cursorline = true
 vim.o.number = true
 
--- empty setup using defaults
-require("nvim-tree").setup()
-
 -- OR setup with some options
 require("nvim-tree").setup({
+  sync_root_with_cwd = true,
   sort = {
     sorter = "case_sensitive",
   },
@@ -526,11 +541,10 @@ nmap("<leader>tr", ":<c-u>exec printf(\"%sTexec !! \\<lt>cr>\", v:count)<cr>")
 
 
 -- vim.g.completion_chain_complete_list = { default = {{ complete_items = { "lsp", "path", "buffers", "snippet" } },{ mode = "<c-p>" },{ mode = "<c-n>" },},TelescopePrompt = {},frecency = {}}
-vim.cmd([[
-if has("autocmd")
-  autocmd BufNewFile,BufRead *.asm,*.s,*.inc makeprg=/usr/bin/make\ %:r
-endif
-]])
+-- vim.cmd([[
+-- if has("autocmd")
+-- endif
+-- ]])
 
 
 -- vim.g.tinted_colorspace = 256
@@ -670,7 +684,7 @@ require("workspaces").setup(
         remove = {},
         rename = {},
         open_pre = {},
-        open = {},
+        open = { "NvimTreeOpen", "Telescope find_files" },
     },
 })
 
@@ -813,3 +827,47 @@ if dmStatus == "off" then
 else
   vim.cmd([[set bg=dark]])
 end
+require('render-markdown').setup({})
+
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all" (the listed parsers MUST always be installed)
+  -- ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+  ensure_installed = { "python" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+  -- List of parsers to ignore installing (or "all")
+  ignore_install = { "javascript" },
+
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  highlight = {
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    disable = { "c", "rust" },
+    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+    disable = function(lang, buf)
+        local max_filesize = 100 * 1024 -- 100 KB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+            return true
+        end
+    end,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
