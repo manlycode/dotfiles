@@ -11,11 +11,11 @@ Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-buffer')
 Plug('hrsh7th/cmp-path')
 Plug('hrsh7th/nvim-cmp')
-Plug('hrsh7th/cmp-vsnip')
-Plug('hrsh7th/vim-vsnip')
-Plug('hrsh7th/vim-vsnip-integ')
-
+Plug('L3MON4D3/LuaSnip', {['tag'] = 'v2.*', ['do'] =  'make install_jsregexp'})
+Plug('saadparwaiz1/cmp_luasnip')
 Plug('natecraddock/workspaces.nvim')
+Plug('mireq/luasnip-snippets')
+
 
 Plug('w0rp/ale')
 Plug('pbrisbin/vim-mkdir')
@@ -24,7 +24,6 @@ Plug('neomake/neomake')
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim')
 Plug('MunifTanjim/nui.nvim')
-Plug('stevearc/oil.nvim')
 
 Plug('kyazdani42/nvim-web-devicons')
 -- Plug('nvim-tree/nvim-web-devicons')
@@ -198,7 +197,7 @@ if vim.g.neovide then
   -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-normal"
   -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-slight"
   vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-none"
-  vim.opt.linespace = 4
+  vim.opt.linespace = 6
   -- vim.g.neovide_scale_factor = 1.0
   vim.g.neovide_padding_top = 0
   vim.g.neovide_padding_bottom = 0
@@ -359,7 +358,7 @@ let g:neoterm_autoscroll = '1'
 
 -- let g:neoterm_default_mod = 'vertical'
 vim.cmd([[
-let g:neoterm_size = '25'
+let g:neoterm_size = '10'
 let g:neoterm_default_mod = 'aboveleft'
 
 nnoremap <silent> <leader>sf :TREPLSendFile<cr>
@@ -577,13 +576,14 @@ local theme = {
 }
 
 local cmp = require('cmp')
+local luasnip = require("luasnip")
 
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
       -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
       -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
@@ -604,12 +604,47 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
+   ['<CR>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            if luasnip.expandable() then
+                luasnip.expand()
+            else
+                cmp.confirm({
+                    select = true,
+                })
+            end
+        else
+            fallback()
+        end
+    end),
+
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.locally_jumpable(1) then
+        luasnip.jump(1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.locally_jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
+    -- { name = 'vsnip' }, -- For vsnip users.
+    { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
   }, {
@@ -768,7 +803,12 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
+    lualine_c = {
+      {
+        'filename',
+        path = 1
+      }
+    },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
@@ -776,14 +816,24 @@ require('lualine').setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
+    lualine_c = {
+      {
+        'filename',
+        path = 1
+      }
+    },
     lualine_x = {'location'},
     lualine_y = {},
     lualine_z = {}
   },
   tabline = {},
   winbar = {
-    lualine_c = {'filename'},
+    lualine_c = {
+      {
+        'filename',
+        path = 1
+      }
+    },
   },
   inactive_winbar = {},
   extensions = {}
@@ -906,3 +956,4 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+require('luasnip_snippets.common.snip_utils').setup()
