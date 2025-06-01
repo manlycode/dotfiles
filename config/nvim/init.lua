@@ -212,7 +212,23 @@ if vim.g.neovide then
   nmap("<D-}>", ":tabn<CR>")
   imap("<D-{>", "<Esc>:tabp<CR>")
   imap("<D-}>", "<Esc>:tabn<CR>")
+  -- nmap("<D-F>", "<cmd>lua require('telescope.builtin').find_files()<cr>")
+  imap("<D-Left>", "<Esc>^i")
+  imap("<D-Right>", "<Esc>$A")
+  nmap("<D-Left>", "<Esc>^")
+  nmap("<D-Right>", "<Esc>$")
 end
+
+-- imap("<C-a>", "<Esc>^i")
+-- imap("<C-e>", "<Esc>$A")
+imap("<C-a>", "<Home>")
+imap("<C-e>", "<End>")
+imap("<C-f>", "<Right>")
+imap("<C-b>", "<Left>")
+cmap("<C-f>", "<Right>")
+cmap("<C-b>", "<Left>")
+cmap("<C-a>", "<Home>")
+cmap("<C-b>", "<End>")
 
 -- General settings
 -- ------------------------------------------------
@@ -539,6 +555,7 @@ nmap("<leader>n", ":NvimTreeToggle<CR>")
 -- Force bash run the last command (!!)
 nmap("<leader>tr", ":<c-u>exec printf(\"%sTexec !! \\<lt>cr>\", v:count)<cr>")
 
+vim.env.PATH = "/Users/manlycode/.asdf/shims:" .. vim.env.PATH
 
 -- vim.g.completion_chain_complete_list = { default = {{ complete_items = { "lsp", "path", "buffers", "snippet" } },{ mode = "<c-p>" },{ mode = "<c-n>" },},TelescopePrompt = {},frecency = {}}
 -- vim.cmd([[
@@ -633,11 +650,31 @@ require("cmp_git").setup() ]]--
 -- })
 
 -- Set up lspconfig.
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
--- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-  -- capabilities = capabilities
--- }
+require('lspconfig')['pylsp'].setup {
+  capabilities = capabilities,
+  pylsp = {
+    executable = "heloooo",
+    plugins = {
+      -- formatter options
+      black = { enabled = true },
+      autopep8 = { enabled = false },
+      yapf = { enabled = false },
+      -- linter options
+      pylint = { enabled = true, executable = "pylint" },
+      pyflakes = { enabled = false },
+      pycodestyle = { enabled = false },
+      -- type checker
+      pylsp_mypy = { enabled = true },
+      -- auto-completion options
+      jedi_completion = { fuzzy = true },
+      -- import sorting
+      pyls_isort = { enabled = true },
+    },
+  },
+}
+
 --
 --
 require("workspaces").setup(
