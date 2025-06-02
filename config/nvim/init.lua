@@ -6,6 +6,7 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
+Plug('vhyrro/luarocks.nvim')
 Plug('neovim/nvim-lspconfig')
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-buffer')
@@ -17,7 +18,7 @@ Plug('natecraddock/workspaces.nvim')
 Plug('mireq/luasnip-snippets')
 
 
-Plug('w0rp/ale')
+-- Plug('w0rp/ale')
 Plug('pbrisbin/vim-mkdir')
 Plug('neomake/neomake')
 
@@ -48,24 +49,19 @@ Plug('tpope/vim-repeat')
 Plug('vim-scripts/Arduino-syntax-file')
 Plug('junegunn/vim-peekaboo')
 Plug('tpope/vim-projectionist')
-Plug('keith/swift.vim')
-Plug('wojciech-kulik/xcodebuild.nvim')
+-- Plug('keith/swift.vim')
+-- Plug('wojciech-kulik/xcodebuild.nvim')
 Plug('nvim-treesitter/nvim-treesitter')
 
 Plug('powerman/vim-plugin-AnsiEsc')
--- Plug('Rip-Rip/clang_complete')
--- Plug('tweekmonster/deoplete-clang2')
 
 -- Look and Feel
--- Plug('chriskempson/base16-vim')
 -- ColorSchemes
 Plug('tinted-theming/tinted-vim')
 Plug('tiagovla/tokyodark.nvim')
 Plug('morhetz/gruvbox')
 Plug('sainnhe/gruvbox-material')
-Plug('sainnhe/gruvbox-material')
 Plug('marko-cerovac/material.nvim')
-
 Plug('vim-scripts/syntaxm4.vim')
 Plug('nvim-lualine/lualine.nvim')
 Plug('nanozuki/tabby.nvim')
@@ -122,7 +118,7 @@ Plug('benmills/vim-golang-alternate', {['for'] =  'go'})
 -- Plug('janko-m/vim-test')
 
 -- Terraform
-Plug('hashivim/vim-terraform')
+-- Plug('hashivim/vim-terraform')
 -- Plug('juliosueiras/vim-terraform-completion')
 
 -- Elixir
@@ -191,36 +187,7 @@ function! TabbyRenderTabline() abort
 endfunction
 ]])
 
-
-if vim.g.neovide then
-  -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-full"
-  -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-normal"
-  -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-slight"
-  vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-none"
-  vim.opt.linespace = 6
-  -- vim.g.neovide_scale_factor = 1.0
-  vim.g.neovide_padding_top = 0
-  vim.g.neovide_padding_bottom = 0
-  vim.g.neovide_padding_right = 15
-  vim.g.neovide_padding_left = 15
-  vim.g.neovide_refresh_rate = 120
-  nmap("<D-v>", "\"+p")
-  imap("<D-v>", "<Esc>\"+pA")
-  cmap("<D-v>", "<C-r>+")
-  imap("<D-s>", "<Esc>:w<CR>A")
-  nmap("<D-s>", "<Esc>:w<CR>")
-  imap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
-  nmap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
-  nmap("<D-{>", ":tabp<CR>")
-  nmap("<D-}>", ":tabn<CR>")
-  imap("<D-{>", "<Esc>:tabp<CR>")
-  imap("<D-}>", "<Esc>:tabn<CR>")
-  -- nmap("<D-F>", "<cmd>lua require('telescope.builtin').find_files()<cr>")
-  imap("<D-Left>", "<Esc>^i")
-  imap("<D-Right>", "<Esc>$A")
-  nmap("<D-Left>", "<Esc>^")
-  nmap("<D-Right>", "<Esc>$")
-end
+require("config/neovide")
 
 -- imap("<C-a>", "<Esc>^i")
 -- imap("<C-e>", "<Esc>$A")
@@ -255,6 +222,19 @@ set splitright
 set splitbelow
 ]])
 
+
+local mygroup = vim.api.nvim_create_augroup('vimrc', { clear = true })
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  group = mygroup,
+  pattern = {
+    "init.lua",
+    "/Users/manlycode/.dotfiles/config/nvim/**/*.lua",
+    "/Users/manlycode/.config/nvim/lua/**/*.lua",
+  },
+  -- command = "source /Users/manlycode/.config/nvim/init.lua",
+  command = "source %",
+})
+
 -- NeoVim handles ESC keys as alt+key set this to solve the problem
 vim.cmd([[
 if has('nvim')
@@ -276,7 +256,6 @@ set expandtab
 
 -- Reload config on write
 vim.cmd([[
-autocmd! BufWritePost ~/.config/nvim/init.lua source ~/.config/nvim/init.lua
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
@@ -461,8 +440,11 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 autocmd StdinReadPre * let s:std_in=1
-highlight ALEWarning ctermbg=lightmagenta
-let g:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo'], 'go': ['gofmt', 'golint', 'go vet', 'gopls']}
+" highlight ALEWarning ctermbg=lightmagenta
+" let g:ale_linters = {'ruby': ['ruby'], 'clojure': ['clj-kondo'], 'go': ['gofmt', 'golint', 'go vet', 'gopls']}
+" let g:ale_fixers = {'python': ['black']}
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 
 filetype plugin indent on
@@ -684,15 +666,13 @@ require("cmp_git").setup() ]]--
 
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['pylsp'].setup {
-  capabilities = capabilities,
-  pylsp = {
-    executable = "pylsp",
+vim.lsp.config("pylsp", {
     plugins = {
       -- formatter options
-      black = { enabled = true },
-      autopep8 = { enabled = false },
+      black = { enabled = false},
+      autopep8 = { enabled = true},
       yapf = { enabled = false },
       -- linter options
       pylint = { enabled = true, executable = "pylint" },
@@ -705,8 +685,31 @@ require('lspconfig')['pylsp'].setup {
       -- import sorting
       pyls_isort = { enabled = true },
     },
-  },
-}
+})
+vim.lsp.enable("pylsp")
+
+-- require('lspconfig')['pylsp'].setup {
+--   capabilities = capabilities,
+--   pylsp = {
+--     executable = "pylsp",
+--     plugins = {
+--       -- formatter options
+--       black = { enabled = true },
+--       autopep8 = { enabled = false },
+--       yapf = { enabled = false },
+--       -- linter options
+--       pylint = { enabled = true, executable = "pylint" },
+--       pyflakes = { enabled = false },
+--       pycodestyle = { enabled = false },
+--       -- type checker
+--       pylsp_mypy = { enabled = true },
+--       -- auto-completion options
+--       jedi_completion = { fuzzy = true },
+--       -- import sorting
+--       pyls_isort = { enabled = true },
+--     },
+--   },
+-- }
 
 --
 --
