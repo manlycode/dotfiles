@@ -17,6 +17,8 @@ Plug('saadparwaiz1/cmp_luasnip')
 Plug('natecraddock/workspaces.nvim')
 Plug('mireq/luasnip-snippets')
 Plug('mfussenegger/nvim-dap')
+Plug('nvim-neotest/nvim-nio')
+Plug('rcarriga/nvim-dap-ui')
 
 
 -- Plug('w0rp/ale')
@@ -66,7 +68,6 @@ Plug('marko-cerovac/material.nvim')
 Plug('vim-scripts/syntaxm4.vim')
 Plug('nvim-lualine/lualine.nvim')
 Plug('nanozuki/tabby.nvim')
-Plug('mawkler/modicator.nvim')
 
 -- Neovim
 Plug('kassio/neoterm')
@@ -110,7 +111,7 @@ Plug('fatih/vim-go', { ['do'] =  ':GoUpdateBinaries' })
 -- Plug('ray-x/guihua.lua', {['do'] =  'cd lua/fzy && make' })
 -- Plug('ray-x/navigator.lua')
 -- Plug('mfussenegger/nvim-dap')
--- Plug('rcarriga/nvim-dap-ui')
+
 -- Plug('theHamsta/nvim-dap-virtual-text')
 Plug('nvim-treesitter/nvim-treesitter', {['do'] =  ':TSUpdate'})
 -- Plug('ray-x/go.nvim')
@@ -757,7 +758,12 @@ require("workspaces").setup(
         remove = {},
         rename = {},
         open_pre = {},
-        open = { "NvimTreeOpen", "Telescope find_files"},
+        open = { 
+          "NvimTreeOpen", 
+          function()
+            require("telescope.builtin").find_files({follow=true})
+          end
+        },
     },
 })
 
@@ -894,7 +900,6 @@ require('tabby').setup({
   -- option = {}, -- setup modules' option,
 })
 
-require('modicator').setup()
 
 require('os')
 
