@@ -16,6 +16,7 @@ Plug('L3MON4D3/LuaSnip', {['tag'] = 'v2.*', ['do'] =  'make install_jsregexp'})
 Plug('saadparwaiz1/cmp_luasnip')
 Plug('natecraddock/workspaces.nvim')
 Plug('mireq/luasnip-snippets')
+Plug('mfussenegger/nvim-dap')
 
 
 -- Plug('w0rp/ale')
@@ -158,26 +159,6 @@ Plug('RaafatTurki/hex.nvim')
 -- Initialize plugin system
 vim.call('plug#end')
 
-function map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-end
-
-function nmap(shortcut, command)
-  map('n', shortcut, command)
-end
-
-function imap(shortcut, command)
-  map('i', shortcut, command)
-end
-
-function cmap(shortcut, command)
-  vim.api.nvim_set_keymap("c", shortcut, command, { noremap = true, silent = false})
-end
-
-function tmap(shortcut, command)
-  vim.api.nvim_set_keymap("t", shortcut, command, { noremap = true, silent = false})
-end
-
 vim.cmd([[
 function! TabbyTabline() abort
     return luaeval("require'tabby'.update()")
@@ -187,10 +168,27 @@ function! TabbyRenderTabline() abort
 endfunction
 ]])
 
+require("util")
 require("config/neovide")
+require("config/plugins/nvim-dap")
+require("languages/python")
 
 -- imap("<C-a>", "<Esc>^i")
 -- imap("<C-e>", "<Esc>$A")
+nmap("<M-space>", ":lua vim.diagnostic.open_float()<CR>")
+
+vim.keymap.set('n', "<M-space>", function() vim.diagnostic.open_float()  end)
+
+vim.keymap.set('n', '<D-,>', function()
+  vim.diagnostic.goto_next()
+  vim.diagnostic.open_float()
+end, { desc = "Go to previous diagnostic" })
+
+vim.keymap.set('n', '<D-<>', function()
+  vim.diagnostic.goto_prev()
+  vim.diagnostic.open_float()
+end, { desc = "Go to next diagnostic" })
+
 imap("<C-a>", "<Home>")
 imap("<C-e>", "<End>")
 imap("<C-f>", "<Right>")
@@ -228,6 +226,8 @@ vim.api.nvim_create_autocmd({"BufWritePost"}, {
   group = mygroup,
   pattern = {
     "init.lua",
+    "/Users/manlycode/.dotfiles/config/nvim/init.lua",
+    "/Users/manlycode/.config/nvim/init.lua",
     "/Users/manlycode/.dotfiles/config/nvim/**/*.lua",
     "/Users/manlycode/.config/nvim/lua/**/*.lua",
   },
@@ -278,7 +278,7 @@ endif
 ]])
 -- Key Bindings
 vim.cmd([[
-nnoremap <leader>ev :tabe ~/.config/nvim/init.lua<cr>:lcd %:p:h<cr>
+nnoremap <leader>ev :tabe<CR>:WorkspacesOpen nvim<CR><Esc>:tabe init.lua<CR>
 nnoremap <leader>m :Make<cr>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>ot :Tags <C-r><C-w><cr>
@@ -757,7 +757,7 @@ require("workspaces").setup(
         remove = {},
         rename = {},
         open_pre = {},
-        open = { "NvimTreeOpen", "Telescope find_files" },
+        open = { "NvimTreeOpen", "Telescope find_files"},
     },
 })
 
