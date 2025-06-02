@@ -395,7 +395,7 @@ nmap <silent> <leader>tt :Ttoggle<CR>
 
 -- Using Lua functions
 vim.cmd([[
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
 nnoremap <leader>fF <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
