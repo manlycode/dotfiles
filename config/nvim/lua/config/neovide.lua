@@ -10,6 +10,8 @@ if vim.g.neovide then
   vim.g.neovide_padding_right = 15
   vim.g.neovide_padding_left = 15
   vim.g.neovide_refresh_rate = 120
+
+  nmap("<D-t>", "<cmd>tabe<cr>")
   nmap("<D-v>", "\"+p")
   imap("<D-v>", "<Esc>\"+pA")
   cmap("<D-v>", "<C-r>+")
@@ -28,4 +30,3 @@ if vim.g.neovide then
   nmap("<D-Right>", "<Esc>$")
 end
 
-vim.cmd([[echo 'got here']])

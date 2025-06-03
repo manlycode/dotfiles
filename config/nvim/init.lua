@@ -5,6 +5,10 @@ local vim = vim
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
+Plug('echasnovski/mini.nvim')
+Plug('kyazdani42/nvim-web-devicons')
+-- Plug('nvim-tree/nvim-web-devicons')
+Plug('ryanoasis/vim-devicons')
 
 Plug('vhyrro/luarocks.nvim')
 Plug('neovim/nvim-lspconfig')
@@ -29,11 +33,8 @@ Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim')
 Plug('MunifTanjim/nui.nvim')
 
-Plug('kyazdani42/nvim-web-devicons')
--- Plug('nvim-tree/nvim-web-devicons')
 Plug('kyazdani42/nvim-tree.lua')
-Plug('tpope/vim-flagship')
-Plug('ryanoasis/vim-devicons')
+-- Plug('tpope/vim-flagship')
 Plug('embear/vim-localvimrc')
 Plug('tpope/vim-vinegar')
 Plug('tpope/vim-eunuch')
@@ -67,7 +68,7 @@ Plug('sainnhe/gruvbox-material')
 Plug('marko-cerovac/material.nvim')
 Plug('vim-scripts/syntaxm4.vim')
 Plug('nvim-lualine/lualine.nvim')
-Plug('nanozuki/tabby.nvim')
+-- Plug('alvarosevilla95/luatab.nvim')
 
 -- Neovim
 Plug('kassio/neoterm')
@@ -156,18 +157,11 @@ Plug('clojure-vim/async-clj-omni')
 Plug('MattesGroeger/vim-bookmarks')
 
 Plug('RaafatTurki/hex.nvim')
+Plug('nanozuki/tabby.nvim')
 
 -- Initialize plugin system
 vim.call('plug#end')
 
-vim.cmd([[
-function! TabbyTabline() abort
-    return luaeval("require'tabby'.update()")
-endfunction
-function! TabbyRenderTabline() abort
-    return luaeval("require'tabby.tabline'.render()")
-endfunction
-]])
 
 require("util")
 require("config/neovide")
@@ -231,6 +225,7 @@ vim.api.nvim_create_autocmd({"BufWritePost"}, {
     "/Users/manlycode/.config/nvim/init.lua",
     "/Users/manlycode/.dotfiles/config/nvim/**/*.lua",
     "/Users/manlycode/.config/nvim/lua/**/*.lua",
+    "workspace.lua",
   },
   -- command = "source /Users/manlycode/.config/nvim/init.lua",
   command = "source %",
@@ -547,16 +542,6 @@ vim.env.PATH = "/Users/manlycode/.asdf/shims:" .. vim.env.PATH
 -- vim.g.tinted_colorspace = 256
 vim.cmd.colorscheme('retrobox')
 
-vim.o.showtabline = 2
-local theme = {
-  fill = 'TabLineFill',
-  -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
-  head = 'TabLine',
-  current_tab = 'TabLineSel',
-  tab = 'TabLine',
-  win = 'TabLine',
-  tail = 'TabLine',
-}
 
 local cmp = require('cmp')
 local luasnip = require("luasnip")
@@ -688,83 +673,66 @@ vim.lsp.config("pylsp", {
     },
 })
 vim.lsp.enable("pylsp")
-
--- require('lspconfig')['pylsp'].setup {
---   capabilities = capabilities,
---   pylsp = {
---     executable = "pylsp",
---     plugins = {
---       -- formatter options
---       black = { enabled = true },
---       autopep8 = { enabled = false },
---       yapf = { enabled = false },
---       -- linter options
---       pylint = { enabled = true, executable = "pylint" },
---       pyflakes = { enabled = false },
---       pycodestyle = { enabled = false },
---       -- type checker
---       pylsp_mypy = { enabled = true },
---       -- auto-completion options
---       jedi_completion = { fuzzy = true },
---       -- import sorting
---       pyls_isort = { enabled = true },
---     },
---   },
--- }
-
 --
 --
-require("workspaces").setup(
-  {
-    -- path to a file to store workspaces data in
-    -- on a unix system this would be ~/.local/share/nvim/workspaces
-    path = vim.fn.stdpath("data") .. "/workspaces",
+require("workspaces").setup({
+  -- path to a file to store workspaces data in
+  -- on a unix system this would be ~/.local/share/nvim/workspaces
+  path = vim.fn.stdpath("data") .. "/workspaces",
 
-    -- to change directory for nvim (:cd), or only for window (:lcd)
-    -- deprecated, use cd_type instead
-    -- global_cd = true,
+  -- to change directory for nvim (:cd), or only for window (:lcd)
+  -- deprecated, use cd_type instead
+  -- global_cd = true,
 
-    -- controls how the directory is changed. valid options are "global", "local", and "tab"
-    --   "global" changes directory for the neovim process. same as the :cd command
-    --   "local" changes directory for the current window. same as the :lcd command
-    --   "tab" changes directory for the current tab. same as the :tcd command
-    --
-    -- if set, overrides the value of global_cd
-    cd_type = "global",
+  -- controls how the directory is changed. valid options are "global", "local", and "tab"
+  --   "global" changes directory for the neovim process. same as the :cd command
+  --   "local" changes directory for the current window. same as the :lcd command
+  --   "tab" changes directory for the current tab. same as the :tcd command
+  --
+  -- if set, overrides the value of global_cd
+  cd_type = "global",
 
-    -- sort the list of workspaces by name after loading from the workspaces path.
-    sort = true,
+  -- sort the list of workspaces by name after loading from the workspaces path.
+  sort = true,
 
-    -- sort by recent use rather than by name. requires sort to be true
-    mru_sort = true,
+  -- sort by recent use rather than by name. requires sort to be true
+  mru_sort = true,
 
-    -- option to automatically activate workspace when opening neovim in a workspace directory
-    auto_open = false,
+  -- option to automatically activate workspace when opening neovim in a workspace directory
+  auto_open = false,
 
-    -- option to automatically activate workspace when changing directory not via this plugin
-    -- set to "autochdir" to enable auto_dir when using :e and vim.opt.autochdir
-    -- valid options are false, true, and "autochdir"
-    auto_dir = false,
+  -- option to automatically activate workspace when changing directory not via this plugin
+  -- set to "autochdir" to enable auto_dir when using :e and vim.opt.autochdir
+  -- valid options are false, true, and "autochdir"
+  auto_dir = false,
 
-    -- enable info-level notifications after adding or removing a workspace
-    notify_info = true,
+  -- enable info-level notifications after adding or removing a workspace
+  notify_info = true,
 
-    -- lists of hooks to run after specific actions
-    -- hooks can be a lua function or a vim command (string)
-    -- lua hooks take a name, a path, and an optional state table
-    -- if only one hook is needed, the list may be omitted
-    hooks = {
-        add = {},
-        remove = {},
-        rename = {},
-        open_pre = {},
-        open = { 
-          "NvimTreeOpen", 
-          function()
-            require("telescope.builtin").find_files({follow=true})
-          end
-        },
+  -- lists of hooks to run after specific actions
+  -- hooks can be a lua function or a vim command (string)
+  -- lua hooks take a name, a path, and an optional state table
+  -- if only one hook is needed, the list may be omitted
+  hooks = {
+    add = {},
+    remove = {},
+    rename = {},
+    open_pre = {},
+    open = { 
+      "NvimTreeOpen", 
+      function()
+        require("telescope.builtin").find_files({follow=true})
+      end,
+      function()
+        local path = fileExistsInPWD("workspace.lua") 
+        if path then
+          vim.cmd("source" .. path)
+        else
+          print("no workspace.lua file found")
+        end
+      end
     },
+  },
 })
 
 -- defaults
@@ -787,7 +755,6 @@ require('hex').setup({
     -- must return a bool
   end,
 })
-
 
 require('lualine').setup {
   options = {
@@ -849,6 +816,18 @@ require('lualine').setup {
 }
 
 
+-- local theme = {
+--   fill = 'TabLineFill',
+--   -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+--   head = 'TabLine',
+--   current_tab = 'TabLineSel',
+--   tab = 'TabLine',
+--   win = 'TabLine',
+--   tail = 'TabLine',
+-- }
+
+-- require('luatab').setup{}
+vim.o.showtabline = 2
 local theme = {
   fill = 'TabLineFill',
   -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
@@ -859,6 +838,7 @@ local theme = {
   tail = 'TabLine',
 }
 
+-- require('tabby').setup()
 require('tabby').setup({
   line = function(line)
     return {
@@ -965,3 +945,16 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 require('luasnip_snippets.common.snip_utils').setup()
+
+-- require("tabby").setup({
+--     tabline = require("tabby.presets").tab_with_top_win,
+-- })
+
+vim.cmd([[
+function! TabbyTabline() abort
+    return luaeval("require'tabby'.update()")
+endfunction
+function! TabbyRenderTabline() abort
+    return luaeval("require'tabby.tabline'.render()")
+endfunction
+]])
