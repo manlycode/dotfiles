@@ -43,6 +43,8 @@ Plug('tpope/vim-fugitive')
 Plug('tpope/vim-rhubarb')
 Plug('janko-m/vim-test')
 
+Plug('pwntester/octo.nvim')
+
 Plug('tpope/vim-sleuth')
 Plug('chr4/nginx.vim')
 Plug('wannesm/wmgraphviz.vim')
@@ -107,7 +109,7 @@ Plug('syngan/vim-vimlint')
 -- Go
 
 Plug('fatih/vim-go', { ['do'] =  ':GoUpdateBinaries' })
--- Plug('farazdagi/vim-go-ide')
+-- Plug('farazdagi/vim-go-ide)
 -- Plug('neovim/nvim-lspconfig')
 -- Plug('ray-x/guihua.lua', {['do'] =  'cd lua/fzy && make' })
 -- Plug('ray-x/navigator.lua')
@@ -196,6 +198,7 @@ cmap("<C-b>", "<End>")
 -- General settings
 -- ------------------------------------------------
 vim.cmd([[
+hi SignColumn guibg=NONE
 set iskeyword+=-
 set hidden
 set noswapfile
@@ -275,6 +278,8 @@ endif
 -- Key Bindings
 vim.cmd([[
 nnoremap <leader>ev :tabe<CR>:WorkspacesOpen nvim<CR><Esc>:tabe init.lua<CR>
+nnoremap <leader>ew <Esc>:tabe workspace.lua<CR>
+nnoremap <leader>en <Esc>:vs .workspace-notes.md<CR>
 nnoremap <leader>m :Make<cr>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>ot :Tags <C-r><C-w><cr>
@@ -530,6 +535,7 @@ nmap("<leader>n", ":NvimTreeToggle<CR>")
 -- Force bash run the last command (!!)
 nmap("<leader>tr", ":<c-u>exec printf(\"%sTexec !! \\<lt>cr>\", v:count)<cr>")
 
+vim.env.TERM = "xterm-256color"
 vim.env.PATH = "/Users/manlycode/.asdf/shims:" .. vim.env.PATH
 
 -- vim.g.completion_chain_complete_list = { default = {{ complete_items = { "lsp", "path", "buffers", "snippet" } },{ mode = "<c-p>" },{ mode = "<c-n>" },},TelescopePrompt = {},frecency = {}}
@@ -540,7 +546,12 @@ vim.env.PATH = "/Users/manlycode/.asdf/shims:" .. vim.env.PATH
 
 
 -- vim.g.tinted_colorspace = 256
+-- vim.cmd.colorscheme('base16-gruvbox-material-light-soft')
 vim.cmd.colorscheme('retrobox')
+
+vim.cmd([[
+hi SignColumn guibg=NONE
+]])
 
 
 local cmp = require('cmp')
@@ -720,9 +731,9 @@ require("workspaces").setup({
     open_pre = {},
     open = { 
       "NvimTreeOpen", 
-      function()
-        require("telescope.builtin").find_files({follow=true})
-      end,
+      -- function()
+      --   require("telescope.builtin").find_files({follow=true})
+      -- end,
       function()
         local path = fileExistsInPWD("workspace.lua") 
         if path then
@@ -778,7 +789,8 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
+    -- lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_b = {'diff', 'diagnostics'},
     lualine_c = {
       {
         'filename',
@@ -803,14 +815,7 @@ require('lualine').setup {
     lualine_z = {}
   },
   tabline = {},
-  winbar = {
-    lualine_c = {
-      {
-        'filename',
-        path = 1
-      }
-    },
-  },
+  winbar = {},
   inactive_winbar = {},
   extensions = {}
 }
@@ -905,7 +910,7 @@ require('render-markdown').setup({})
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
   -- ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-  ensure_installed = { "python" },
+  ensure_installed = { "python", "yaml", "latex", "html" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -957,4 +962,10 @@ endfunction
 function! TabbyRenderTabline() abort
     return luaeval("require'tabby.tabline'.render()")
 endfunction
+]])
+
+require"octo".setup()
+
+vim.cmd([[
+hi SignColumn guibg=NONE
 ]])

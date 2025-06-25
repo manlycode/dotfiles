@@ -17,8 +17,11 @@ if vim.g.neovide then
   cmap("<D-v>", "<C-r>+")
   imap("<D-s>", "<Esc>:w<CR>A")
   nmap("<D-s>", "<Esc>:w<CR>")
-  imap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
-  nmap("<D-w>", "<Esc>:w<CR><Esc>:bd<CR>")
+  -- imap("<D-w>", "<Esc>:bd<CR>")
+  -- nmap("<D-w>", "<Esc>:bd<CR>")
+  imap("<D-w>", "<Esc>:tabclose<CR>")
+  nmap("<D-w>", "<Esc>:tabclose<CR>")
+
   nmap("<D-{>", ":tabp<CR>")
   nmap("<D-}>", ":tabn<CR>")
   imap("<D-{>", "<Esc>:tabp<CR>")
