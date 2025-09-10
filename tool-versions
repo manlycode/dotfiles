@@ -6,4 +6,4 @@ nodejs 18.12.1
 #java zulu-17.0.9
 java openjdk-17
 postgres 15.4
-
+yarn 1.22.22

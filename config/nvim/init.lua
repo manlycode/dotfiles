@@ -1,4 +1,4 @@
--- Specify a directory for plugins
+-- Specify a directory for pluginsq
 -- - For Neovim: ~/.local/share/nvim/plugged
 -- - Avoid using standard Vim directory names like 'plugin'
 local vim = vim
@@ -10,9 +10,15 @@ Plug('kyazdani42/nvim-web-devicons')
 -- Plug('nvim-tree/nvim-web-devicons')
 Plug('ryanoasis/vim-devicons')
 
+-- lsp
 Plug('vhyrro/luarocks.nvim')
 Plug('neovim/nvim-lspconfig')
 Plug('hrsh7th/cmp-nvim-lsp')
+Plug('nvimdev/lspsaga.nvim')
+Plug('esmuellert/nvim-eslint')
+
+Plug('folke/trouble.nvim')
+
 Plug('hrsh7th/cmp-buffer')
 Plug('hrsh7th/cmp-path')
 Plug('hrsh7th/nvim-cmp')
@@ -31,6 +37,7 @@ Plug('neomake/neomake')
 
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope.nvim')
+Plug("nvim-telescope/telescope-live-grep-args.nvim")
 Plug('MunifTanjim/nui.nvim')
 
 Plug('kyazdani42/nvim-tree.lua')
@@ -71,7 +78,7 @@ Plug('marko-cerovac/material.nvim')
 Plug('vim-scripts/syntaxm4.vim')
 Plug('nvim-lualine/lualine.nvim')
 -- Plug('alvarosevilla95/luatab.nvim')
-
+Plug('wasabeef/bufferin.nvim')
 -- Neovim
 Plug('kassio/neoterm')
 
@@ -157,9 +164,11 @@ Plug('tpope/vim-salve')
 Plug('clojure-vim/async-clj-omni')
 -- Plug('jiangmiao/auto-pairs')
 Plug('MattesGroeger/vim-bookmarks')
+Plug('clojure-vim/vim-jack-in')
 
 Plug('RaafatTurki/hex.nvim')
 Plug('nanozuki/tabby.nvim')
+Plug('David-Kunz/jester')
 
 -- Initialize plugin system
 vim.call('plug#end')
@@ -173,6 +182,7 @@ require("languages/python")
 -- imap("<C-a>", "<Esc>^i")
 -- imap("<C-e>", "<Esc>$A")
 nmap("<M-space>", ":lua vim.diagnostic.open_float()<CR>")
+nmap('<leader>b', '<cmd>Bufferin<cr>')
 
 vim.keymap.set('n', "<M-space>", function() vim.diagnostic.open_float()  end)
 
@@ -234,6 +244,15 @@ vim.api.nvim_create_autocmd({"BufWritePost"}, {
   command = "source %",
 })
 
+-- local mygroup = vim.api.nvim_create_augroup('jsxtest', { clear = true })
+-- vim.api.nvim_create_autocmd({"BufWritePost"}, {
+--   group = "jsxtest",
+--   pattern = {
+--     "**/*.test.jsx",
+--   },
+--   command = 'lua require"jester".run_file()',
+-- })
+
 -- NeoVim handles ESC keys as alt+key set this to solve the problem
 vim.cmd([[
 if has('nvim')
@@ -284,13 +303,15 @@ nnoremap <leader>m :Make<cr>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <leader>ot :Tags <C-r><C-w><cr>
 nnoremap <leader>r :NvimTreeRefresh <CR>
+
 ]])
 
 -- Other files
 vim.cmd([[
 source ~/.config/nvim/languages.vim
-set clipboard=unnamed
 ]])
+
+vim.opt.clipboard:append("unnamed")
 
 
 
@@ -395,18 +416,26 @@ nmap <silent> <leader>tt :Ttoggle<CR>
 -- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 -- Using Lua functions
+-- nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({follow = true, path_display = {"shorten"}})<cr>
 vim.cmd([[
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({follow = true})<cr>
 nnoremap <leader>fF <cmd>lua require('telescope.builtin').git_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fG <cmd>lua require('telescope.builtin').grep_string()<cr>
+" nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fo <cmd>lua require('telescope.builtin').oldfiles()<cr>
+nnoremap <leader>fi <cmd>Octo issue list<cr>
 ]])
 
+nmap("<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 nmap("<leader>fw", ":Telescope workspaces<cr>")
-
-
+nmap("<leader>xx", ":Trouble diagnostics toggle<cr>")
+nmap("<leader>xX", ":Trouble diagnostics toggle filter.buf=0<cr>")
+nmap("<leader>cs", ":Trouble symbols toggle focus=false<cr>")
+nmap("<leader>cl", ":Trouble lsp toggle focus=false win.position=right<cr>")
+nmap("<leader>xL", ":Trouble loclist toggle<cr>")
+nmap("<leader>xQ", ":Trouble qflist toggle<cr>")
 
 vim.cmd([[
 let g:go_autodetect_gopath = 0
@@ -496,6 +525,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 vim.o.cursorline = true
 vim.o.number = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- OR setup with some options
 require("nvim-tree").setup({
@@ -546,12 +577,9 @@ vim.env.PATH = "/Users/manlycode/.asdf/shims:" .. vim.env.PATH
 
 
 -- vim.g.tinted_colorspace = 256
--- vim.cmd.colorscheme('base16-gruvbox-material-light-soft')
-vim.cmd.colorscheme('retrobox')
+vim.cmd.colorscheme('base16-gruvbox-material-light-soft')
+-- vim.cmd.colorscheme('retrobox')
 
-vim.cmd([[
-hi SignColumn guibg=NONE
-]])
 
 
 local cmp = require('cmp')
@@ -663,6 +691,25 @@ require("cmp_git").setup() ]]--
 
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lsp_attach = function(client, buf)
+	-- Example maps, set your own with vim.api.nvim_buf_set_keymap(buf, "n", <lhs>, <rhs>, { desc = <desc> })
+	-- or a plugin like which-key.nvim
+	-- <lhs>        <rhs>                        <desc>
+	-- "K"          vim.lsp.buf.hover            "Hover Info"
+	-- "<leader>qf" vim.diagnostic.setqflist     "Quickfix Diagnostics"
+	-- "[d"         vim.diagnostic.goto_prev     "Previous Diagnostic"
+	-- "]d"         vim.diagnostic.goto_next     "Next Diagnostic"
+	-- "<leader>e"  vim.diagnostic.open_float    "Explain Diagnostic"
+	-- "<leader>ca" vim.lsp.buf.code_action      "Code Action"
+	-- "<leader>cr" vim.lsp.buf.rename           "Rename Symbol"
+	-- "<leader>fs" vim.lsp.buf.document_symbol  "Document Symbols"
+	-- "<leader>fS" vim.lsp.buf.workspace_symbol "Workspace Symbols"
+	-- "<leader>gq" vim.lsp.buf.formatting_sync  "Format File"
+
+	vim.api.nvim_buf_set_option(buf, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+	vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
+	vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
+end
 
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 vim.lsp.config("pylsp", {
@@ -683,7 +730,14 @@ vim.lsp.config("pylsp", {
       pyls_isort = { enabled = true },
     },
 })
+
 vim.lsp.enable("pylsp")
+
+vim.lsp.config("eslint", {
+  cmd = { "/Users/manlycode/.asdf/shims/vscode-eslint-language-server",  "--stdio"}
+})
+
+vim.lsp.enable("eslint")
 --
 --
 require("workspaces").setup({
@@ -910,7 +964,7 @@ require('render-markdown').setup({})
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
   -- ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-  ensure_installed = { "python", "yaml", "latex", "html" },
+  ensure_installed = { "python", "yaml", "latex", "html", "clojure", "css", "scss" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -969,3 +1023,287 @@ require"octo".setup()
 vim.cmd([[
 hi SignColumn guibg=NONE
 ]])
+
+local telescope = require("telescope")
+
+-- first setup telescope
+-- telescope.setup({
+    -- your config
+-- })
+
+-- then load the extension
+telescope.load_extension("live_grep_args")
+
+
+require('lspsaga').setup({})
+
+
+local actions = require("telescope.actions")
+local open_with_trouble = require("trouble.sources.telescope").open
+
+-- Use this to add more results without clearing the trouble list
+local add_to_trouble = require("trouble.sources.telescope").add
+
+telescope.setup({
+  defaults = {
+    path_display = {"smart"},
+    mappings = {
+      i = { 
+        ["<c-t>"] = open_with_trouble,
+        ["<c-a>"] = {"<home>", type = "command"},
+        ["<c-e>"] = {"<end>", type = "command"},
+        ["<c-f>"] = {"<right>", type = "command"},
+        ["<c-b>"] = {"<left>", type = "command"},
+      },
+      n = { 
+        ["<c-t>"] = open_with_trouble 
+      },
+    },
+  },
+})
+
+
+require('trouble').setup(
+{
+  cmd = "Trouble",
+  auto_close = false, -- auto close when there are no items
+  auto_open = false, -- auto open when there are items
+  auto_preview = true, -- automatically open preview when on an item
+  auto_refresh = true, -- auto refresh when open
+  auto_jump = false, -- auto jump to the item when there's only one
+  focus = false, -- Focus the window when opened
+  restore = true, -- restores the last location in the list when opening
+  follow = true, -- Follow the current item
+  indent_guides = true, -- show indent guides
+  max_items = 200, -- limit number of items that can be displayed per section
+  multiline = true, -- render multi-line messages
+  pinned = false, -- When pinned, the opened trouble window will be bound to the current buffer
+  warn_no_results = true, -- show a warning when there are no results
+  open_no_results = false, -- open the trouble window when there are no results
+  ---@type trouble.Window.opts
+  win = {}, -- window options for the results window. Can be a split or a floating window.
+  -- Window options for the preview window. Can be a split, floating window,
+  -- or `main` to show the preview in the main editor window.
+  ---@type trouble.Window.opts
+  preview = {
+    type = "main",
+    -- when a buffer is not yet loaded, the preview window will be created
+    -- in a scratch buffer with only syntax highlighting enabled.
+    -- Set to false, if you want the preview to always be a real loaded buffer.
+    scratch = true,
+  },
+  -- Throttle/Debounce settings. Should usually not be changed.
+  ---@type table<string, number|{ms:number, debounce?:boolean}>
+  throttle = {
+    refresh = 20, -- fetches new data when needed
+    update = 10, -- updates the window
+    render = 10, -- renders the window
+    follow = 100, -- follows the current item
+    preview = { ms = 100, debounce = true }, -- shows the preview for the current item
+  },
+  -- Key mappings can be set to the name of a builtin action,
+  -- or you can define your own custom action.
+  ---@type table<string, trouble.Action.spec|false>
+  keys = {
+    ["?"] = "help",
+    r = "refresh",
+    R = "toggle_refresh",
+    q = "close",
+    o = "jump_close",
+    ["<esc>"] = "cancel",
+    ["<cr>"] = "jump",
+    ["<2-leftmouse>"] = "jump",
+    ["<c-s>"] = "jump_split",
+    ["<c-v>"] = "jump_vsplit",
+    -- go down to next item (accepts count)
+    -- j = "next",
+    ["}"] = "next",
+    ["]]"] = "next",
+    -- go up to prev item (accepts count)
+    -- k = "prev",
+    ["{"] = "prev",
+    ["[["] = "prev",
+    dd = "delete",
+    d = { action = "delete", mode = "v" },
+    i = "inspect",
+    p = "preview",
+    P = "toggle_preview",
+    zo = "fold_open",
+    zO = "fold_open_recursive",
+    zc = "fold_close",
+    zC = "fold_close_recursive",
+    za = "fold_toggle",
+    zA = "fold_toggle_recursive",
+    zm = "fold_more",
+    zM = "fold_close_all",
+    zr = "fold_reduce",
+    zR = "fold_open_all",
+    zx = "fold_update",
+    zX = "fold_update_all",
+    zn = "fold_disable",
+    zN = "fold_enable",
+    zi = "fold_toggle_enable",
+    gb = { -- example of a custom action that toggles the active view filter
+      action = function(view)
+        view:filter({ buf = 0 }, { toggle = true })
+      end,
+      desc = "Toggle Current Buffer Filter",
+    },
+    s = { -- example of a custom action that toggles the severity
+      action = function(view)
+        local f = view:get_filter("severity")
+        local severity = ((f and f.filter.severity or 0) + 1) % 5
+        view:filter({ severity = severity }, {
+          id = "severity",
+          template = "{hl:Title}Filter:{hl} {severity}",
+          del = severity == 0,
+        })
+      end,
+      desc = "Toggle Severity Filter",
+    },
+  },
+  ---@type table<string, trouble.Mode>
+  modes = {
+    diagnostics = {},
+    qflist = {},
+    quickfix = {},
+    telescope = {},
+    telescope_files = {},
+    lsp = {},
+    -- sources define their own modes, which you can use directly,
+    -- or override like in the example below
+    lsp_references = {
+      -- some modes are configurable, see the source code for more details
+      params = {
+        include_declaration = true,
+      },
+    },
+    -- The LSP base mode for:
+    -- * lsp_definitions, lsp_references, lsp_implementations
+    -- * lsp_type_definitions, lsp_declarations, lsp_command
+    lsp_base = {
+      params = {
+        -- don't include the current location in the results
+        include_current = false,
+      },
+    },
+    -- more advanced example that extends the lsp_document_symbols
+    symbols = {
+      desc = "document symbols",
+      mode = "lsp_document_symbols",
+      focus = false,
+      win = { position = "right" },
+      filter = {
+        -- remove Package since luals uses it for control flow structures
+        ["not"] = { ft = "lua", kind = "Package" },
+        any = {
+          -- all symbol kinds for help / markdown files
+          ft = { "help", "markdown" },
+          -- default set of symbol kinds
+          kind = {
+            "Class",
+            "Constructor",
+            "Enum",
+            "Field",
+            "Function",
+            "Interface",
+            "Method",
+            "Module",
+            "Namespace",
+            "Package",
+            "Property",
+            "Struct",
+            "Trait",
+          },
+        },
+      },
+    },
+  },
+  -- stylua: ignore
+  icons = {
+    ---@type trouble.Indent.symbols
+    indent = {
+      top           = "│ ",
+      middle        = "├╴",
+      last          = "└╴",
+      -- last          = "-╴",
+      -- last       = "╰╴", -- rounded
+      fold_open     = " ",
+      fold_closed   = " ",
+      ws            = "  ",
+    },
+    folder_closed   = " ",
+    folder_open     = " ",
+    kinds = {
+      Array         = " ",
+      Boolean       = "󰨙 ",
+      Class         = " ",
+      Constant      = "󰏿 ",
+      Constructor   = " ",
+      Enum          = " ",
+      EnumMember    = " ",
+      Event         = " ",
+      Field         = " ",
+      File          = " ",
+      Function      = "󰊕 ",
+      Interface     = " ",
+      Key           = " ",
+      Method        = "󰊕 ",
+      Module        = " ",
+      Namespace     = "󰦮 ",
+      Null          = " ",
+      Number        = "󰎠 ",
+      Object        = " ",
+      Operator      = " ",
+      Package       = " ",
+      Property      = " ",
+      String        = " ",
+      Struct        = "󰆼 ",
+      TypeParameter = " ",
+      Variable      = "󰀫 ",
+    },
+  },
+}
+)
+
+local actions = require("telescope.actions")
+local open_with_trouble = require("trouble.sources.telescope").open
+
+-- Use this to add more results without clearing the trouble list
+local add_to_trouble = require("trouble.sources.telescope").add
+
+local telescope = require("telescope")
+
+telescope.setup({
+  defaults = {
+    mappings = {
+      i = { ["<c-t>"] = open_with_trouble },
+      n = { ["<c-t>"] = open_with_trouble },
+    },
+  },
+})
+
+vim.cmd([[
+highlight SignColumn guibg=NONE ctermbg=NONE term=NONE
+]])
+
+
+require('lspconfig').stylelint_lsp.setup {
+  -- Define the file types stylelint-lsp should apply to
+  filetypes = { "css", "scss", "less", "postcss" },
+  -- Define root directories where stylelint config files are found
+  root_dir = require('lspconfig.util').root_pattern('.stylelintrc', 'package.json'),
+  -- Optional: Customize settings passed to stylelint-lsp
+  settings = {
+    stylelintplus = {
+      -- See stylelint-lsp documentation for available options
+      -- For example, to enable auto-fix on save:
+      -- autoFixOnSave = true,
+    },
+  },
+  -- Optional: on_attach function to customize client behavior
+  on_attach = function(client, bufnr)
+    -- Example: Disable document formatting if another formatter handles it
+    -- client.server_capabilities.document_formatting = false
+  end,
+}

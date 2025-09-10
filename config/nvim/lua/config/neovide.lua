@@ -1,7 +1,7 @@
 if vim.g.neovide then
   -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-full"
   -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-normal"
-  -- vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-slight"
+  -- vim.o.guifont = "Hack Nerd Font Mono:h16:#e-subpixelantialias:#h-slight"
   vim.o.guifont = "Hack Nerd Font Mono:h14:#e-subpixelantialias:#h-none"
   vim.opt.linespace = 6
   -- vim.g.neovide_scale_factor = 1.0
