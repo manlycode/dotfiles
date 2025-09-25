@@ -1,2 +1,6 @@
 # vim: set ft=sh:
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+
+ELIXIR_LS_URL="https://github.com/elixir-lang/expert/releases/download/nightly/expert_darwin_arm64"
+wget -o ~/bin/elixir_ls --delete-after $ELIXIR_LS_URL
+
