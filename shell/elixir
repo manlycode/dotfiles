@@ -4,6 +4,6 @@ test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 ELIXIR_LS_URL="https://github.com/elixir-lang/expert/releases/download/nightly/expert_darwin_arm64"
 ELIXIR_LS_EXE="$HOME/bin/elixir_ls"
 
-wget -o $ELIXIR_LS_EXE --delete-after $ELIXIR_LS_URL
+wget -O $ELIXIR_LS_EXE --delete-after $ELIXIR_LS_URL
 chmod +x $ELIXIR_LS_EXE
 
