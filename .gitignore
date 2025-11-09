@@ -5,3 +5,4 @@ shell/secrets
 
 .DS_Store
 
+.expert/expert.log

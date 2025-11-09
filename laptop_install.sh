@@ -40,15 +40,20 @@ brew install swiftlint
 # Fastlane should use bundler per project
 # brew install fastlane
 
-source ~/.dotfiles/laptop_install/rcm.sh
-source ~/.dotfiles/laptop_install/ruby.sh
-source ~/.dotfiles/laptop_install/python.sh
-source ~/.dotfiles/laptop_install/node.sh
-source ~/.dotfiles/laptop_install/casks.sh
+
+# Wine
+brew upgrade
+brew install --cask --no-quarantine Sikarugir-App/sikarugir/sikarugir
+
+source $HOME/.dotfiles/laptop_install/rcm.sh
+source $HOME/.dotfiles/laptop_install/ruby.sh
+source $HOME/.dotfiles/laptop_install/python.sh
+source $HOME/.dotfiles/laptop_install/node.sh
+source $HOME/.dotfiles/laptop_install/casks.sh
 asdf install
 
-source ~/.dotfiles/laptop_install/vs_code.sh
-source ~/.dotfiles/laptop_install/nvim.sh
+source $HOME/.dotfiles/laptop_install/vs_code.sh
+source $HOME/.dotfiles/laptop_install/nvim.sh
 
 # Slow to compile, commenting out
 # source ~/.dotfiles/laptop_install/qmk_firmware.sh
