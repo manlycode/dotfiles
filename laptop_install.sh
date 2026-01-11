@@ -25,6 +25,9 @@ brew install rg
 brew install direnv
 brew install dark-mode
 
+# Find largest files on disk
+brew install ncdu 
+
 brew tap heroku/brew && brew install heroku
 brew tap knrz/iterm-workspace && brew install iterm-workspace
 
@@ -43,6 +46,7 @@ brew install swiftlint
 
 # Wine
 brew upgrade
+# Sikarugir-App makes wine skins
 brew install --cask --no-quarantine Sikarugir-App/sikarugir/sikarugir
 
 source $HOME/.dotfiles/laptop_install/rcm.sh
