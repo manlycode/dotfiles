@@ -102,6 +102,8 @@ export PATH="~/.asdf/shims:$PATH"
 export PATH="/Applications/Android Studio.app/Contents/MacOS:$PATH"
 export PATH="/opt/homebrew/opt/avr-gcc@8/bin:$PATH"
 
+export HOMEBREW_PREFIX=/usr/local
+
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /Users/manlycode/git/manlycode/nes-mesen-playground/tools/neslightbox/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/manlycode/git/manlycode/nes-mesen-playground/tools/neslightbox/node_modules/tabtab/.completions/electron-forge.zsh
