@@ -102,7 +102,7 @@ export PATH="~/.asdf/shims:$PATH"
 export PATH="/Applications/Android Studio.app/Contents/MacOS:$PATH"
 export PATH="/opt/homebrew/opt/avr-gcc@8/bin:$PATH"
 
-export HOMEBREW_PREFIX=/usr/local
+export HOMEBREW_PREFIX=/opt/homebrew
 
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
