@@ -2,3 +2,5 @@
 # Go
 # NOTE: Use asdf for go installations
 # vim: set ft=sh:
+echo "loaded go..."
+. ${ASDF_DATA_DIR:-$HOME/.asdf}/plugins/golang/set-env.bash

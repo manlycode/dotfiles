@@ -1,3 +1,4 @@
+# vim: set ft=sh:
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -88,6 +89,7 @@ zinit light "chriskempson/base16-shell"
 
 ### End Zinit
 
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -96,14 +98,9 @@ zinit light "chriskempson/base16-shell"
 export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
 eval "dark-mode-$(dark-mode status)"
 
-# vim: set ft=sh:
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-export PATH="~/.asdf/shims:$PATH"
 export PATH="/Applications/Android Studio.app/Contents/MacOS:$PATH"
-export PATH="/opt/homebrew/opt/avr-gcc@8/bin:$PATH"
-
-export HOMEBREW_PREFIX=/opt/homebrew
 
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /Users/manlycode/git/manlycode/nes-mesen-playground/tools/neslightbox/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/manlycode/git/manlycode/nes-mesen-playground/tools/neslightbox/node_modules/tabtab/.completions/electron-forge.zsh
+

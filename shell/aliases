@@ -28,6 +28,7 @@ alias rsync-with-sudo-su="rsync -a -e \"ssh\" --rsync-path=\"sudo rsync\""
 alias diff-app-yaml="nvim -d config/application{.example,}.yml"
 
 alias mux="tmuxinator"
+alias allow-app="xattr -r -d com.apple.quarantine"
 
 
 # vim: set ft=sh:
