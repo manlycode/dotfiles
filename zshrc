@@ -1,4 +1,5 @@
 # vim: set ft=sh:
+# echo "zshrc..."
 export LANG="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -104,3 +105,24 @@ export PATH="/Applications/Android Studio.app/Contents/MacOS:$PATH"
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /Users/manlycode/git/manlycode/nes-mesen-playground/tools/neslightbox/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/manlycode/git/manlycode/nes-mesen-playground/tools/neslightbox/node_modules/tabtab/.completions/electron-forge.zsh
 
+
+# qlty completions
+[ -s "/opt/homebrew/share/zsh/site-functions/_qlty" ] && source "/opt/homebrew/share/zsh/site-functions/_qlty"
+
+# qlty
+export QLTY_INSTALL="$HOME/.qlty"
+export PATH="$QLTY_INSTALL/bin:$PATH"
+
+export CTAGS=/opt/homebrew/bin
+export PATH="$HOME/.local/bin:$PATH"
+
+# qlty
+export QLTY_INSTALL="$HOME/.qlty"
+export PATH="$QLTY_INSTALL/bin:$PATH"
+
+# qlty
+export QLTY_INSTALL="$HOME/.qlty"
+export PATH="$QLTY_INSTALL/bin:$PATH"
+
+# bun completions
+[ -s "/Users/manlycode/.bun/_bun" ] && source "/Users/manlycode/.bun/_bun"

@@ -30,5 +30,7 @@ alias diff-app-yaml="nvim -d config/application{.example,}.yml"
 alias mux="tmuxinator"
 alias allow-app="xattr -r -d com.apple.quarantine"
 
+alias rake="noglob rake"
+
 
 # vim: set ft=sh:

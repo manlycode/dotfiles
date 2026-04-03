@@ -71,4 +71,4 @@ if [ -d "$HOME/bin" ] ; then
 fi
 source /usr/local/etc/bash_completion.d/po
 source ~/.dotfiles/shell/ruby
-echo "got here."
+# echo "got here."
