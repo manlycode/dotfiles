@@ -79,8 +79,8 @@ zinit from"gh-r" as"program" mv"direnv* -> direnv" \
 # fpath=(~/.zsh/completions $fpath) 
 autoload -Uz compinit
 compinit
-zinit cdreplay -q
-zinit cdlist
+# zinit cdreplay -q
+# zinit cdlist
 # zinit load "asdf-vm/asdf"
 #
 # # Colors and highlight {{{
