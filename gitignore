@@ -29,3 +29,9 @@ workspace.lua
 workspace-notes.md
 .expert
 todo.md
+.claude/settings.local.json
+
+**/.claude/settings.local.json
+.claude/worktrees/
+failing-specs.txt
+docs/superpowers/

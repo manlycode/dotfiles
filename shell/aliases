@@ -31,6 +31,7 @@ alias mux="tmuxinator"
 alias allow-app="xattr -r -d com.apple.quarantine"
 
 alias rake="noglob rake"
-
+alias ci-status='gh run list  --branch $(git rev-parse --abbrev-ref HEAD) --limit 1'
+alias gh-ci-status='gh run list  --branch $(git rev-parse --abbrev-ref HEAD) --limit 1'
 
 # vim: set ft=sh:

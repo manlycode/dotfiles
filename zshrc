@@ -126,3 +126,7 @@ export PATH="$QLTY_INSTALL/bin:$PATH"
 
 # bun completions
 [ -s "/Users/manlycode/.bun/_bun" ] && source "/Users/manlycode/.bun/_bun"
+
+# qlty
+export QLTY_INSTALL="$HOME/.qlty"
+export PATH="$QLTY_INSTALL/bin:$PATH"
