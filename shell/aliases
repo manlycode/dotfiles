@@ -11,8 +11,12 @@ export EDITOR=neovide
 
 alias dark='base16_gruvbox-dark-soft'
 alias dark-mode-on='base16_gruvbox-dark-soft'
-alias light='base16_gruvbox-light-soft'
-alias dark-mode-off='base16_gruvbox-light-soft'
+# alias light='base16_gruvbox-light-soft'
+# alias dark-mode-off='base16_gruvbox-light-soft'
+
+alias light='base16_solarized-light'
+alias dark-mode-off='base16_solarized-light'
+
 alias eagle='/Applications/EAGLE-9.0.0/eagle.app/Contents/MacOS/eagle'
 alias flush-cache='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
 alias kill-pumas='kill_pumas'
