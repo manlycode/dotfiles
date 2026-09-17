@@ -1,4 +1,4 @@
-export PATH="~/.asdf/shims:$PATH"
+export PATH="$(realpath ~/.asdf/shims):$PATH"
 export HOMEBREW_PREFIX=/opt/homebrew
 
 source ~/.dotfiles/shell/aliases
