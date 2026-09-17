@@ -35,3 +35,4 @@ todo.md
 .claude/worktrees/
 failing-specs.txt
 docs/superpowers/
+.qlty/
