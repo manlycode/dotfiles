@@ -2,10 +2,10 @@
 # echo "zshenv..."
 # ------------------------------------------------------------
 if [[ -z "${ZSHENV_LOADED}" ]]; then
-  export PATH="$(realpath ~/.asdf/shims):$PATH"
   export PATH="$PATH:./bin"
   export HOMEBREW_PREFIX=/opt/homebrew
-  export PATH=$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$HOME/bin:$HOMEBREW_PREFIX/bin:$PATH
+  export PATH=:$PATH:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$HOME/bin:$HOMEBREW_PREFIX/bin
+  export PATH="$(realpath ~/.asdf/shims):$PATH"
 
   fpath=(~/.zsh/completions $fpath) 
 

@@ -90,7 +90,7 @@ zinit light "chriskempson/base16-shell"
 
 ### End Zinit
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -108,25 +108,12 @@ export PATH="/Applications/Android Studio.app/Contents/MacOS:$PATH"
 
 # qlty completions
 [ -s "/opt/homebrew/share/zsh/site-functions/_qlty" ] && source "/opt/homebrew/share/zsh/site-functions/_qlty"
-
-# qlty
-export QLTY_INSTALL="$HOME/.qlty"
-export PATH="$QLTY_INSTALL/bin:$PATH"
-
-export CTAGS=/opt/homebrew/bin
-export PATH="$HOME/.local/bin:$PATH"
-
-# qlty
-export QLTY_INSTALL="$HOME/.qlty"
-export PATH="$QLTY_INSTALL/bin:$PATH"
-
-# qlty
-export QLTY_INSTALL="$HOME/.qlty"
-export PATH="$QLTY_INSTALL/bin:$PATH"
-
 # bun completions
 [ -s "/Users/manlycode/.bun/_bun" ] && source "/Users/manlycode/.bun/_bun"
 
 # qlty
 export QLTY_INSTALL="$HOME/.qlty"
-export PATH="$QLTY_INSTALL/bin:$PATH"
+export PATH="$PATH:$QLTY_INSTALL/bin"
+
+
+export PATH="$(realpath ~/.asdf/shims):$PATH"

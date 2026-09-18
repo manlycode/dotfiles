@@ -1,7 +1,7 @@
 if [[ -z "${ZSHENV_LOADED}" ]]; then
   # echo "zlogin..."
   export HOMEBREW_PREFIX=/opt/homebrew
-  export PATH=$HOMEBREW_PREFIX/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$HOME/bin:$PATH
+  export PATH=$PATH:$HOMEBREW_PREFIX/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$HOME/bin
   source ~/.dotfiles/shell/python
   source ~/.dotfiles/shell/nvim
   source ~/.dotfiles/shell/java
